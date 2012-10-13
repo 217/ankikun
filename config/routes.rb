@@ -4,6 +4,7 @@ Ankikun::Application.routes.draw do
   get "wiki/new"
 
   get "wiki/create"
+	post "wiki/create"
 
   get "wiki/edit"
 
