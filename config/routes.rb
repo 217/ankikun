@@ -66,4 +66,13 @@ Ankikun::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+	
+	# Wikiのトップページ
+	match 'wiki/:id/:sub_id/index',:to => 'wiki#index'
+	# Wikiの各ページ
+	match 'wiki/:id/:sub_id/index',:to => 'wiki#index'
+	# Wikiの各ページの削除
+	match 'wiki/:id/:sub_id/destroy',:to => 'wiki#destroy'
+	# Wikiの各ページの編集
+	match 'wiki/:id/:sub_id/edit',:to => 'wiki#edit'
 end
