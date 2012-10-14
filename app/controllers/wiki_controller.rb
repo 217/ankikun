@@ -31,16 +31,15 @@ class WikiController < ApplicationController
   def destroy
 		@wiki = Wiki.find(:first,:conditions => {:wiki_id => params[:id],:story_id => params[:sub_id]}) 
 
-		if 'destroy_button' == params[:commit] then
+		if params[:destroy_button] then
 			@wiki.destroy
-			render :text => '<h1>削除しました。3秒後、移動します。</h1>'
+			# render :text => '<h1>削除しました。3秒後、移動します。</h1>'
 			sleep 3
-			redirect_to :wiki and return
-			return
-		else # if 'back_button' == params[:commit] then
-			render :text => '<h1>3秒後、トップページに移動します。</h1>'
+			redirect_to '/wiki/0/0/index' and return
+		elsif params[:back_button] then
+			# render :text => '<h1>3秒後、トップページに移動します。</h1>'
 			sleep 3
-			redirect_to :wiki and return
+			redirect_to '/wiki/0/0/index' and return
 		end
   end
 end
