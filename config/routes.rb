@@ -68,7 +68,13 @@ Ankikun::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
 	
 	# Wikiのトップページ
-	match 'wiki/:id/:sub_id/index',:to => 'wiki#index'
+	# match 'wiki/index',:to => 'wiki#index'
+
+	# Wikiのページ新規作成
+	match 'wiki/:id/new',:to => 'wiki#new'
+	# Wikiのページのデータベース格納時
+	match 'wiki/:id/create',:to => 'wiki#create'
+
 	# Wikiの各ページ
 	match 'wiki/:id/:sub_id/index',:to => 'wiki#index'
 	# Wikiの各ページの削除
