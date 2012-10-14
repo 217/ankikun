@@ -11,16 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013061848) do
+ActiveRecord::Schema.define(:version => 20121014141124) do
 
-  create_table "wikis", :force => true do |t|
+  create_table "wikipages", :force => true do |t|
     t.integer  "owner_id",   :null => false
-    t.integer  "wiki_id",    :null => false
     t.integer  "page_id",    :null => false
     t.string   "title",      :null => false
     t.text     "body",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "wikipages", ["page_id"], :name => "index_wikipages_on_page_id", :unique => true
+
+  create_table "wikis", :force => true do |t|
+    t.string   "title",                         :null => false
+    t.boolean  "close",      :default => false, :null => false
+    t.integer  "wiki_id",                       :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "wikis", ["wiki_id"], :name => "index_wikis_on_wiki_id", :unique => true
 
 end

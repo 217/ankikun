@@ -1,7 +1,5 @@
 class CreateWikipages < ActiveRecord::Migration
   def change
-		has_one :wiki
-
     create_table :wikipages do |t|
       t.integer :owner_id , :null => false
       t.integer :page_id , :null => false

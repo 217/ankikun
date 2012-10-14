@@ -1,2 +1,14 @@
-<h1>Wiki#new</h1>
-<p>Find me in app/views/wiki/new.html.erb</p>
+<h1>Wikiを新規作成</h1>
+
+<%# もっといいやり方があるはずだが、知らない %>
+<%= form_for @wiki, :url => "create" do |f| %>
+	<%# なぜか出来た。このコードは理解してないので、危険%>
+	<%= f.fields_for :wikipage do |page| %>
+		タイトル : <%= page.text_field :title %>
+		<br>
+		本文 : <br>
+		<%= page.text_area :body %>
+		<br>
+	<% end %>
+	<%= f.submit "送信", :disable_with => "送信中..." %>
+<% end %>

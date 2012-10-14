@@ -18,7 +18,7 @@ Ankikun::Application.routes.draw do
 	match "wiki/:id/new" => "wiki#new"
 	match "wiki/:id/create" => "wiki#create"
 
-	match "wiki/:id/:sub_id/index" => "wiki#index"
+	# match "wiki/:id/:sub_id/index" => "wiki#index"
 	match "wiki/:id/:sub_id/edit" => "wiki#edit"
 	match "wiki/:id/:sub_id/update" => "wiki#update"
 	match "wiki/:id/:sub_id/destroy" => "wiki#destroy"
