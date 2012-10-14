@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 class WikiController < ApplicationController
   def index
-		@wiki = Wiki.find(:first,:conditions => {:wiki_id => params[:id], :story_id => params[:sub_id]})
+		@wiki = Wiki.find(:first,:conditions => {:wiki_id => params[:id], :page_id => params[:sub_id]})
   end
 
   def new
@@ -15,7 +15,7 @@ class WikiController < ApplicationController
 		# Test Code
 		@wiki.wiki_id = params[:id]
 		@wiki.owner_id = 0 
-		@wiki.story_id = 1
+		@wiki.page_id = 1
 
 		if @wiki.save
 			redirect_to :action => "index"
@@ -30,7 +30,7 @@ class WikiController < ApplicationController
 	end
 
   def destroy
-		@wiki = Wiki.find(:first,:conditions => {:wiki_id => params[:id],:story_id => params[:sub_id]}) 
+		@wiki = Wiki.find(:first,:conditions => {:wiki_id => params[:id],:page_id => params[:sub_id]}) 
 
 		# 本来は、JSを用いず、Railsの力で書きたい
 		if params[:destroy_button] then

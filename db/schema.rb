@@ -14,11 +14,11 @@
 ActiveRecord::Schema.define(:version => 20121013061848) do
 
   create_table "wikis", :force => true do |t|
-    t.integer  "owner_id"
-    t.integer  "wiki_id"
-    t.integer  "story_id"
-    t.string   "title"
-    t.text     "body"
+    t.integer  "owner_id",   :null => false
+    t.integer  "wiki_id",    :null => false
+    t.integer  "page_id",    :null => false
+    t.string   "title",      :null => false
+    t.text     "body",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
