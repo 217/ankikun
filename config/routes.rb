@@ -1,4 +1,29 @@
 Ankikun::Application.routes.draw do
+  get "wiki/index"
+
+  get "wiki/show"
+
+  get "wiki/new"
+	post "wiki/new"
+
+  get "wiki/create"
+
+  get "wiki/edit"
+
+  get "wiki/update"
+
+  get "wiki/destroy"
+	
+	match "wiki/:id/index" => "wiki#index"
+	match "wiki/:id/new" => "wiki#new"
+	match "wiki/:id/create" => "wiki#create"
+
+	match "wiki/:id/:sub_id/index" => "wiki#index"
+	match "wiki/:id/:sub_id/edit" => "wiki#edit"
+	match "wiki/:id/:sub_id/update" => "wiki#update"
+	match "wiki/:id/:sub_id/destroy" => "wiki#destroy"
+	match "wiki/:id/:sub_id/show" => "wiki#show"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
