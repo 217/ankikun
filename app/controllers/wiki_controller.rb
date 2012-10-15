@@ -13,7 +13,7 @@ class WikiController < ApplicationController
 			@wiki = Wiki.new
 			# @page = @wiki.wikipages.new
 		else
-			@page = Wiki.find(:first,:conditions => {:wiki_id => params[:id]}).build_wikipages
+			# @page = Wiki.find(:first,:conditions => {:wiki_id => params[:id]}).build_wikipages
 		end
 		
   end
@@ -27,8 +27,7 @@ class WikiController < ApplicationController
 			page.owner_id = 0
 			page.body = "hoge"
 			
-			wiki.wikipages.push(page)
-			wiki.save!
+			wiki.save
 =begin
 			@wiki = Wiki.new(params[:wiki])
 			@wiki.wikipages.title = "Wikiへようこそ!"
