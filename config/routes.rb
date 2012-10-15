@@ -13,7 +13,7 @@ Ankikun::Application.routes.draw do
   get "wiki/update"
 
   get "wiki/destroy"
-	
+
 	match "wiki/:id/index" => "wiki#index"
 	match "wiki/:id/new" => "wiki#new"
 	match "wiki/:id/create" => "wiki#create"
