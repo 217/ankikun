@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(:version => 20121014141124) do
   create_table "wikis", :force => true do |t|
     t.string   "title",                         :null => false
     t.boolean  "close",      :default => false, :null => false
-    t.integer  "wiki_id",                       :null => false
+    t.integer  "wiki_id"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
   end

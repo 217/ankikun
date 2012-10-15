@@ -9,29 +9,26 @@ class WikiController < ApplicationController
   end
 
   def new
-		if params[:id].empty?
-		
+		if params[:id].nil?
+			@wiki = Wiki.new
+		else
+			@page = Wiki.find(:first,:conditions => {:wiki_id => params[:id]}).wikipage.build
 		end
+		
   end
 
   def create
-=begin
-		@wiki = Wiki.find(params[:wikis])
-		# とりあえず、owner_idを0に固定
-		# @wiki.build_wikipages でも可能
-		@page = @wiki.wikipages.build(:owner_id => 0)
-		
-		# Test Code
-		# @wiki.wikipages.owner_id = 0
-		
-		@page.wiki_id = params[:id]
-
-		if @page.save
-			redirect_to "wiki/index"
+		if params[:id].nil?
+			@wiki = Wiki.new(params[:wiki])
+			
+			if @wiki.save
+				redirect_to "wiki/#{@wiki.wiki_id}/index"
+			else
+				render :action => "wiki/new"
+			end
 		else
-			render :new
+			
 		end
-=end
   end
 
   def edit
