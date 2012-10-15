@@ -23,13 +23,15 @@ ActiveRecord::Schema.define(:version => 20121014141124) do
 
   add_index "wikipages", ["page_id"], :name => "index_wikipages_on_page_id"
 
-  create_table "wikis", :primary_key => "wiki_id", :force => true do |t|
+  create_table "wikis", :force => true do |t|
     t.string   "title",                         :null => false
     t.boolean  "close",      :default => false, :null => false
+    t.integer  "wikis_id",                      :null => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+    t.integer  "wiki_id"
   end
 
-  add_index "wikis", ["wiki_id"], :name => "index_wikis_on_wiki_id"
+  add_index "wikis", ["wikis_id"], :name => "index_wikis_on_wikis_id"
 
 end

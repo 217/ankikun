@@ -20,14 +20,21 @@ class WikiController < ApplicationController
 
   def create
 		if params[:id].nil?
-			@wiki = Wiki.new(params[:wiki])
+			wiki = Wiki.new(params[:wiki])
+			page = wiki.wikipages.new
 
-			@page = @wiki.wikipages.build
-			@page.title = "Wikiへようこそ!"
-			@page.owner_id = 0
-			@page.body = "hoge"
-			@wiki.update_attributes!
-			redirect_to "/wiki/#{@wiki.wiki_id}/index"
+			page.title = "Wikiへようこそ！"
+			page.owner_id = 0
+			page.body = "hoge"
+			
+			wiki.wikipages.push(page)
+=begin
+			@wiki = Wiki.new(params[:wiki])
+			@wiki.wikipages.title = "Wikiへようこそ!"
+			@wiki.wikipages.owner_id = 0
+			@page.wikipages.body = "hoge"
+=end
+			redirect_to "/wiki/index"
 =begin
 			if @wiki.save
 				redirect_to "/wiki/index"

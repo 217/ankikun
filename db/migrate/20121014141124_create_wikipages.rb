@@ -9,7 +9,8 @@ class CreateWikipages < ActiveRecord::Migration
       t.timestamps
     end
 
-		add_index :wikipages, :page_id,:uniqe => true
+		add_index :wikipages, :page_id, :uniqe => true
+		# add_column :wikipages, :wikipage_id,:integer
   end
 
 	def down
