@@ -6,10 +6,3 @@ one:
   page_id: 1
   title: MyString
   body: MyText
-
-two:
-  owner_id: 1
-  wiki_id: 1
-  page_id: 1
-  title: MyString
-  body: MyText
