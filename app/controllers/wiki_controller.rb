@@ -2,6 +2,12 @@
 class WikiController < ApplicationController
   def index
 		@wiki = Wiki.find(:first,:include => :wiki_wikipages,:conditions => {"wiki_wikipages.wiki_id" => params[:id]})
+
+		if @wiki.nil?
+			render :text => "データが無いよ！"
+		else
+			render :text => "データが格納されています。"
+		end
   end
 
   def show
