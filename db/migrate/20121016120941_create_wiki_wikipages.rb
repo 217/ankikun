@@ -6,5 +6,7 @@ class CreateWikiWikipages < ActiveRecord::Migration
 
       t.timestamps
     end
+		add_index :wiki_wikipages, :wiki_id, :unique => true
+		add_index :wiki_wikipages, :wikipage_id, :unique => true 
   end
 end

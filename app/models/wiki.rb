@@ -1,5 +1,6 @@
 class Wiki < ActiveRecord::Base
-	has_and_belongs_to_many :wikipages
+	has_many :wiki_wikipages
+	has_many :wikipages,:through => :wiki_wikipages
 	accepts_nested_attributes_for :wikipages
 
   attr_accessible :close,:title

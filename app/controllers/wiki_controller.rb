@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 class WikiController < ApplicationController
   def index
-		@wiki = Wiki.find(:first,:include => :wikipages,:conditions => {"wikipages.wiki_id" => params[:id]})
+		@wiki = Wiki.find(:first,:include => :wiki_wikipages,:conditions => {"wiki_wikipages.wiki_id" => params[:id]})
   end
 
   def show
