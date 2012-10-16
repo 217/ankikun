@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  wiki_id: 1
+  wikipage_id: 1
+
+two:
+  wiki_id: 1
+  wikipage_id: 1
