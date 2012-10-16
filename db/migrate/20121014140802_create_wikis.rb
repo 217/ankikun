@@ -8,7 +8,7 @@ class CreateWikis < ActiveRecord::Migration
       t.timestamps
     end
 
-		add_index :wikis, :wiki_id, :uniqe => true
+		add_index :wikis, :wiki_id, :unique => true
   end
 
 	def down

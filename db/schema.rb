@@ -31,6 +31,6 @@ ActiveRecord::Schema.define(:version => 20121014141124) do
     t.datetime "updated_at",                    :null => false
   end
 
-  add_index "wikis", ["wiki_id"], :name => "index_wikis_on_wiki_id"
+  add_index "wikis", ["wiki_id"], :name => "index_wikis_on_wiki_id", :unique => true
 
 end

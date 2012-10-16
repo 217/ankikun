@@ -26,14 +26,8 @@ class WikiController < ApplicationController
 			page.title = "Wikiへようこそ！"
 			page.owner_id = 0
 			page.body = "hoge"
-			
+
 			wiki.save
-=begin
-			@wiki = Wiki.new(params[:wiki])
-			@wiki.wikipages.title = "Wikiへようこそ!"
-			@wiki.wikipages.owner_id = 0
-			@page.wikipages.body = "hoge"
-=end
 			# redirect_to "/wiki/#{wiki.page_id}/index"
 =begin
 			if @wiki.save
