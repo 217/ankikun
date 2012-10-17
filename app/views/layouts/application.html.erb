@@ -8,8 +8,12 @@
 </head>
 <body>
 	<div>
-		<%= link_to "Twitterでログイン", "/auth/twitter" %>
-		<%= link_to "Facebookでログイン", "auth/facebook" %>
+	 	<% if current_omniuser %>
+			 <%= current_omniuser.name %>さん <%= link_to "ログアウト" ,logout_path %>
+  	<% else %>		
+			<%= link_to "Twitterでログイン", "/auth/twitter" %>
+			<%= link_to "Facebookでログイン", "auth/facebook" %>
+		<% end %>
 	</div>
 
 	<%= yield %>

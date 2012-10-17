@@ -1,4 +1,6 @@
 Ankikun::Application.routes.draw do
+  get "sessions/callback"
+
   get "test/new"
 
   get "test/create"
