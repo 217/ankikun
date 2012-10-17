@@ -1,2 +1,8 @@
-<h1>Test#new</h1>
-<p>Find me in app/views/test/new.html.erb</p>
+<h1>テストの新規作成</h1>
+<%# フォームに関連する変数の動的作成 %>
+<%# フォームの動的作成 %>
+<%= form_for @test, :url => {:action => "create"} do |f| %>
+	<%= f.fields_for :testquestions do |f1| %>
+		問題形式 : <%= f1.select :kind, ["N択問題", "○×問題", "一問一答","穴埋め"] %>
+	<% end %>
+<% end %>

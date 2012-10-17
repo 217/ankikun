@@ -7,5 +7,8 @@ class CreateTestTestquestions < ActiveRecord::Migration
 
       t.timestamps
     end
+		add_index :test_testquestions, :test_id, :unique => true
+		add_index :test_testquestions, :testquestion_id, :unique => true
+		add_index :test_testquestions, :testquestionchoices_id, :unique => true
   end
 end
