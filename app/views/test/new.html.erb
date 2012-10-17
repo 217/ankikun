@@ -5,6 +5,7 @@
 	<%= f.fields_for :testquestions do |f1| %>
 		問題形式 : <%= f1.select :kind, ["N択問題", "○×問題", "一問一答","穴埋め"] %>
 		<script type = "text/javascript">
+			var xmlHttp = new XMLHttpRequest();
 			var select = document.getElementById("test_testquestions_kind").value;
 			document.write(select);
 		</script>
