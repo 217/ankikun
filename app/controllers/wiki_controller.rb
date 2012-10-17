@@ -17,11 +17,9 @@ class WikiController < ApplicationController
   def new
 		if params[:id].nil?
 			@wiki = Wiki.new
-			# @page = @wiki.wikipages.new
 		else
-			# @page = Wiki.find(:first,:conditions => {:wiki_id => params[:id]}).build_wikipages
+			@page = Wiki.find(:first, :include => :wiki_wikipages, :conditions => {"wiki_wikipages.wiki_id" => params[:id]}).wikipages.build
 		end
-		
   end
 
   def create
