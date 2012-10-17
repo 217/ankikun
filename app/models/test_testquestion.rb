@@ -1,6 +1,7 @@
 class TestTestquestion < ActiveRecord::Base
 	belongs_to :test
 	belongs_to :testquestion
+	belongs_to :testquestionchoices
 
-	attr_accessible :test_id, :testquestion_id
+	attr_accessible :questions
 end
