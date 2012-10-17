@@ -7,8 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<div>
+		<%= link_to "Twitterでログイン", "/auth/twitter" %>
+		<%= link_to "Facebookでログイン", "auth/facebook" %>
+	</div>
 
-<%= yield %>
+	<%= yield %>
 
 </body>
 </html>

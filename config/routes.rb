@@ -25,16 +25,22 @@ Ankikun::Application.routes.draw do
 
   get "wiki/destroy"
 
+	# Wikiのルーティング
 	match "wiki/:id/index" => "wiki#index"
 	match "wiki/:id/new" => "wiki#new"
 	match "wiki/:id/create" => "wiki#create"
-
 	# match "wiki/:id/:sub_id/index" => "wiki#index"
 	match "wiki/:id/:sub_id/edit" => "wiki#edit"
 	match "wiki/:id/:sub_id/update" => "wiki#update"
 	match "wiki/:id/:sub_id/destroy" => "wiki#destroy"
 	match "wiki/:id/:sub_id/show" => "wiki#show"
 
+	# Twitter、Facebookのルーティング
+	match "/auth/:provider/callback" => "sessions#callback"
+	match "/logout" => "sessions#destroy", :as => :logout
+
+	root :to => "question#index"
+	
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
