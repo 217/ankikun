@@ -1,11 +1,11 @@
 Ankikun::Application.routes.draw do
-  get "welcome/index"
+  get "welcome/index", :as => :welcome
 
   devise_for :users
 
   get "sessions/callback"
-
-  get "test/new", :as => :welcome
+	
+  get "test/new"
 
   get "test/create"
 
