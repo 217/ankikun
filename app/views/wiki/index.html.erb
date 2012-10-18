@@ -1,3 +1,4 @@
 <h1><%= @wiki.title %></h1>
+<%= link_to "編集", "edit" %> <%= link_to "削除", {:controller => "wiki", :action => "destroy", :id => params[:id]} %>
 <h2><%= @wiki.wikipages[0].title %></h2>
 <%= @wiki.wikipages[0].body %>

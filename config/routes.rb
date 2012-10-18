@@ -32,11 +32,15 @@ Ankikun::Application.routes.draw do
 
   get "wiki/destroy"
 
-	# Wikiのルーティング
+	# Wikiのトップページのルーティング
 	match "wiki/:id/index" => "wiki#index"
 	match "wiki/:id/new" => "wiki#new"
 	match "wiki/:id/create" => "wiki#create"
-	# match "wiki/:id/:sub_id/index" => "wiki#index"
+	match "wiki/:id/edit" => "wiki#edit"
+	match "wiki/:id/update" => "wiki#update"
+	match "wiki/:id/destroy" => "wiki#destroy"
+
+	# Wikiのページのルーティング
 	match "wiki/:id/:sub_id/edit" => "wiki#edit"
 	match "wiki/:id/:sub_id/update" => "wiki#update"
 	match "wiki/:id/:sub_id/destroy" => "wiki#destroy"
