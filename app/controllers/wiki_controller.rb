@@ -1,12 +1,13 @@
 # -*- encoding: utf-8 -*-
 class WikiController < ApplicationController
   def index
-		@wiki = Wiki.find(:first,:include => :wiki_wikipages,:conditions => {"wiki_wikipages.wiki_id" => params[:id]})
+		@wiki = Wiki.find(:first,{:include => :wiki_wikipages, :conditions => {"wiki_wikipages.wiki_id" => params[:id]}})
 
 		if @wiki.nil?
-			render :text => "データが無いよ！"
-		else
-			render :text => "データが格納されています。"
+			# params[:id] = 0
+			# render :text => "データが無いよ！"
+		# else
+			# render :text => "データが格納されています。"
 		end
   end
 
@@ -28,7 +29,7 @@ class WikiController < ApplicationController
 			page = wiki.wikipages.build
 
 			page.title = "Wikiへようこそ！"
-			page.owner_id = 0
+			page.owner_id = 1
 			page.body = "hoge"
 
 			wiki.save

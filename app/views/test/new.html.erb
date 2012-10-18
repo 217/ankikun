@@ -5,18 +5,23 @@
 	<%= f.fields_for :testquestions do |f1| %>
 		問題形式 : <%= f1.select :kind, ["N択問題", "○×問題", "一問一答","穴埋め"], {:include_blank => "選択してください"}, {:onchange => "changeSelect()"} %>
 		<script type = "text/javascript">
-			function changeSelect(){
-				var select = document.getElementById("test_testquestions_kind").value;
-				if(select == "N択問題"){
-					document.write("1");
-				}else if(select == "○×問題"){
-					document.write("2");
-				}else if(select == "一問一答"){
-					document.write("3");
-				}else if(select == "穴埋め"){
-					document.write("4");
+		function changeSelect(){
+			var select = document.getElementById("test_testquestions_kind").value;
+		}
+
+		function getXHR(){
+			var req;
+			try{
+				req = new XMLHttpReqest();			// Internet Exlorer 7.0以降／それ以外のブラウザ
+			}catch(e){
+				try{
+					req = new ActiveXObject("Msxml2.XMLHTTP");
+				}catch(e){
+					req = new ActiveXObject("Microsoft.XMLHTTP");
 				}
 			}
+			return req;
+		}
 		</script>
 	<% end %>
 <% end %>
