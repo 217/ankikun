@@ -37,6 +37,10 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 
+# omniauth
 gem 'omniauth'
+# この二つがないと、うまく機能しない
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
+
+gem 'devise'

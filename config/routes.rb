@@ -1,4 +1,6 @@
 Ankikun::Application.routes.draw do
+  devise_for :users
+
   get "sessions/callback"
 
   get "test/new"
