@@ -1,9 +1,11 @@
 Ankikun::Application.routes.draw do
+  get "welcome/index"
+
   devise_for :users
 
   get "sessions/callback"
 
-  get "test/new"
+  get "test/new", :as => :welcome
 
   get "test/create"
 
@@ -13,7 +15,8 @@ Ankikun::Application.routes.draw do
 
   get "test/destroy"
 
-  get "wiki/index"
+	# Deviseログイン直後の戻り先user_rootを指定
+  get "wiki/index", :as => :user_root
 
   get "wiki/show"
 
@@ -42,8 +45,6 @@ Ankikun::Application.routes.draw do
 	# Twitter、Facebookのルーティング
 	match "/auth/:provider/callback" => "sessions#callback"
 	match "/logout" => "sessions#destroy", :as => :logout
-
-	root :to => "question#index"
 	
   # The priority is based upon order of creation:
   # first created -> highest priority.
