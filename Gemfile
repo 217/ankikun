@@ -43,4 +43,5 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 
+# 認証システム
 gem 'devise'
