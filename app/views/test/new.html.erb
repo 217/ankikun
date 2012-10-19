@@ -3,6 +3,7 @@
 <%# フォームの動的作成 %>
 <%= form_for @test, :url => {:action => "create"} do |f| %>
 	<%= f.fields_for :testquestions do |f1| %>
-		問題形式 : <%= f1.select :kind, ["N択問題", "○×問題", "一問一答","穴埋め"], {:include_blank => "選択してください"}, {:onchange => "changeSelect()"} %>
+		問題形式 : <%= f1.select :kind, ["N択問題", "○×問題", "一問一答","穴埋め"], {:include_blank => "選択してください"}, {:onchange => "changeSelect()"} %><br />
+		問題 : <br /><%= f1.text_area :question_body %>
 	<% end %>
 <% end %>
