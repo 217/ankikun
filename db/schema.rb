@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121019045150) do
+ActiveRecord::Schema.define(:version => 20121019215854) do
 
   create_table "contents", :force => true do |t|
     t.text     "body"
@@ -27,6 +27,13 @@ ActiveRecord::Schema.define(:version => 20121019045150) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "question_choices", :force => true do |t|
+    t.integer  "question_id"
+    t.integer  "choice_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "question_contents", :force => true do |t|
     t.integer  "question_id"
     t.integer  "content_id"
@@ -34,28 +41,21 @@ ActiveRecord::Schema.define(:version => 20121019045150) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "questions", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "test_testquestions", :force => true do |t|
     t.integer  "test_id"
-    t.integer  "testquestion_id"
-    t.integer  "testquestionchoices_id"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.integer  "question_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
+  add_index "test_testquestions", ["question_id"], :name => "index_test_testquestions_on_question_id", :unique => true
   add_index "test_testquestions", ["test_id"], :name => "index_test_testquestions_on_test_id", :unique => true
-  add_index "test_testquestions", ["testquestion_id"], :name => "index_test_testquestions_on_testquestion_id", :unique => true
-  add_index "test_testquestions", ["testquestionchoices_id"], :name => "index_test_testquestions_on_testquestionchoices_id", :unique => true
 
   create_table "testquestionchoices", :force => true do |t|
     t.text     "choices"
-    t.boolean  "right_anster"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.boolean  "right"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "testquestions", :force => true do |t|

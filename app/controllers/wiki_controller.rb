@@ -1,18 +1,21 @@
 # -*- encoding: utf-8 -*-
 class WikiController < ApplicationController
   def index
-		@wiki = Wiki.find(:first, {:include => :wiki_wikipages, :conditions => {"wiki_wikipages.wiki_id" => params[:id]}})
-
-		if @wiki.nil?
-			# params[:id] = 0
-			# render :text => "データが無いよ！"
-		# else
-			# render :text => "データが格納されています。"
+		if params[:id].nil?
+			@wiki = Array.new
+			10.times{|t| 
+				@wiki << Wiki.find(:all, :include => :wiki_wikipages, :conditions => {"wiki_wikipages.wiki_id" => t+1}, :order => "wiki_wikipages.wiki_id", :limit => 10)
+			}
+		else
+			@wiki = Wiki.find(:first, {:include => :wiki_wikipages, :conditions => {"wiki_wikipages.wiki_id" => params[:id]}})
+			if @wiki.nil?
+				render :text => "Wikiが見つかりません。"
+			end
 		end
   end
 
   def show
-		@wiki = Wiki.find(:first,:conditions => {:wiki_id => params[:id],:page_id => params[:sub_id]})
+		@wiki = Wiki.find(:first,:conditions => {:wiki_id => params[:id],:page_iad => params[:sub_id]})
   end
 
   def new
@@ -33,13 +36,11 @@ class WikiController < ApplicationController
 			page.body = "hoge"
 			
 			# 生成したWikiのURLに飛びたい
-=begin
 			if wiki.save
-				redirect_to "/wiki/#{wiki.wiki_wikipages.wiki_id}/index"
+				redirect_to "/wiki/index"
 			else
 				render :action => "/wiki/new"
 			end
-=end
 		else
 			page = Wiki.new(params[:wiki]).wikipages.build
 
