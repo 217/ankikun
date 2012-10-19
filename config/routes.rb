@@ -1,4 +1,12 @@
 Ankikun::Application.routes.draw do
+  get "question/index"
+
+  get "question/new"
+
+  get "question/create"
+
+  get "question/destroy"
+
   get "welcome/index", :as => :welcome
 
   devise_for :users
