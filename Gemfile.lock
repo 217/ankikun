@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/fesplugas/typus.git
+  revision: b1e1de2f53f6b4419b8577acb1793c240d2d6570
+  specs:
+    typus (3.2.0.beta)
+      bcrypt-ruby (~> 3.0.1)
+      jquery-rails (~> 2.1.2)
+      rails (~> 3.2.8)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -153,4 +162,5 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   sqlite3
   therubyracer
+  typus!
   uglifier (>= 1.0.3)

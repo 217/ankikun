@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 class WikiController < ApplicationController
   def index
-		@wiki = Wiki.find(:first,{:include => :wiki_wikipages, :conditions => {"wiki_wikipages.wiki_id" => params[:id]}})
+		@wiki = Wiki.find(:first, {:include => :wiki_wikipages, :conditions => {"wiki_wikipages.wiki_id" => params[:id]}})
 
 		if @wiki.nil?
 			# params[:id] = 0
@@ -19,7 +19,7 @@ class WikiController < ApplicationController
 		if params[:id].nil?
 			@wiki = Wiki.new
 		else
-			@page = Wiki.find(:first, :include => :wiki_wikipages, :conditions => {"wiki_wikipages.wiki_id" => params[:id]}).wikipages.build
+			@page = Wiki.find(:first, {:include => :wiki_wikipages, :conditions => {"wiki_wikipages.wiki_id" => params[:id]}}).wikipages.build
 		end
   end
 
@@ -31,18 +31,23 @@ class WikiController < ApplicationController
 			page.title = "Wikiへようこそ！"
 			page.owner_id = 1
 			page.body = "hoge"
-
-			wiki.save
-			# redirect_to "/wiki/#{wiki.page_id}/index"
+			
+			# 生成したWikiのURLに飛びたい
 =begin
-			if @wiki.save
-				redirect_to "/wiki/index"
+			if wiki.save
+				redirect_to "/wiki/#{wiki.wiki_wikipages.wiki_id}/index"
 			else
 				render :action => "/wiki/new"
 			end
 =end
 		else
-			
+			page = Wiki.new(params[:wiki]).wikipages.build
+
+			page.wiki_wikipages.wiki_id = params[:id]
+
+			page.save
+
+			# page.wiki_wikipages =
 		end
   end
 

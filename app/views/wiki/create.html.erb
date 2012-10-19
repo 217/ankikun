@@ -1,2 +1,5 @@
-<h1>Wiki#create</h1>
-<p>Find me in app/views/wiki/create.html.erb</p>
+<% if params[:id].nil? %>
+	<h1>Wikiを作成中。</h1>
+<% else %>
+	<h1>ページを作成中</h1>
+<% end %>
