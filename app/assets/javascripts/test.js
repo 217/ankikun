@@ -28,6 +28,10 @@ function changeForm(){
 $(function(){
 	/*ここにjQueryを記述*/
 	$("#test_questions_kind").bind("change",function(){
-		alert("hogehoge");
+		$("#test_questions_kind option:selected").each(function(){
+			if($(this).text == "N択問題"){
+				alert("honiu");
+			}
+		});
 	});
 });
