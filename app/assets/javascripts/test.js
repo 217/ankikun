@@ -1,8 +1,20 @@
+/*
 function changeForm(){
-	var select = document.getElementById("test_testquestions_kind").value;
+	var select = document.getElementById("test_questions_kind").value;
 
 	if(select === "N択問題"){
-		document.createElement("")
+		// document.write("N : ");
+		/*
+		var element = document.createElement("input");
+		element.setAtrribute("type","text");
+		element.setAttribute("size","10");
+		element.setAttribute("name","URL");
+
+		document.getElementById("test_questions_kind").appendChild(element);
+		*
+		var element = document.createElement("option");
+		document.getElementById("test_questions_kind").appendChild(element);
+	
 	}else if(select === "○×問題"){
 
 	}else if(select === "一問一答"){
@@ -10,20 +22,12 @@ function changeForm(){
 	}else if(select === "穴埋め"){
 	
 	}
-}	
+}
+*/
 
 $(function(){
-	$("#test_testquestions_kind").change(
-		function(){
-			/*
-			else if($(this).text === "○×問題"){
-	
-			}else if($(this).text === "一問一答"){
-			
-			}else if($(this).text === "穴埋め"){
-
-			}
-			*/
-			$("#test_testquestions_kind").after("hoge");
-	})
+	/*ここにjQueryを記述*/
+	$("#test_questions_kind").bind("change",function(){
+		alert("hogehoge");
+	});
 });
