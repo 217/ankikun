@@ -27,6 +27,7 @@ function changeForm(){
 
 $(function(){
 	/*ここにjQueryを記述*/
+	// 動的なフォームの処理
 	$("#test_questions_kind").bind("change",function(){
 		$("#test_questions_kind option:selected").each(function(){
 			var selectText = $("#test_questions_kind option:selected").text();
@@ -42,7 +43,15 @@ $(function(){
 		});
 	});
 
+	// 選択肢の処理
 	$("#test_questions_sub_kind").bind("change",function(){
 		var choice_num = $("#test_questions_sub_kind option:selected").text();
+		for(var i = 1;i <= choice_num;i++){
+			if(i === 1){
+				$("#test_questions_sub_kind").after("<br>1つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices\", size = \"2\", maxlinght = \"2\", name = \"test[questions][choices][choice_id]\"></input>")
+			}else{
+				
+			}
+		}
 	});
 });
