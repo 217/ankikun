@@ -30,9 +30,8 @@ $(function(){
 	$("#test_questions_kind").bind("change",function(){
 		$("#test_questions_kind option:selected").each(function(){
 			var selectText = $("#test_questions_kind option:selected").text();
-			// ここは、textではなく、val
 			if(selectText === "N択問題"){
-				alert("1");
+				$("#test_questions_kind").after("<br>N : <input type = \"text\", size = \"2\", maxlinght = \"2\", name = \"test[questions][sub_kind]\"></input");
 			}else if(selectText === "○×問題"){
 				alert("2");
 			}else if(selectText === "一問一答"){
