@@ -29,8 +29,16 @@ $(function(){
 	/*ここにjQueryを記述*/
 	$("#test_questions_kind").bind("change",function(){
 		$("#test_questions_kind option:selected").each(function(){
-			if($(this).text == "N択問題"){
-				alert("honiu");
+			var selectText = $("#test_questions_kind option:selected").text();
+			// ここは、textではなく、val
+			if(selectText === "N択問題"){
+				alert("1");
+			}else if(selectText === "○×問題"){
+				alert("2");
+			}else if(selectText === "一問一答"){
+				alert("3");
+			}else if(selectText === "穴埋め"){
+				alert("4");
 			}
 		});
 	});
