@@ -31,7 +31,7 @@ $(function(){
 		$("#test_questions_kind option:selected").each(function(){
 			var selectText = $("#test_questions_kind option:selected").text();
 			if(selectText === "N択問題"){
-				$("#test_questions_kind").after("<br>N : <input type = \"text\", size = \"2\", maxlinght = \"2\", name = \"test[questions][sub_kind]\"></input");
+				$("#test_questions_kind").after("<br>何択か : <input type = \"text\", id = \"test_questions_sub_kind\", size = \"2\", maxlinght = \"2\", name = \"test[questions][sub_kind]\"></input><br>問題文<br><textarea cols=\"40\" id=\"test_body\" name=\"test[body]\" rows=\"20\"></textarea><br>選択肢 : ");
 			}else if(selectText === "○×問題"){
 				alert("2");
 			}else if(selectText === "一問一答"){
@@ -40,5 +40,9 @@ $(function(){
 				alert("4");
 			}
 		});
+	});
+
+	$("#test_questions_sub_kind").bind("change",function(){
+		var choice_num = $("#test_questions_sub_kind option:selected").text();
 	});
 });
