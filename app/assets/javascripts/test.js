@@ -3,8 +3,15 @@
 $(function(){
 	// 違う選択肢が選ばれた際の初期化処理
 	function init(){
+		// N択問題で出来た選択肢の削除
 		$("#sub_kind").remove();
 		$("#choice").remove();
+
+		// ○×問題で出来たのを削除
+		$("#TrueOrFalse").remove();
+
+		// 一問一答で出来たのを削除
+		$("#right").remove();
 	}
 
 	// テキストエリアを作る処理
@@ -40,10 +47,12 @@ $(function(){
 				$("#body").after("<div id = \"TrueOrFalse\">○か×か。<input type = \"text\", id = \"test_questions_choices_right\", size = \"2\", maxlinght = \"2\", name = \"test[questions][choices][right]\"></input></div>");
 			}else if(selectText === "一問一答"){
 				init();
+				createTextArea(selectText);
+				$("#body").after("<div id = \"right\">正解は、<input type = \"text\", id = \"test_questions_choices_right\", size = \"16\", maxlinght = \"16\", name = \"test[questions][choices][right]\"></input></div>")
 			}else if(selectText === "穴埋め"){
 				init();
+				createTextArea(selectText);
 			}
-
 		});
 	});
 
@@ -51,6 +60,8 @@ $(function(){
 	$("#test_questions_sub_kind").live("change",function(){
 		// 選択肢数
 		var choice_num = $("#test_questions_sub_kind").val();
+		
+		// 選択肢の数だけフォームを生成
 		for(var i = 1;i <= choice_num;i++){
 			if(i === 1){
 				$("#test_body").after("<br><div id = \"choice\">1つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices_choice1\", size = \"128\", maxlinght = \"256\", name = \"test[questions][choices][choice]\"></input> <input type = \"checkbox\" id = \"test_questions_choices_right1\", name=\"test[questions][choices][right]\"></input>");
