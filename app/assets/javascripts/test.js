@@ -32,7 +32,7 @@ $(function(){
 		$("#test_questions_kind option:selected").each(function(){
 			var selectText = $("#test_questions_kind option:selected").text();
 			if(selectText === "N択問題"){
-				$("#test_questions_kind").after("<br>何択か : <input type = \"text\", id = \"test_questions_sub_kind\", size = \"2\", maxlinght = \"2\", name = \"test[questions][sub_kind]\"></input><br>問題文<br><textarea cols=\"40\" id=\"test_body\" name=\"test[body]\" rows=\"20\"></textarea><br>選択肢 : ");
+				$("#test_questions_kind").after("<br>何択か : <input type = \"text\", id = \"test_questions_sub_kind\", size = \"2\", maxlinght = \"2\", name = \"test[questions][sub_kind]\"></input><br>問題文<br><textarea cols=\"40\" id=\"test_body\" name=\"test[body]\" rows=\"20\"></textarea><br>");
 			}else if(selectText === "○×問題"){
 				alert("2");
 			}else if(selectText === "一問一答"){
@@ -44,11 +44,12 @@ $(function(){
 	});
 
 	// 選択肢の処理
-	$("#test_questions_sub_kind").bind("change",function(){
-		var choice_num = $("#test_questions_sub_kind option:selected").text();
+	$("#test_questions_sub_kind").live("change",function(){
+		// 選択肢数
+		var choice_num = $("#test_questions_sub_kind").val();
 		for(var i = 1;i <= choice_num;i++){
-			if(i === 1){
-				$("#test_questions_sub_kind").after("<br>1つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices\", size = \"2\", maxlinght = \"2\", name = \"test[questions][choices][choice_id]\"></input>")
+			if(i == 1){
+				$("#test_body").after("<br>1つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices\", size = \"128\", maxlinght = \"256\", name = \"test[questions][choices][choice]\"></input> <input type = \"checkbox\" name=\"test[questions][choices][right]\"></input>");
 			}else{
 				
 			}
