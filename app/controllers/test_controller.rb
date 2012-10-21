@@ -4,6 +4,8 @@ class TestController < ApplicationController
   end
 
   def create
+		@test = Test.new(params[:tests]);
+		# render :text => ""
   end
 
   def index

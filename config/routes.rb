@@ -16,6 +16,7 @@ Ankikun::Application.routes.draw do
   get "test/new"
 
   get "test/create"
+	post "test/create"
 
   get "test/index"
 

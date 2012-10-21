@@ -74,7 +74,7 @@ $(function(){
 			}
 
 			// divの終了タグと送信ボタン
-			// ここも、===ではなく、==。
+			// ここも、===ではなく、==。(文字と数値の為)
 			if(i == choice_num){
 				$("#test_questions_choices_right" + choice_num).after("</div><br><input name=\"commit\" type=\"submit\" value=\"送信\"/></input>");
 			}
