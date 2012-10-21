@@ -1,2 +1,7 @@
-<h1>Test#edit</h1>
-<p>Find me in app/views/test/edit.html.erb</p>
+<%= form_for @test, :url => {:action => "create"} do |f| %>
+	<%= f.text_area :body %>
+<% end %>
+<% @test1 = Test.new %>
+<%= form_for @test1, :url => {:action => "create"} do |f| %>
+	<%= f.text_area :body %>
+<% end %>

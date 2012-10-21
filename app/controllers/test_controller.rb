@@ -13,7 +13,7 @@ class TestController < ApplicationController
   end
 
   def edit
-
+		@test = Test.new
   end
 
   def destroy
