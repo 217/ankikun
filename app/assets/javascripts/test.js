@@ -12,6 +12,9 @@ $(function(){
 
 		// 一問一答で出来たのを削除
 		$("#right").remove();
+
+		// 送信ボタンを削除
+		$("input[name = \"commit\"]").remove();
 	}
 
 	// テキストエリアを作る処理
@@ -23,7 +26,7 @@ $(function(){
 			// ===ではなく、==でないと通らない
 			if(selectText == "N択問題"){
 				// alert(selectText);
-				$("#sub_kind").after("<br><div id = \"body\">問題文<br><textarea cols=\"40\" id=\"test_body\" name=\"test[body]\" rows=\"20\"></textarea><br></div>");
+				$("#sub_kind").after("<div id = \"body\">問題文<br><textarea cols=\"40\" id=\"test_body\" name=\"test[body]\" rows=\"20\"></textarea><br></div>");
 			}else{
 				$("#test_questions_kind").after("<br><div id = \"body\">問題文<br><textarea cols=\"40\" id=\"test_body\" name=\"test[body]\" rows=\"20\"></textarea><br></div>");
 			}
@@ -39,19 +42,20 @@ $(function(){
 			if(selectText === "N択問題"){
 				init();
 				// タグ生成
-				$("#test_questions_kind").after("<div id = \"sub_kind\"><br>何択か : <input type = \"text\", id = \"test_questions_sub_kind\", size = \"2\", maxlinght = \"2\", name = \"test[questions][sub_kind]\"></input><br></div>");
+				$("#test_questions_kind").after("<div id = \"sub_kind\">何択か : <input type = \"text\" id = \"test_questions_sub_kind\" size = \"2\", maxlinght = \"2\" name = \"test[questions][sub_kind]\"></input></div>");
 				createTextArea(selectText);
 			}else if(selectText === "○×問題"){
 				init();
 				createTextArea(selectText);
-				$("#body").after("<div id = \"TrueOrFalse\">○か×か。<input type = \"text\", id = \"test_questions_choices_right\", size = \"2\", maxlinght = \"2\", name = \"test[questions][choices][right]\"></input></div>");
+				$("#body").after("<div id = \"TrueOrFalse\">○か×か。<input type = \"text\" id = \"test_questions_choices_right\" size = \"2\" maxlinght = \"2\" name = \"test[questions][choices][right]\"></input></div><input name=\"commit\" type=\"submit\" value=\"送信\"/>");
 			}else if(selectText === "一問一答"){
 				init();
 				createTextArea(selectText);
-				$("#body").after("<div id = \"right\">正解は、<input type = \"text\", id = \"test_questions_choices_right\", size = \"16\", maxlinght = \"16\", name = \"test[questions][choices][right]\"></input></div>");
+				$("#body").after("<div id = \"right\">正解は、<input type = \"text\" id = \"test_questions_choices_right\" size = \"16\" maxlinght = \"16\" name = \"test[questions][choices][right]\"></input></div><input name=\"commit\" type=\"submit\" value=\"送信\"/>");
 			}else if(selectText === "穴埋め"){
 				init();
 				createTextArea(selectText);
+				$("#body").after("<input name=\"commit\" type=\"submit\" value=\"送信\"/>");
 			}
 		});
 	});
@@ -68,9 +72,11 @@ $(function(){
 			}else{
 				$("#test_questions_choices_right" + (i - 1)).after("<br>" + i + "つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices_choice" + i + "\", size = \"128\", maxlinght = \"256\", name = \"test[questions][choices][choice]\"></input> <input type = \"checkbox\" id = \"test_questions_choices_right" + i + "\", name=\"test[questions][choices][right]\"></input>");
 			}
-			// divの終了タグ	
-			if(i === choice_num){
-				$("#test_questions_choices_right" + choice_num).after("</div>");
+
+			// divの終了タグと送信ボタン
+			// ここも、===ではなく、==。
+			if(i == choice_num){
+				$("#test_questions_choices_right" + choice_num).after("</div><br><input name=\"commit\" type=\"submit\" value=\"送信\"/></input>");
 			}
 		}
 	});
