@@ -49,9 +49,9 @@ $(function(){
 		var choice_num = $("#test_questions_sub_kind").val();
 		for(var i = 1;i <= choice_num;i++){
 			if(i == 1){
-				$("#test_body").after("<br>1つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices\", size = \"128\", maxlinght = \"256\", name = \"test[questions][choices][choice]\"></input> <input type = \"checkbox\" name=\"test[questions][choices][right]\"></input>");
+				$("#test_body").after("<br>1つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices_choice1\", size = \"128\", maxlinght = \"256\", name = \"test[questions][choices][choice]\"></input> <input type = \"checkbox\" id = \"test_questions_choices_right1\", name=\"test[questions][choices][right]\"></input>");
 			}else{
-				
+				$("#test_questions_choices_right" + (i - 1)).after("<br>" + i + "つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices_choice" + i + "\", size = \"128\", maxlinght = \"256\", name = \"test[questions][choices][choice]\"></input> <input type = \"checkbox\" id = \"test_questions_choices_right" + i + "\", name=\"test[questions][choices][right]\"></input>");
 			}
 		}
 	});
