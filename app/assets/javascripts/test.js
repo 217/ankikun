@@ -1,6 +1,8 @@
 // jQueryのソース
 //
 $(function(){
+	var question_num = 1;
+
 	// 違う選択肢が選ばれた際の初期化処理
 	function init(){
 		// N択問題で出来た選択肢の削除
@@ -62,7 +64,7 @@ $(function(){
 		});
 	});
 
-	// 選択肢の処理
+	// N択の選択肢の処理
 	$("#test_questions_sub_kind").live("change",function(){
 		// 選択肢数
 		var choice_num = $("#test_questions_sub_kind").val();
@@ -70,7 +72,7 @@ $(function(){
 		// 選択肢の数だけフォームを生成
 		for(var i = 1;i <= choice_num;i++){
 			if(i === 1){
-				$("#test_body").after("<br><div id = \"choice\">1つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices_choice1\", size = \"128\", maxlinght = \"256\", name = \"test[questions][choices][choice]\"></input> <input type = \"checkbox\" id = \"test_questions_choices_right1\", name=\"test[questions][choices][right]\"></input>");
+				$("#test_body").after("<br><div id = \"choice" + question_num + "\">1つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices_choice1\", size = \"128\", maxlinght = \"256\", name = \"test[questions][choices][choice]\"></input> <input type = \"checkbox\" id = \"test_questions_choices_right1\", name=\"test[questions][choices][right]\"></input>");
 			}else{
 				$("#test_questions_choices_right" + (i - 1)).after("<br>" + i + "つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices_choice" + i + "\", size = \"128\", maxlinght = \"256\", name = \"test[questions][choices][choice]\" /> <input type = \"checkbox\" id = \"test_questions_choices_right" + i + "\", name=\"test[questions][choices][right]\" />");
 			}
@@ -80,6 +82,20 @@ $(function(){
 			if(i == choice_num){
 				$("#test_questions_choices_right" + choice_num).after("</div><br><input name=\"commit\" type=\"submit\" value=\"送信\" /><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
 			}
+		}
+	});
+
+	// 問題追加ボタンが押された場合の処理
+	$("#add").live("click",function(){
+		// 不要なボタンの削除
+		$("#add").remove();
+		$("input[name = \"commit\"]").remove();
+
+		// N択の場合
+		if($("#choice") != 0){
+			$("#choice" + question_num).after("<option id = test_questions_kind1")
+		}else{
+			$("#")("<select id = \"test_questions_kind" + question_num + "\"><option value="">選択してください</option><option value=\"N択問題\">N択問題</option><option value=\"○×問題\">○×問題</option><option value=\"一問一答\">一問一答</option><option value=\"穴埋め\">穴埋め</option>");
 		}
 	});
 });
