@@ -1,4 +1,4 @@
-// jQuery
+// jQueryのソース
 //
 $(function(){
 	// 違う選択肢が選ばれた際の初期化処理
@@ -25,12 +25,11 @@ $(function(){
 				// alert(selectText);
 				$("#sub_kind").after("<br><div id = \"body\">問題文<br><textarea cols=\"40\" id=\"test_body\" name=\"test[body]\" rows=\"20\"></textarea><br></div>");
 			}else{
-				$("#kind").after("<br><div id = \"body\">問題文<br><textarea cols=\"40\" id=\"test_body\" name=\"test[body]\" rows=\"20\"></textarea></div>");
+				$("#test_questions_kind").after("<br><div id = \"body\">問題文<br><textarea cols=\"40\" id=\"test_body\" name=\"test[body]\" rows=\"20\"></textarea><br></div>");
 			}
 		}
 	}
 
-	/*ここにjQueryを記述*/
 	// 動的なフォームの処理
 	$("#test_questions_kind").bind("change",function(){
 		$("#test_questions_kind option:selected").each(function(){
@@ -38,6 +37,7 @@ $(function(){
 			var selectText = $("#test_questions_kind option:selected").text();
 
 			if(selectText === "N択問題"){
+				init();
 				// タグ生成
 				$("#test_questions_kind").after("<div id = \"sub_kind\"><br>何択か : <input type = \"text\", id = \"test_questions_sub_kind\", size = \"2\", maxlinght = \"2\", name = \"test[questions][sub_kind]\"></input><br></div>");
 				createTextArea(selectText);
@@ -48,7 +48,7 @@ $(function(){
 			}else if(selectText === "一問一答"){
 				init();
 				createTextArea(selectText);
-				$("#body").after("<div id = \"right\">正解は、<input type = \"text\", id = \"test_questions_choices_right\", size = \"16\", maxlinght = \"16\", name = \"test[questions][choices][right]\"></input></div>")
+				$("#body").after("<div id = \"right\">正解は、<input type = \"text\", id = \"test_questions_choices_right\", size = \"16\", maxlinght = \"16\", name = \"test[questions][choices][right]\"></input></div>");
 			}else if(selectText === "穴埋め"){
 				init();
 				createTextArea(selectText);
@@ -68,7 +68,7 @@ $(function(){
 			}else{
 				$("#test_questions_choices_right" + (i - 1)).after("<br>" + i + "つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices_choice" + i + "\", size = \"128\", maxlinght = \"256\", name = \"test[questions][choices][choice]\"></input> <input type = \"checkbox\" id = \"test_questions_choices_right" + i + "\", name=\"test[questions][choices][right]\"></input>");
 			}
-			// divの終了タグ
+			// divの終了タグ	
 			if(i === choice_num){
 				$("#test_questions_choices_right" + choice_num).after("</div>");
 			}
