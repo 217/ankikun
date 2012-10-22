@@ -2,16 +2,18 @@
 // 変数の付け方がごちゃごちゃになっているのであとでcamelCaseに統一。
 $(function(){
 	// 違う選択肢が選ばれた際の初期化処理
-	function init(){
+	function init(questionNum){
+		var questionNum = new Number(questionNum);
+
 		// N択問題で出来た選択肢の削除
-		$("#sub_kind").remove();
-		$("#choice").remove();
+		$("#sub_kind" + questionNum).remove();
+		$("#choice" + questionNum).remove();
 
 		// ○×問題で出来たのを削除
-		$("#TrueOrFalse").remove();
+		$("#TrueOrFalse" + questionNum).remove();
 
 		// 一問一答で出来たのを削除
-		$("#right").remove();
+		$("#right" + questionNum).remove();
 
 		// 送信ボタンを削除
 		$("input[name = \"commit\"]").remove();
@@ -30,10 +32,8 @@ $(function(){
 			if(selectText == "N択問題"){
 				// alert(selectText);
 				$("#sub_kind" + questionNum).after("<div id = \"body"+ questionNum +"\">問題文<br><textarea cols=\"40\" id=\"test_body" + questionNum + "\" name=\"test[body]\" rows=\"20\"></textarea><br></div>");
-			/*
 			}else{
-				$("#test_questions_kind" ).after("<br><div id = \"body\">問題文<br><textarea cols=\"40\" id=\"test_body\" name=\"test[body]\" rows=\"20\"></textarea><br></div>");
-			*/
+				$("#test_questions_kind" + questionNum).after("<br><div id = \"body" + questionNum + "\">問題文<br><textarea cols=\"40\" id=\"" + test_body + "\" name=\"test[body]\" rows=\"20\"></textarea><br></div>");
 			}
 		}
 	}
@@ -45,13 +45,13 @@ $(function(){
 			// 選んだ文字列
 			var selectText = $(this).val();
 			// 問題番号
-			var question_num = $(this).attr("id").split(/^test_questions_kind/);
+			var questionNum = $(this).attr("id").replace(/^test_questions_kind/,"");
 			
 			if(selectText === "N択問題"){
 				init();
 				// タグ生成
-				$(this).after("<div id = \"sub_kind" + question_num + "\">何択か : <input type = \"text\" id = \"test_questions_sub_kind" + question_num + "\" size = \"2\", maxlinght = \"2\" name = \"test[questions][sub_kind]\" /></div>");
-				createTextArea(question_num,selectText);
+				$(this).after("<div id = \"sub_kind" + questionNum + "\">何択か : <input type = \"text\" id = \"test_questions_sub_kind" + questionNum + "\" size = \"2\", maxlinght = \"2\" name = \"test[questions][sub_kind]\" /></div>");
+				createTextArea(questionNum,selectText);
 				/*
 			}else if(selectText === "○×問題"){
 				init();
