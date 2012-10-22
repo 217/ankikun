@@ -2,6 +2,6 @@
 <%# フォームの動的作成 %>
 <%= form_for @test, :url => {:action => "create"} do |f| %>
 	<%= f.fields_for :questions do |f1| %>
-		問題形式 : <%= f1.select :kind, ["N択問題", "○×問題", "一問一答","穴埋め"], {:include_blank => "選択してください"}, {:id => "test_questions_kind"} %><br />
+		問題形式 : <%= f1.select :kind, ["N択問題", "○×問題", "一問一答","穴埋め"], {:include_blank => "選択してください"}, {:id => "test_questions_kind1"} %><br />
 	<% end %>
 <% end %>
