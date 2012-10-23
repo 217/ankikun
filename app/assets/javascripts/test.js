@@ -33,7 +33,8 @@ $(function(){
 				// alert(selectText);
 				$("#sub_kind" + questionNum).after("<div id = \"body"+ questionNum +"\">問題文<br><textarea cols=\"40\" id=\"test_body" + questionNum + "\" name=\"test[body]\" rows=\"20\"></textarea><br></div>");
 			}else{
-				$("#test_questions_kind" + questionNum).after("<br><div id = \"body" + questionNum + "\">問題文<br><textarea cols=\"40\" id=\"" + test_body + "\" name=\"test[body]\" rows=\"20\"></textarea><br></div>");
+				// alert("hoge");
+				$("#test_questions_kind" + questionNum).after("<br><div id = \"body" + questionNum + "\">問題文<br><textarea cols=\"40\" id=\"test_body" + questionNum + "\" name=\"test[body]\" rows=\"20\"></textarea><br></div>");
 			}
 		}
 	}
@@ -46,6 +47,7 @@ $(function(){
 			var selectText = $(this).val();	
 			// 問題番号
 			var questionNum = $(this).attr("id").replace(/^test_questions_kind/,"");
+			// alert(questionNum);
 			
 			if(selectText === "N択問題"){
 				init();
@@ -71,31 +73,29 @@ $(function(){
 		});
 	});
 
-	$("input").each(function(){
-		// 選択肢の処理
-		if(!($(this).attr("id") === undefined)){
-			alert("hoge");
-			$("#" + $(this).attr("id").match(/^test_questions_sub_kind[0-9]+$/)).live("change",function(){
-				// 選択肢数
-				var choiceNum = $(this).val();
-				// 問題番号
-				var questionNum = $(this).attr("id").replace(/^test_questions_sub_kind/,"");
+	$("#" + $(this).attr("id").match(/^body[0-9]+$/)).live("change",function(){
+		alert("d");
+		// 選択肢数
+		var choiceNum = $(this).val();
+		// 問題番号
+		var questionNum = $(this).attr("id").replace(/^test_questions_sub_kind/,"");
+		alert(choiceNum);
+		alert(questionNum);
 
-				// 選択肢の数だけフォームを生成
-				for(var i = 1;i <= choiceNum;i++){
-					if(i === 1){
-						$("#test_body" + questionNum).after("<br><div id = \"choice" + questionNum + "_1\">1つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices_choice" + questionNum + "_1\", size = \"128\", maxlinght = \"256\", name = \"test[questions][choices][choice]\"></input> <input type = \"checkbox\" id = \"test_questions_choices_right" + questionNum +"_1\", name=\"test[questions][choices][right]\"></input>");
-					}else{
-						$("#test_questions_choices_right" + questionNum + "_" + (i - 1)).after("<br>" + i + "つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices_choice" + questionNum + "_" + i + "\", size = \"128\", maxlinght = \"256\", name = \"test[questions][choices][choice]\" /> <input type = \"checkbox\" id = \"test_questions_choices_right" + questionNum + "_" + i + "\", name=\"test[questions][choices][right]\" />");
-					}	
+		// 選択肢の数だけフォームを生成
+		for(var i = 1;i <= choiceNum;i++){
+			if(i === 1){
+				// alert("a"); 
+				$("#body" + questionNum).after("<br><div id = \"choice" + questionNum + "_1\">1つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices_choice" + questionNum + "_1\", size = \"128\", maxlinght = \"256\", name = \"test[questions][choices][choice]\"></input> <input type = \"checkbox\" id = \"test_questions_choices_right" + questionNum +"_1\", name=\"test[questions][choices][right]\" />");
+			}else{
+				$("#test_questions_choices_right" + questionNum + "_" + (i - 1)).after("<br>" + i + "つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices_choice" + questionNum + "_" + i + "\", size = \"128\", maxlinght = \"256\", name = \"test[questions][choices][choice]\" /> <input type = \"checkbox\" id = \"test_questions_choices_right" + questionNum + "_" + i + "\", name=\"test[questions][choices][right]\" />");
+			}	
 
-					// divの終了タグと送信ボタン
-					// ここも、===ではなく、==。(文字と数値の為)
-					if(i == choice_num){
-						$("#test_questions_choices_right" + choice_num).after("</div><br><input name=\"commit\" type=\"submit\" value=\"送信\" /><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
-					}
-				}
-			});
+			// divの終了タグと送信ボタン
+			// ここも、===ではなく、==。(文字と数値の為)
+			if(i == choiceNum){
+				$("#test_questions_choices_right" + questionNum + "_" + choiceNum).after("</div><br><input name=\"commit\" type=\"submit\" value=\"送信\" /><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
+			}
 		}
 	});
 });
