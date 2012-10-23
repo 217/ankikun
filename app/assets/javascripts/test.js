@@ -1,101 +1,61 @@
 // jQueryのソース
-// 変数の付け方がごちゃごちゃになっているのであとでcamelCaseに統一。
+//
 $(function(){
-	// 違う選択肢が選ばれた際の初期化処理
-	function init(questionNum){
-		var questionNum = new Number(questionNum);
-
-		// N択問題で出来た選択肢の削除
-		$("#sub_kind" + questionNum).remove();
-		$("#choice" + questionNum).remove();
-
-		// ○×問題で出来たのを削除
-		$("#TrueOrFalse" + questionNum).remove();
-
-		// 一問一答で出来たのを削除
-		$("#right" + questionNum).remove();
-
-		// 送信ボタンを削除
-		$("input[name = \"commit\"]").remove();
-		// 問題追加ボタンを削除
-		$("#add").remove();
-	}
-
-	// テキストエリアを作る処理
-	function createTextArea(questionNum,selectText){
-		var questionNum = new Number(questionNum);
+	// テキストエリアを生成
+	function createTextArea(selectText, questionNum){
+		// JavaScriptのおまじないらしい。
+		// 仕様を知らない
 		var selectText = new String(selectText);
-		// 問題文フォームが生成されていない場合生成
-		// 要素 == null では機能しなかった
-		if($("#body" + questionNum).size() == 0){
-			// ===ではなく、==でないと通らない
+		var questionNum = new Number(questionNum);
+
+		if($("#body" + questionNum) != 0){
 			if(selectText == "N択問題"){
-				// alert(selectText);
-				$("#sub_kind" + questionNum).after("<div id = \"body"+ questionNum +"\">問題文<br><textarea cols=\"40\" id=\"test_body" + questionNum + "\" name=\"test[body]\" rows=\"20\"></textarea><br></div>");
-			}else{
-				// alert("hoge");
-				$("#test_questions_kind" + questionNum).after("<br><div id = \"body" + questionNum + "\">問題文<br><textarea cols=\"40\" id=\"test_body" + questionNum + "\" name=\"test[body]\" rows=\"20\"></textarea><br></div>");
+				$("#sub_kind" + questionNum).after("<div id = \"body" + questionNum + "\">問題文<br><textarea cols=\"40\" id=\"test_body" + questionNum + "\" name=\"test[body]\" rows=\"20\"></textarea><br></div>");
 			}
 		}
 	}
 
-	// セレクトを一括取得
-	$("select").each(function(){
-		// /^test_questions_kind[0-9]*$/ にヒットするものを実行
-		$("#" + $(this).attr("id").match(/^test_questions_kind[0-9]+$/)).live("change",function(){
-			// 選んだ文字列
-			var selectText = $(this).val();	
-			// 問題番号
-			var questionNum = $(this).attr("id").replace(/^test_questions_kind/,"");
-			// alert(questionNum);
-			
-			if(selectText === "N択問題"){
-				init();
-				// タグ生成
-				$(this).after("<div id = \"sub_kind" + questionNum + "\">何択か : <input type = \"text\" id = \"test_questions_sub_kind" + questionNum + "\" size = \"2\", maxlinght = \"2\" name = \"test[questions][sub_kind]\" /></div>");
-				createTextArea(questionNum,selectText);
-				/*
-			}else if(selectText === "○×問題"){
-				init();
-				createTextArea(selectText);
-				$("#body").after("<div id = \"TrueOrFalse\">○か×か。<input type = \"text\" id = \"test_questions_choices_right\" size = \"2\" maxlinght = \"2\" name = \"test[questions][choices][right]\" /></div><input name=\"commit\" type=\"submit\" value=\"送信\" /><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
-			}else if(selectText === "一問一答"){
-				init();
-				createTextArea(selectText);
-				$("#body").after("<div id = \"right\">正解は、<input type = \"text\" id = \"test_questions_choices_right\" size = \"16\" maxlinght = \"16\" name = \"test[questions][choices][right]\" /></div><input name=\"commit\" type=\"submit\" value=\"送信\"/><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
-			}else if(selectText === "穴埋め"){
-				init();
-				createTextArea(selectText);
-				$("#body").after("<input name=\"commit\" type=\"submit\" value=\"送信\"/><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
-				*/
-			}
-			// alert(typeof($this));
-		});
-	});
-
-	$("#" + $(this).attr("id").match(/^body[0-9]+$/)).live("change",function(){
-		alert("d");
+	// N択問題の選択肢の生成
+	function createChoices(choiceNum,questionNum){
+		var choiceNum = new Number(choiceNum);
+		var questionNum = new Number(questionNum);
 		// 選択肢数
-		var choiceNum = $(this).val();
-		// 問題番号
-		var questionNum = $(this).attr("id").replace(/^test_questions_sub_kind/,"");
-		alert(choiceNum);
-		alert(questionNum);
+		var choice_num = $("#test_questions_sub_kind").val();
 
+		/*
 		// 選択肢の数だけフォームを生成
-		for(var i = 1;i <= choiceNum;i++){
+		for(var i = 1;i <= choice_num;i++){
 			if(i === 1){
-				// alert("a"); 
-				$("#body" + questionNum).after("<br><div id = \"choice" + questionNum + "_1\">1つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices_choice" + questionNum + "_1\", size = \"128\", maxlinght = \"256\", name = \"test[questions][choices][choice]\"></input> <input type = \"checkbox\" id = \"test_questions_choices_right" + questionNum +"_1\", name=\"test[questions][choices][right]\" />");
+				$("#test_body").after("<br><div id = \"choice\">1つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices_choice1\", size = \"128\", maxlinght = \"256\", name = \"test[questions][choices][choice]\"></input> <input type = \"checkbox\" id = \"test_questions_choices_right1\", name=\"test[questions][choices][right]\"></input>");
 			}else{
-				$("#test_questions_choices_right" + questionNum + "_" + (i - 1)).after("<br>" + i + "つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices_choice" + questionNum + "_" + i + "\", size = \"128\", maxlinght = \"256\", name = \"test[questions][choices][choice]\" /> <input type = \"checkbox\" id = \"test_questions_choices_right" + questionNum + "_" + i + "\", name=\"test[questions][choices][right]\" />");
-			}	
+				$("#test_questions_choices_right" + (i - 1)).after("<br>" + i + "つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices_choice" + i + "\", size = \"128\", maxlinght = \"256\", name = \"test[questions][choices][choice]\" /> <input type = \"checkbox\" id = \"test_questions_choices_right" + i + "\", name=\"test[questions][choices][right]\" />");
+			}
 
 			// divの終了タグと送信ボタン
 			// ここも、===ではなく、==。(文字と数値の為)
-			if(i == choiceNum){
-				$("#test_questions_choices_right" + questionNum + "_" + choiceNum).after("</div><br><input name=\"commit\" type=\"submit\" value=\"送信\" /><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
+			if(i == choice_num){
+				$("#test_questions_choices_right" + choice_num).after("</div><br><input name=\"commit\" type=\"submit\" value=\"送信\" /><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
 			}
+			*/
+		}
+	}
+
+	// 最初からあるフォームに対する処理
+	// すべての要素の末尾に1を付加
+	$("#test_questions_kind1").bind("change",function(){
+		var selectText = $(this).val();
+
+		if(selectText === "N択問題"){
+			$(this).after("<div id = \"sub_kind1\">何択か : <input type = \"text\" id = \"test_questions_sub_kind1\" size = \"2\", maxlinght = \"2\" name = \"test[questions][sub_kind]\" /></div>");	
+			createTextArea(selectText,1);
+		}else if(selectText === "○×問題"){
+
+		}else if(selectText === "一問一答"){
+		
+		}else if(selectText === "穴埋め"){
+		
 		}
 	});
+
+
 });
