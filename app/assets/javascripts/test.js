@@ -32,9 +32,9 @@ $(function(){
 
 		if($("#body" + questionNum) != null){
 			if(selectText == "N択問題"){
-				$("#sub_kind" + questionNum).after("<div id = \"body" + questionNum + "\">問題文<br><textarea cols=\"40\" id=\"test_body" + questionNum + "\" name=\"test[body]\" rows=\"20\"></textarea><br></div>");
+				$("#sub_kind" + questionNum).after("<div id = \"body" + questionNum + "\">問題文<br><textarea cols=\"40\" name=\"test[questions][body" + questionNum +"]\" rows=\"20\"></textarea><br></div>");
 			}else{
-				$("#test_questions_kind" + questionNum).after("<br><div id = \"body"+ questionNum + "\">問題文<br><textarea cols=\"40\" id=\"test_body" + questionNum + "\" name=\"test[body]\" rows=\"20\"></textarea><br></div>");
+				$("#test_questions_kind" + questionNum).after("<br><div id = \"body"+ questionNum + "\">問題文<br><textarea cols=\"40\" name=\"test[questions][body" + questionNum + "]\" rows=\"20\"></textarea><br></div>");
 			}
 		}
 	}
@@ -81,12 +81,12 @@ $(function(){
 	function createForm(questionNum){
 		var questionNum = new Number(questionNum);
 
-		$("#test_questions_kind" + questionNum).bind("change",function(){
+		$("select[name = \"test[questions"+ questionNum + "][kind]\"]").bind("change",function(){
 			var selectText = $(this).val();
 			
 			if(selectText === "N択問題"){
 				init(questionNum);
-				$(this).after("<div id = \"sub_kind" + questionNum  + "\">何択か : <input type = \"text\" id = \"test_questions_sub_kind" + questionNum + "\" size = \"2\", maxlinght = \"2\" name = \"test[questions][sub_kind]\" /></div>");	
+				$(this).after("<div id = \"sub_kind" + questionNum  + "\">何択か : <input type = \"text\" name = \"test[questions" +questionNum + "][sub_kind]\" size = \"2\", maxlinght = \"2\" /></div>");
 				createTextArea(selectText,questionNum);
 				$("#test_questions_sub_kind" + questionNum).bind("change",function(){
 					createChoices(questionNum);
@@ -116,3 +116,4 @@ $(function(){
 	// 最初からあるフォームに対する処理
 	createForm(1);
 });
+
