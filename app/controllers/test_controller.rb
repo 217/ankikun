@@ -1,7 +1,7 @@
 class TestController < ApplicationController
   def new
 		@test = Test.new
-		@questions = @test.questions.build
+		@questions = [@test.questions.new]
   end
 
   def create
