@@ -58,6 +58,26 @@ $(function(){
 				$("#test_questions_choices_right" + questionNum + "_" + choiceNum).after("</div><br><input name=\"commit\" type=\"submit\" value=\"送信\" /><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
 			}
 		}
+		addEvent(questionNum);
+	}
+
+	// add(追加ボタン)にイベントを追加
+	function addEvent(questionNum){
+		// addの前の問題番号
+		var questionNum = new Number(questionNum);
+		var tag = "<br />" + (questionNum + 1) + "問目<br />問題形式 : <select id = \"test_questions_kind" + (questionNum + 1) + "\" name = \"test[questions][kind]\"><option value=\"\">選択してください</option><option value=\"N択問題\">N択問題</option><option value=\"○×問題\">○×問題</option><option value=\"一問一答\">一問一答</option><option value=\"穴埋め\">穴埋め</option></select><br />";
+		
+		$("#add").bind("click",function(){
+			// 送信ボタンを削除
+			$("input[name = \"commit\"]").remove();
+			// 問題追加ボタンを削除
+			$("#add").remove();
+			if($("#test_questions_kind" + questionNum).val() === "N択問題"){
+				$("#choice" + questionNum).after(tag);
+			}else{
+				$("#body" + questionNum).after(tag);
+			}
+		});
 	}
 
 	// 最初からあるフォームに対する処理
@@ -72,18 +92,25 @@ $(function(){
 			$("#test_questions_sub_kind1").bind("change",function(){
 				createChoices(1);
 			});
-		}else if(selectText === "○×問題"){
+
+			}else if(selectText === "○×問題"){
 			init(1);
 			createTextArea(selectText,1);
 			$("#body1").after("<div id = \"TrueOrFalse1\">○か×か。<input type = \"text\" id = \"test_questions_choices_right1\" size = \"2\" maxlinght = \"2\" name = \"test[questions][choices][right]\" /></div><input name=\"commit\" type=\"submit\" value=\"送信\" /><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
+
+			addEvent(1);
 		}else if(selectText === "一問一答"){
 			init(1);
 			createTextArea(selectText,1);
 			$("#body1").after("<div id = \"right1\">正解は、<input type = \"text\" id = \"test_questions_choices_right1\" size = \"16\" maxlinght = \"16\" name = \"test[questions][choices][right]\" /></div><input name=\"commit\" type=\"submit\" value=\"送信\"/><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
+
+			addEvent(1);
 		}else if(selectText === "穴埋め"){
 			init(1);
 			createTextArea(selectText,1);
 			$("#body1").after("<input name=\"commit\" type=\"submit\" value=\"送信\"/><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
+
+			addEvent(1);
 		}
 	});
 });
