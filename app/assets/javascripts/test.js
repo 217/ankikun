@@ -47,10 +47,10 @@ $(function(){
 		// 選択肢の数だけフォームを生成
 		for(var i = 1;i <= choiceNum;i++){
 			if(i === 1){
-				$("textarea[name = \"test[questions" + questionNum + "][body]\"]").after("<br><div id = \"choice" + questionNum + "\">1つ目の選択肢 : <input type = \"text\" size = \"128\", maxlinght = \"256\", name = \"test[questions" + questionNum + "][choices][choice" + i + "]\"></input> <input type = \"checkbox\" id = \"test_questions_choices_right" + questionNum +"_1\", name=\"test[questions][choices][right]\"></input>");
+				$("#body" + questionNum).after("<div id = \"choice" + questionNum + "\">1つ目の選択肢 : <input type = \"text\" size = \"128\", maxlinght = \"256\", name = \"test[questions" + questionNum + "][choices" + i + "][choice]\" /> <input type = \"checkbox\" name=\"test[questions" + questionNum + "][choices" + i + "][right]\" />");
 			}else{
 				alert("a");
-				$("input[name = \"test[questions" + questionNum + "][choices][right" + i + "]\"]").after("<br>" + i + "つ目の選択肢 : <input type = \"text\" size = \"128\", maxlinght = \"256\", name = \"test[questions" + questionNum + "][choices][choice" + i + "]\" /> <input type = \"checkbox\" name=\"test[questions" + questionNum +"][choices][right" + i + "]\" />");
+				$("input[name = \"test[questions" + questionNum + "][choices" + (i - 1) + "][right]\"]").after("<br>" + i + "つ目の選択肢 : <input type = \"text\" size = \"128\", maxlinght = \"256\", name = \"test[questions" + questionNum + "][choices][choice" + i + "]\" /> <input type = \"checkbox\" name=\"test[questions" + questionNum +"][choices" + i + "][right]\" />");
 			}
 
 			// divの終了タグと送信ボタン
@@ -87,7 +87,7 @@ $(function(){
 			
 			if(selectText === "N択問題"){
 				init(questionNum);
-				$(this).after("<div id = \"sub_kind" + questionNum  + "\">何択か : <input type = \"text\" name = \"test[questions" +questionNum + "][sub_kind]\" size = \"2\", maxlinght = \"2\" /></div>");
+				$(this).after("<div id = \"sub_kind" + questionNum  + "\">何択か : <input type = \"text\" name = \"test[questions" + questionNum + "][sub_kind]\" size = \"2\", maxlinght = \"2\" /></div>");
 				createTextArea(selectText,questionNum);
 				$("input[name = \"test[questions" + questionNum + "][sub_kind]\"]").bind("change",function(){
 					createChoices(questionNum);
