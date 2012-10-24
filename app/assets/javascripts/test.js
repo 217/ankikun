@@ -43,7 +43,7 @@ $(function(){
 	function createChoices(questionNum){
 		var questionNum = new Number(questionNum);
 		var choiceNum = $("#test_questions_sub_kind" + questionNum).val();
-
+				
 		// 選択肢の数だけフォームを生成
 		for(var i = 1;i <= choiceNum;i++){
 			if(i === 1){
@@ -65,18 +65,14 @@ $(function(){
 	function addEvent(questionNum){
 		// addの前の問題番号
 		var questionNum = new Number(questionNum);
-		var tag = "<br />" + (questionNum + 1) + "問目<br />問題形式 : <select id = \"test_questions_kind" + (questionNum + 1) + "\" name = \"test[questions][kind]\"><option value=\"\">選択してください</option><option value=\"N択問題\">N択問題</option><option value=\"○×問題\">○×問題</option><option value=\"一問一答\">一問一答</option><option value=\"穴埋め\">穴埋め</option></select><br />";
+		var tag = "<div id = \"form" + (questionNum + 1) + "\">" + (questionNum + 1) + "問目<br />問題形式 : <select id = \"test_questions_kind" + (questionNum + 1) + "\" name = \"test[questions][kind]\"><option value=\"\">選択してください</option><option value=\"N択問題\">N択問題</option><option value=\"○×問題\">○×問題</option><option value=\"一問一答\">一問一答</option><option value=\"穴埋め\">穴埋め</option></select><br /></dir>";
 		
 		$("#add").bind("click",function(){
 			// 送信ボタンを削除
 			$("input[name = \"commit\"]").remove();
 			// 問題追加ボタンを削除
 			$("#add").remove();
-			if($("#test_questions_kind" + questionNum).val() === "N択問題"){
-				$("#choice" + questionNum).after(tag);
-			}else{
-				$("#body" + questionNum).after(tag);
-			}
+			$("#form" + questionNum).after(tag);
 		});
 	}
 

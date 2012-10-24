@@ -1,8 +1,10 @@
 <h1>テストの新規作成</h1>
 <%# フォームの動的作成 %>
+<div id = "form1">
 <%= form_for @test, :url => {:action => "create"} do |f| %>
 	1問目<br />
 	<%= f.fields_for :questions do |f1| %>
 		問題形式 : <%= f1.select :kind, ["N択問題", "○×問題", "一問一答","穴埋め"], {:include_blank => "選択してください"}, {:id => "test_questions_kind1"} %><br />
 	<% end %>
 <% end %>
+</div>
