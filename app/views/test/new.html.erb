@@ -1,10 +1,15 @@
 <h1>テストの新規作成</h1>
-<%# フォームの動的作成 %>
-<%= form_for @test, :url => {:action => "create"} do |f| %>
-	<div id = "form1">
-		1問目<br />
-		<%= f.fields_for :questions1 do |f1| %>
-			問題形式 : <%= f1.select :kind, ["N択問題", "○×問題", "一問一答","穴埋め"], {:include_blank => "選択してください"}, {:id => "test_questions_kind1"} %><br />
-		<% end %>
-	</div>
+<%= form_tag("/create", :multipart => true) do %>
+	<% @questions.each_with_index do |question, i| %>
+		<% @question = question %>
+		<%= i %>問目 : 
+		<select name = "question_kind_<%= i %>">
+			<option value = "0">選択してください</option>
+			<option value = "1">N択問題</option>
+			<option value = "2">○×問題</option>
+			<option value = "3">一問一答</option>
+			<option value = "4">穴埋め</option>
+		</select>
+	<% end %>
+	<%= submit_tag "送信" %>
 <% end %>
