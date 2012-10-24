@@ -8,9 +8,4 @@ class CreateWikis < ActiveRecord::Migration
     end
 
   end
-
-	def down
-		drop_table :wikis
-	end
-
 end

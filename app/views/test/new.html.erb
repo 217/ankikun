@@ -1,5 +1,6 @@
 <h1>テストの新規作成</h1>
 <%= form_tag("/create", :multipart => true) do %>
+	<% if false %>
 	<% @questions.each_with_index do |question, i| %>
 		<% @question = question %>
 		<%= i %>問目 : 
@@ -12,4 +13,5 @@
 		</select>
 	<% end %>
 	<%= submit_tag "送信" %>
+	<% end %>
 <% end %>

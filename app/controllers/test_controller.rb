@@ -1,11 +1,11 @@
 class TestController < ApplicationController
   def new
 		@test = Test.new
-		@questions = @test.question.build
+		@questions = @test.questions.build
   end
 
   def create
-		@questions = Question.new(params[:questions]);
+		# @questions = Question.new(params[:questions]);
 		# render :text => ""
   end
 

@@ -1,10 +1,10 @@
 class Question < ActiveRecord::Base
-	has_many :test_testquestions
-	has_many :tests, :through => :test_testquestions
-	has_many :testquestionchoises, :through => :testquestionchoises
+	has_many :test_questions
+	has_many :tests, :through => :test_questions, :source => :tests
+	has_many :question_choices
+	has_many :choices, :through => :question_choices, :source => :choices
 
-	accepts_nested_attributes_for :test_testquestions
-	accepts_nested_attributes_for :testquestionchoises
+	accepts_nested_attributes_for :test_questions
 
   attr_accessible :kind, :sub_kind, :question_body		
 end
