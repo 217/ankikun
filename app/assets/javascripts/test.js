@@ -42,20 +42,21 @@ $(function(){
 	// N択問題の選択肢の生成
 	function createChoices(questionNum){
 		var questionNum = new Number(questionNum);
-		var choiceNum = $("#test_questions_sub_kind" + questionNum).val();
+		var choiceNum = $("input[name = \"test[questions" + questionNum + "][sub_kind]\"]").val();
 				
 		// 選択肢の数だけフォームを生成
 		for(var i = 1;i <= choiceNum;i++){
 			if(i === 1){
-				$("#test_body" + questionNum).after("<br><div id = \"choice" + questionNum + "\">1つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices_choice" + questionNum + "_1\", size = \"128\", maxlinght = \"256\", name = \"test[questions][choices][choice]\"></input> <input type = \"checkbox\" id = \"test_questions_choices_right" + questionNum +"_1\", name=\"test[questions][choices][right]\"></input>");
+				$("textarea[name = \"test[questions" + questionNum + "][body]\"]").after("<br><div id = \"choice" + questionNum + "\">1つ目の選択肢 : <input type = \"text\" size = \"128\", maxlinght = \"256\", name = \"test[questions" + questionNum + "][choices][choice" + i + "]\"></input> <input type = \"checkbox\" id = \"test_questions_choices_right" + questionNum +"_1\", name=\"test[questions][choices][right]\"></input>");
 			}else{
-				$("#test_questions_choices_right" + questionNum + "_" + (i - 1)).after("<br>" + i + "つ目の選択肢 : <input type = \"text\", id = \"test_questions_choices_choice" + questionNum + "_" + i + "\", size = \"128\", maxlinght = \"256\", name = \"test[questions][choices][choice]\" /> <input type = \"checkbox\" id = \"test_questions_choices_right" + questionNum + "_" + i + "\", name=\"test[questions][choices][right]\" />");
+				alert("a");
+				$("input[name = \"test[questions" + questionNum + "][choices][right" + i + "]\"]").after("<br>" + i + "つ目の選択肢 : <input type = \"text\" size = \"128\", maxlinght = \"256\", name = \"test[questions" + questionNum + "][choices][choice" + i + "]\" /> <input type = \"checkbox\" name=\"test[questions" + questionNum +"][choices][right" + i + "]\" />");
 			}
 
 			// divの終了タグと送信ボタン
 			// ここも、===ではなく、==。(文字と数値の為)
 			if(i == choiceNum){
-				$("#test_questions_choices_right" + questionNum + "_" + choiceNum).after("</div><br><input name=\"commit\" type=\"submit\" value=\"送信\" /><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
+				$("input[name = \"test[questions" + questionNum + "][choices" + choiceNum + "][right]\"]").after("</div><br><input name=\"commit\" type=\"submit\" value=\"送信\" /><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
 			}
 		}
 		addEvent(questionNum);
@@ -66,7 +67,7 @@ $(function(){
 		// addの前の問題番号
 		var questionNum = new Number(questionNum);
 
-		var tag = "<div id = \"form" + (questionNum + 1) + "\">" + (questionNum + 1) + "問目<br />問題形式 : <select id = \"test_questions_kind" + (questionNum + 1) + "\" name = \"test[questions][kind]\"><option value=\"\">選択してください</option><option value=\"N択問題\">N択問題</option><option value=\"○×問題\">○×問題</option><option value=\"一問一答\">一問一答</option><option value=\"穴埋め\">穴埋め</option></select><br /></div>";
+		var tag = "<div id = \"form" + (questionNum + 1) + "\">" + (questionNum + 1) + "問目<br />問題形式 : <select name = \"test[questions][kind" + questionNum + "]\"><option value=\"\">選択してください</option><option value=\"N択問題\">N択問題</option><option value=\"○×問題\">○×問題</option><option value=\"一問一答\">一問一答</option><option value=\"穴埋め\">穴埋め</option></select><br /></div>";
 		
 		$("#add").bind("click",function(){
 			// 送信ボタンを削除
@@ -88,7 +89,7 @@ $(function(){
 				init(questionNum);
 				$(this).after("<div id = \"sub_kind" + questionNum  + "\">何択か : <input type = \"text\" name = \"test[questions" +questionNum + "][sub_kind]\" size = \"2\", maxlinght = \"2\" /></div>");
 				createTextArea(selectText,questionNum);
-				$("#test_questions_sub_kind" + questionNum).bind("change",function(){
+				$("input[name = \"test[questions" + questionNum + "][sub_kind]\"]").bind("change",function(){
 					createChoices(questionNum);
 				});
 
