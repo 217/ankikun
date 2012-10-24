@@ -49,7 +49,6 @@ $(function(){
 			if(i === 1){
 				$("#body" + questionNum).after("<div id = \"choice" + questionNum + "\">1つ目の選択肢 : <input type = \"text\" size = \"128\", maxlinght = \"256\", name = \"test[questions" + questionNum + "][choices" + i + "][choice]\" /> <input type = \"checkbox\" name=\"test[questions" + questionNum + "][choices" + i + "][right]\" />");
 			}else{
-				alert("a");
 				$("input[name = \"test[questions" + questionNum + "][choices" + (i - 1) + "][right]\"]").after("<br>" + i + "つ目の選択肢 : <input type = \"text\" size = \"128\", maxlinght = \"256\", name = \"test[questions" + questionNum + "][choices][choice" + i + "]\" /> <input type = \"checkbox\" name=\"test[questions" + questionNum +"][choices" + i + "][right]\" />");
 			}
 
@@ -81,8 +80,8 @@ $(function(){
 	
 	function createForm(questionNum){
 		var questionNum = new Number(questionNum);
-
-		$("select[name = \"test[questions"+ questionNum + "][kind]\"]").bind("change",function(){
+	
+		$("select[name = \"test[questions" + questionNum + "][kind]\"]").bind("change",function(){
 			var selectText = $(this).val();
 			
 			if(selectText === "N択問題"){
