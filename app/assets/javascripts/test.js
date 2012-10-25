@@ -65,10 +65,10 @@ $(function(){
 
 	// add(追加ボタン)にイベントを追加
 	function addEvent(questionId){
-		// addの前の問題番号
 		var questionId = new Number(questionId);
+		var nextQuestionId = questionId + 1;
 
-		var tag = "<div id = \"form" + (questionId + 1) + "\">" + (questionId + 1) + "問目<br />問題形式 : <select name = \"test[questions][kind" + questionId + "]\"><option value=\"\">選択してください</option><option value=\"N択問題\">N択問題</option><option value=\"○×問題\">○×問題</option><option value=\"一問一答\">一問一答</option><option value=\"穴埋め\">穴埋め</option></select><br /></div>";
+		var tag = "<div id = \"form" + nextQuestionId + "\">" + (nextQuestionId + 1) + "問目<br />問題形式 : <select name = \"question[" + nextQuestionId + "][kind]\"><option value=\"0\">選択してください</option><option value=\"1\">N択問題</option><option value=\"2\">○×問題</option><option value=\"3\">一問一答</option><option value=\"4\">穴埋め</option></select><br /></div>";
 		
 		$("#add").bind("click",function(){
 			// 送信ボタンを削除
@@ -76,7 +76,7 @@ $(function(){
 			// 問題追加ボタンを削除
 			$("#add").remove();
 			$("#form" + questionId).after(tag);
-			createForm(questionId + 1);
+			createForm(nextQuestionId);
 		});
 	}
 	
