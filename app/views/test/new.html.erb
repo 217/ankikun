@@ -1,17 +1,17 @@
 <h1>テストの新規作成</h1>
 <br />
 <%= form_tag("/test/create", :multipart => true) do %>
-	<% @questions.each_with_index do |question, i| %>
-		<% @question = question %>
-		<%= i + 1 %>問目 : 
-		<select name = "question_kind_<%= i %>">
-			<option value = "0">選択してください</option>
-			<option value = "1">N択問題</option>
-			<option value = "2">○×問題</option>
-			<option value = "3">一問一答</option>
-			<option value = "4">穴埋め</option>
-		</select>
-	<% end %>
-	<br />
-	<%= submit_tag "送信" %>
+	<div id = "form0">
+		<% @questions.each_with_index do |question, i| %>
+			<% @question = question %>
+			<%= i + 1 %>問目 : 
+			<select name = "question[<%= i %>][kind]">
+				<option value = "0">選択してください</option>
+				<option value = "1">N択問題</option>
+				<option value = "2">○×問題</option>
+				<option value = "3">一問一答</option>
+				<option value = "4">穴埋め</option>
+			</select>
+		<% end %>
+	</div>
 <% end %>
