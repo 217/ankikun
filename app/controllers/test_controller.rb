@@ -12,22 +12,25 @@ class TestController < ApplicationController
 		@test = Test.new
 		# @question
 
-		# pp params
+		pp params
 		
 		# 初期化
 		i = 0
 
 		Test.transaction do
-			# pp params[:test]
+			pp "a"
 			# 2桁までしか入力できないので、制限時間無制限の場合、3桁の100を代入
-			@test.min = params[:test][:min] != "" ? params[:test][:min] : 100
-			@test.sec = params[:test][:sec] != "" ? params[:test][:sec] : 100
+			@test.min = params[:test][:min] != "" ? params[:test][:min].to_i : 100
+			@test.sec = params[:test][:sec] != "" || params[:test][:sec] == "0" ? params[:test][:sec].to_i : 100
 			@test.save
+			pp "b"
 
 			while !params[:question][i.to_s].nil?
 				@question = @test.questions.new
 				@question.kind = params[:question][i.to_s][:kind]
-				@question.sub_kind = params[:question][i.to_s][:kind] == 1 ? params[:question][i.to_s][:sub_kind] : 0
+				@question.sub_kind = params[:question][i.to_s][:kind] == "1" ? params[:question][i.to_s][:sub_kind] : 0
+				# エラーになる問題のコード
+				# @question.body = params[:question][i.to_s][:body]
 				@question.save
 			
 				case params[:question][i.to_s][:kind]
@@ -48,9 +51,18 @@ class TestController < ApplicationController
 
 						j += 1
 					end
-				when "2"
+				when "2"		
+					@choice = @question.choices.new
+					@choice.text = ""
+					@choice.right = params[:question][i.to_s][:choices][0][:right]
+					@choice.save
 				when "3"
+					@choice = @question.choices.new
+					@choice.text = params[:question][i.to_s][:choices][0][:choice_text]
+					@choice.right = true
+					@choice.save
 				when "4"
+					# まだ実装しない
 				end
 
 				i += 1

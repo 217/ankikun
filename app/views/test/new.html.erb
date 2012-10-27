@@ -3,7 +3,7 @@
 <%= form_tag("/test/create", :multipart => true) do %>
 	制限時間(入力しなくても良い) :
 	<!-- ここでは、都合が悪いため、あえてselectを使用する -->
-	<select name = "test[:min]">
+	<select name = "test[min]">
 		<option value = "">分</option>
 		<option value = "1">1</option>
 		<option value = "2">2</option>
@@ -67,7 +67,7 @@
 		<option value = "60">60</option>
 	</select>
 	 : 
-	<select name = "test[:sec]">
+	<select name = "test[sec]">
 		<option value = "">秒</option>
 		<option value = "0">00</option>
 		<option value = "1">01</option>

@@ -1,7 +1,7 @@
 // jQueryのソース
 //
-// HTMLの書き方が混ざっているのは仕様です
-// 
+// JavaScriptは、\[改行]で文字列を複数行に渡り分割する事が出来るが、今回はVimが対応していない為使用しない。
+//
 $(function(){
 	// 違う選択肢が選ばれた際の初期化処理
 	function init(questionId){
@@ -68,7 +68,7 @@ $(function(){
 		var questionId = new Number(questionId);
 		var nextQuestionId = questionId + 1;
 
-		var tag = "<div id = \"form" + nextQuestionId + "\">" + (nextQuestionId + 1) + "問目<br />問題形式 : <select name = \"question[" + nextQuestionId + "][kind]\"><option value=\"0\">選択してください</option><option value=\"1\">N択問題</option><option value=\"2\">○×問題</option><option value=\"3\">一問一答</option><option value=\"4\">穴埋め</option></select><br /></div>";
+		var tag = "<div id = \"form" + nextQuestionId + "\"><br />" + (nextQuestionId + 1) + "問目<br />問題形式 : <select name = \"question[" + nextQuestionId + "][kind]\"><option value=\"0\">選択してください</option><option value=\"1\">N択問題</option><option value=\"2\">○×問題</option><option value=\"3\">一問一答</option><option value=\"4\">穴埋め</option></select><br /></div>";
 		
 		$("#add").bind("click",function(){
 			// 送信ボタンを削除
@@ -99,12 +99,12 @@ $(function(){
 			}else if(selectId == 2){
 				init(questionId);
 				createTextArea(selectId,questionId);
-				$("#body" + questionId).after("<div id = \"TrueOrFalse" + questionId + "\">○か×か。<input type = \"text\" size = \"2\" maxlinght = \"2\" name = \"questions[" + questionId + "][choices][0][right]\" /></div><input name=\"commit\" type=\"submit\" value=\"送信\" /><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
+				$("#body" + questionId).after("<div id = \"TrueOrFalse" + questionId + "\">○か×か。<select name = \"questions[" + questionId + "][choices][0][choice_text]\" ><option value = \"true\">○</option><option value = \"false\">×</option></div><br /><input name=\"commit\" type=\"submit\" value=\"送信\" /><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
 				addEvent(questionId);
 			}else if(selectId == 3){
 				init(questionId);
 				createTextArea(selectId,questionId);
-				$("#body" + questionId).after("<div id = \"right" + questionId + "\">正解は、<input type = \"text\" size = \"16\" maxlinght = \"16\" name = \"questions[" + questionId + "][choices][right]\" /></div><input name=\"commit\" type=\"submit\" value=\"送信\"/><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
+				$("#body" + questionId).after("<div id = \"right" + questionId + "\">正解は、<input type = \"text\" size = \"16\" maxlinght = \"16\" name = \"questions[" + questionId + "][choices][0][choice_text]\" /></div><input name = \"commit\" type=\"submit\" value=\"送信\"/><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
 
 				addEvent(questionId);
 			}else if(selectId == 4){

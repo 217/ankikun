@@ -1,4 +1,4 @@
-# coding: utf-8
+# -*- encoding: UTF-8 –*-
 class CreateTests < ActiveRecord::Migration
   def change
     create_table :tests do |t|
