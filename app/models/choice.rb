@@ -1,6 +1,6 @@
 class Choice < ActiveRecord::Base
 	has_many :question_choices
-	has_many :questions, :through => :question_choice, :source => :question
+	has_many :questions, :through => :question_choices, :source => :questions
 
-	attr_accessible :choice_id, :question_id
+	attr_accessible :choice_text, :right
 end

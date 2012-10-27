@@ -47,16 +47,16 @@ $(function(){
 		var choiceNum = $("input[name = \"question[" + questionId + "][sub_kind]\"]").val();
 				
 		// 選択肢の数だけフォームを生成
-		for(var i = 1;i <= choiceNum;i++){
-			if(i === 1){
+		for(var i = 0;i < choiceNum;i++){
+			if(i === 0){
 				$("#body" + questionId).after("<div id = \"choice" + questionId + "\">1つ目の選択肢 : <input type = \"text\" size = \"128\", maxlinght = \"256\", name = \"question[" + questionId + "][choices][" + i + "][choice]\" /> <input type = \"checkbox\" name=\"question[" + questionId + "][choices][" + i + "][right]\" />");
 			}else{
-				$("input[name = \"question[" + questionId + "][choices][" + (i - 1) + "][right]\"]").after("<br>" + i + "つ目の選択肢 : <input type = \"text\" size = \"128\", maxlinght = \"256\", name = \"question[" + questionId + "][choices][choice" + i + "]\" /> <input type = \"checkbox\" name=\"question[" + questionId +"][choices][" + i + "][right]\" />");
+				$("input[name = \"question[" + questionId + "][choices][" + (i - 1) + "][right]\"]").after("<br>" + (i + 1) + "つ目の選択肢 : <input type = \"text\" size = \"128\", maxlinght = \"256\", name = \"question[" + questionId + "][choices][" + i + "][choice]\" /> <input type = \"checkbox\" name=\"question[" + questionId +"][choices][" + i + "][right]\" />");
 			}
 
 			// divの終了タグと送信ボタン
 			// ここも、===ではなく、==。(文字と数値の為)
-			if(i == choiceNum){
+			if((i + 1) == choiceNum){
 				$("input[name = \"question[" + questionId + "][choices][" + i + "][right]\"]").after("</div><br><input name=\"commit\" type=\"submit\" value=\"送信\" /><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
 			}
 		}
@@ -80,6 +80,7 @@ $(function(){
 		});
 	}
 	
+	// フォームを作成
 	function createForm(questionId){
 		var questionId = new Number(questionId);
 	

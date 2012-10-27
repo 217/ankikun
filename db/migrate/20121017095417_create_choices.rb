@@ -1,7 +1,7 @@
 class CreateChoices < ActiveRecord::Migration
   def change
-    create_table :testquestionchoices do |t|
-      t.text :choices
+    create_table :choices do |t|
+      t.text :choice_text
 			t.boolean :right
 
       t.timestamps
