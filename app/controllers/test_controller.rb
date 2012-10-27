@@ -27,10 +27,12 @@ class TestController < ApplicationController
 
 			while !params[:question][i.to_s].nil?
 				@question = @test.questions.new
+				pp @question
 				@question.kind = params[:question][i.to_s][:kind]
 				@question.sub_kind = params[:question][i.to_s][:kind] == "1" ? params[:question][i.to_s][:sub_kind] : 0
 				# エラーになる問題のコード
-				# @question.body = params[:question][i.to_s][:body]
+				# 名前を合わせるのが定石だが、合わせるとエラーになる
+				@question.question_body = params[:question][i.to_s][:body]
 				@question.save
 			
 				case params[:question][i.to_s][:kind]
