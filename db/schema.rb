@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(:version => 20121019221245) do
 
   create_table "choices", :force => true do |t|
-    t.text     "choices"
+    t.text     "choice_text"
     t.boolean  "right"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

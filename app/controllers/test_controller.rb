@@ -1,3 +1,4 @@
+# coding: utf-8
 # デバッグ用
 require 'pp'
 
@@ -11,41 +12,42 @@ class TestController < ApplicationController
 		@test = Test.new
 		# @question
 
-		pp params
-		# 
+		# pp params
+		
+		# 初期化
 		i = 0
-		while !params[:question][i.to_s].nil?
-			@question = @test.questions.new
+
+		Test.transaction do
+			@test.save	
+			while !params[:question][i.to_s].nil?
+				@question = @test.questions.new
+				@question.save
 			
-			case params[:question][i.to_s][:kind]	
-			when "1"
-				j = 0
-				pp "i = ",i
-				pp "j = ",j
-				pp "params[:question][i][:choices][i] = ",params[:question][i.to_s][:choices][j.to_s]
-				pp params
+				case params[:question][i.to_s][:kind]	
+				when "1"
+					j = 0
 
-				while !params[:question][i.to_s][:choices][j.to_s].nil?
-					# 選択肢の代入
-					@choice = @question.choices.new
-					if !@choice.save
-						render :text => "Choice NG"
+					while !params[:question][i.to_s][:choices][j.to_s].nil?
+						# 選択肢の代入
+						@choice = @question.choices.new
+						@choice.choice_text = params[:question][i.to_s][:choices][j.to_s][:choice]
+						@choice.right = params[:question][i.to_s][:choices][j.to_s][:right]
+						pp "choice = ",	 @choice
+
+						@choice.save
+
+						j += 1
 					end
-					j += 1
+				when "2"
+				when "3"
+				when "4"
 				end
-				if !@question.save
-					render :text => "question NG"
-				end
-			when "2"
-			when "3"
-			when "4"
-			end
-			i += 1
-		end
 
-		if !@test.save
-			render :text => "REJECT"
+				i += 1
+			end
 		end
+		rescue => e
+			render :text => "もう一度送信してください。"
 	end
 
   def index
