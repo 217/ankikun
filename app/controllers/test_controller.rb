@@ -30,9 +30,12 @@ class TestController < ApplicationController
 					while !params[:question][i.to_s][:choices][j.to_s].nil?
 						# 選択肢の代入
 						@choice = @question.choices.new
-						@choice.choice_text = params[:question][i.to_s][:choices][j.to_s][:choice]
+						@choice.choice_text = params[:question][i.to_s][:choices][j.to_s][:choice_text]
 						@choice.right = params[:question][i.to_s][:choices][j.to_s][:right]
-						pp "choice = ",	 @choice
+
+						# pp "params[:question][i.to_s][:choices][j.to_s][:choice]", params[:question][i.to_s][:choices][j.to_s][:choice_text]
+						#	pp "params[:question][i.to_s][:choices][j.to_s][:right]", params[:question][i.to_s][:choices][j.to_s][:right]
+						# pp "choice = ",	@choice
 
 						@choice.save
 
