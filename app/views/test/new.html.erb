@@ -1,6 +1,7 @@
 <h1>テストの新規作成</h1>
 <br />
 <%= form_tag("/test/create", :multipart => true) do %>
+	制限時間(入力しなくても良い) : <input type = "text" name = "test[min]" size = "2" maxlight = "2" /> : <input type = "text" name = "test[sec]" size = "2" maxlight = "2" />
 	<div id = "form0">
 		<% @questions.each_with_index do |question, i| %>
 			<% @question = question %>

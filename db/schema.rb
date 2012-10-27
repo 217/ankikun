@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(:version => 20121019221245) do
   create_table "choices", :force => true do |t|
     t.text     "choice_text"
     t.boolean  "right"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "contents", :force => true do |t|
@@ -59,13 +59,14 @@ ActiveRecord::Schema.define(:version => 20121019221245) do
     t.datetime "updated_at",  :null => false
   end
 
-  add_index "test_questions", ["question_id"], :name => "index_test_testquestions_on_question_id", :unique => true
-  add_index "test_questions", ["test_id"], :name => "index_test_testquestions_on_test_id", :unique => true
+  add_index "test_questions", ["question_id"], :name => "index_test_questions_on_question_id", :unique => true
+  add_index "test_questions", ["test_id"], :name => "index_test_questions_on_test_id", :unique => true
 
   create_table "tests", :force => true do |t|
-    t.integer  "question_num"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.integer  "min"
+    t.integer  "sec"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -102,7 +103,7 @@ ActiveRecord::Schema.define(:version => 20121019221245) do
   add_index "wiki_wikipages", ["wiki_id"], :name => "index_wiki_wikipages_on_wiki_id", :unique => true
   add_index "wiki_wikipages", ["wikipage_id"], :name => "index_wiki_wikipages_on_wikipage_id", :unique => true
 
-  create_table "wikipages", :primary_key => "page_id", :force => true do |t|
+  create_table "wikipages", :force => true do |t|
     t.integer  "owner_id",   :null => false
     t.string   "title",      :null => false
     t.text     "body",       :null => false

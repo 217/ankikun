@@ -1,7 +1,9 @@
+# coding: utf-8
 class CreateTests < ActiveRecord::Migration
   def change
     create_table :tests do |t|
-			t.integer :question_num			# 問題数
+			t.integer :min			# 制限時間(分)
+			t.integer :sec			# 				(秒)
 
       t.timestamps
     end
