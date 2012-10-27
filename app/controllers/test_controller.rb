@@ -18,16 +18,16 @@ class TestController < ApplicationController
 		i = 0
 
 		Test.transaction do
-			pp "a"
+			# pp "a"
 			# 2桁までしか入力できないので、制限時間無制限の場合、3桁の100を代入
 			@test.min = params[:test][:min] != "" ? params[:test][:min].to_i : 100
 			@test.sec = params[:test][:sec] != "" || params[:test][:sec] == "0" ? params[:test][:sec].to_i : 100
 			@test.save
-			pp "b"
+			# pp "b"
 
 			while !params[:question][i.to_s].nil?
 				@question = @test.questions.new
-				pp @question
+				# pp @question
 				@question.kind = params[:question][i.to_s][:kind]
 				@question.sub_kind = params[:question][i.to_s][:kind] == "1" ? params[:question][i.to_s][:sub_kind] : 0
 				# エラーになる問題のコード
