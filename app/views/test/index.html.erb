@@ -1,2 +1,14 @@
-<h1>Test#index</h1>
-<p>Find me in app/views/test/index.html.erb</p>
+<h1>テストの一覧</h1>
+
+<table>
+	<tr>
+		<th>テスト番号</th>
+		<th>タイトル</th>
+	</tr>
+	<% @tests.each_with_index do |test, i| %>
+		<tr>
+			<td><%= test.test_questions.test_id %></td>
+			<td><%= test.title %></td>
+		</tr>
+	<% end %>
+</table>	

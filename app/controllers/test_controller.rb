@@ -77,7 +77,9 @@ class TestController < ApplicationController
 	end
 
   def index
-
+		pp Test.find(:all, {:include => "test_questions"})
+		@tests = Test.find(:all, {:include => "test_questions", :conditions => {"test_questions.question_id" => 0}, :order => "test_questions.test_id asc"})
+		pp @tests
   end
 
   def edit

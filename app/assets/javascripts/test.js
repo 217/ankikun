@@ -98,7 +98,6 @@ $(function(){
 					$("input[name = \"commit\"]").remove();
 					createChoices(questionId);
 				});
-
 			}else if(selectId == 2){
 				init(questionId);
 				createTextArea(selectId,questionId);

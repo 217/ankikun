@@ -4,6 +4,7 @@ class CreateTests < ActiveRecord::Migration
     create_table :tests do |t|
 			t.integer :min			# 制限時間(分)
 			t.integer :sec			# 				(秒)
+			t.text 		:title		# 問題文
 
       t.timestamps
     end
