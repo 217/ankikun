@@ -55,13 +55,13 @@ class TestController < ApplicationController
 					end
 				when "2"		
 					@choice = @question.choices.new
-					@choice.text = ""
-					@choice.right = params[:question][i.to_s][:choices][0][:right]
+					@choice.choice_text = ""
+					@choice.right = params[:question][i.to_s][:choices][0][:right] == "1" ? "t" : "f"
 					@choice.save
 				when "3"
 					@choice = @question.choices.new
-					@choice.text = params[:question][i.to_s][:choices][0][:choice_text]
-					@choice.right = true
+					@choice.choice_text = params[:question][i.to_s][:choices][0][:choice_text]
+					@choice.right = "t"
 					@choice.save
 				when "4"
 					# まだ実装しない
