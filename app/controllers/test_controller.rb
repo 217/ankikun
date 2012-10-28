@@ -70,9 +70,10 @@ class TestController < ApplicationController
 
 				i += 1
 			end
+			redirect_to :action => "index"
 		end
-		# rescue => e
-		#	render :text => "もう一度送信してください。"
+		rescue => e
+			render :text => "エラーが発生しました。"
 	end
 
   def index
