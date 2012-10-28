@@ -41,9 +41,6 @@ ActiveRecord::Schema.define(:version => 20121019221245) do
     t.datetime "updated_at",  :null => false
   end
 
-  add_index "question_choices", ["choice_id"], :name => "index_question_choices_on_choice_id", :unique => true
-  add_index "question_choices", ["question_id"], :name => "index_question_choices_on_question_id", :unique => true
-
   create_table "questions", :force => true do |t|
     t.integer  "kind"
     t.integer  "sub_kind"
@@ -53,13 +50,12 @@ ActiveRecord::Schema.define(:version => 20121019221245) do
   end
 
   create_table "test_questions", :force => true do |t|
-    t.integer  "test_id",     :null => false
-    t.integer  "question_id", :null => false
+    t.integer  "test_id"
+    t.integer  "question_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
 
-  add_index "test_questions", ["question_id"], :name => "index_test_questions_on_question_id", :unique => true
   add_index "test_questions", ["test_id"], :name => "index_test_questions_on_test_id", :unique => true
 
   create_table "tests", :force => true do |t|

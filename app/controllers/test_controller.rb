@@ -18,23 +18,30 @@ class TestController < ApplicationController
 		i = 0
 
 		Test.transaction do
-			# pp "a"
+			pp "a"
 			# 2桁までしか入力できないので、制限時間無制限の場合、3桁の100を代入
 			@test.min = params[:test][:min] != "" ? params[:test][:min].to_i : 100
-			@test.sec = params[:test][:sec] != "" || params[:test][:sec] == "0" ? params[:test][:sec].to_i : 100
+			@test.sec = params[:test][:sec] != "" || params[:test][:sec] == "0" ? params[:test][:sec].to_i : 100	
+
+			# テストのセーブ
 			@test.save
-			pp @test
+			# pp @test
 			# pp "b"
 
 			while !params[:question][i.to_s].nil?
-				pp @question = @test.questions.build(params[:question][i.to_s])
 				@question.kind = params[:question][i.to_s][:kind]
 				@question.sub_kind = params[:question][i.to_s][:kind] == "1" ? params[:question][i.to_s][:sub_kind] : 0
-				# エラーになる問題のコード
-				# 名前を合わせるのが定石だが、合わせるとエラーになる
-				@question.question_body = params[:question][i.to_s][:body]
+				@question.body = params[:question][i.to_s][:body]
+				#  
+				@wikiQuestionId = @test.test_questions.build
+				@wikiQuestionId.question_id = i
+				# IDのセーブ
+				# @wikiQuestionId.save
+
+				# 問題のセーブ
 				@question.save
-				pp @question
+				
+				# pp @question
 			
 				case params[:question][i.to_s][:kind]
 				when "1"
@@ -49,7 +56,11 @@ class TestController < ApplicationController
 						# pp "params[:question][i.to_s][:choices][j.to_s][:choice]", params[:question][i.to_s][:choices][j.to_s][:choice_text]
 						#	pp "params[:question][i.to_s][:choices][j.to_s][:right]", params[:question][i.to_s][:choices][j.to_s][:right]
 						# pp "choice = ",	@choice
-
+						
+						@questionChoiceID = @question.question_choices.build
+						@questionChoiceID.question_id = i
+						@questionChoiceID.choice_id = j
+						
 						@choice.save
 
 						pp @choice
