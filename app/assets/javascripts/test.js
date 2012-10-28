@@ -58,6 +58,11 @@ $(function(){
 			// ここも、===ではなく、==。(文字と数値の為)
 			if((i + 1) == choiceNum){
 				$("input[name = \"question[" + questionId + "][choices][" + i + "][right]\"]").after("</div><br><input name=\"commit\" type=\"submit\" value=\"送信\" /><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
+				$("input[name = \"question[" + questionId + "][sub_kind]\"]").bind("change",function(){
+					$("#choice" + questionId).remove();
+					$("#add").remove();
+					$("input[name = \"commit\"]").remove();
+				});
 			}
 		}
 		addEvent(questionId);
@@ -120,4 +125,3 @@ $(function(){
 	// 最初からあるフォームに対する処理
 	createForm(0);
 });
-
