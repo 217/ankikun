@@ -27,6 +27,9 @@ class TestController < ApplicationController
 
 			while !params[:question][i.to_s].nil?
 				@question = @test.questions.new
+				
+				# このプログラムで、test_id がUniqueされるようになる。
+				# pp @test.test_questions.build
 				# pp @question
 				@question.kind = params[:question][i.to_s][:kind]
 				@question.sub_kind = params[:question][i.to_s][:kind] == "1" ? params[:question][i.to_s][:sub_kind] : 0
@@ -77,9 +80,9 @@ class TestController < ApplicationController
 	end
 
   def index
-		pp Test.find(:all, {:include => "test_questions"})
-		@tests = Test.find(:all, {:include => "test_questions", :conditions => {"test_questions.question_id" => 0}, :order => "test_questions.test_id asc"})
-		pp @tests
+		# pp Test.find(:all, {:include => :test_questions})[0].test_questions
+		@tests = Test.find(:all, {:include => :test_questions, :conditions => {"test_questions.question_id" => 1}}, :order => "test_questions.test_id asc")
+		# pp @tests
   end
 
   def edit
