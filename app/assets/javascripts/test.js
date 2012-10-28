@@ -45,7 +45,7 @@ $(function(){
 	function createChoices(questionId){
 		var questionId = new Number(questionId);
 		var choiceNum = $("input[name = \"question[" + questionId + "][sub_kind]\"]").val();
-				
+
 		// 選択肢の数だけフォームを生成
 		for(var i = 0;i < choiceNum;i++){
 			if(i === 0){
@@ -57,12 +57,7 @@ $(function(){
 			// divの終了タグと送信ボタン
 			// ここも、===ではなく、==。(文字と数値の為)
 			if((i + 1) == choiceNum){
-				$("input[name = \"question[" + questionId + "][choices][" + i + "][right]\"]").after("</div><br><input name=\"commit\" type=\"submit\" value=\"送信\" /><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
-				$("input[name = \"question[" + questionId + "][sub_kind]\"]").bind("change",function(){
-					$("#choice" + questionId).remove();
-					$("#add").remove();
-					$("input[name = \"commit\"]").remove();
-				});
+				$("input[name = \"question[" + questionId + "][choices][" + i + "][right]\"]").after("<br></div><input name=\"commit\" type=\"submit\" value=\"送信\" /><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
 			}
 		}
 		addEvent(questionId);
@@ -97,7 +92,10 @@ $(function(){
 				init(questionId);
 				$(this).after("<div id = \"sub_kind" + questionId  + "\">何択か : <input type = \"text\" name = \"question[" + questionId + "][sub_kind]\" size = \"2\", maxlinght = \"2\" /></div>");
 				createTextArea(selectId,questionId);
-				$("input[name = \"question[" + questionId + "][sub_kind]\"]").bind("change",function(){
+				$("input[name = \"question[" + questionId + "][sub_kind]\"]").bind("change",function(){ 
+					$("#choice" + questionId).remove();
+					$("#add").remove();
+					$("input[name = \"commit\"]").remove();
 					createChoices(questionId);
 				});
 
