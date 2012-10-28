@@ -27,7 +27,7 @@ class TestController < ApplicationController
 			# pp "b"
 
 			while !params[:question][i.to_s].nil?
-				pp @question = @test.questions.build
+				pp @question = @test.questions.build(params[:question][i.to_s])
 				@question.kind = params[:question][i.to_s][:kind]
 				@question.sub_kind = params[:question][i.to_s][:kind] == "1" ? params[:question][i.to_s][:sub_kind] : 0
 				# エラーになる問題のコード
@@ -42,7 +42,7 @@ class TestController < ApplicationController
 
 					while !params[:question][i.to_s][:choices][j.to_s].nil?
 						# 選択肢の代入
-						@choice = @question.choices.build
+						@choice = @question.choices.build(params[:question][i.to_s][:choices][j.to_s])
 						@choice.choice_text = params[:question][i.to_s][:choices][j.to_s][:choice_text]
 						@choice.right = params[:question][i.to_s][:choices][j.to_s][:right] ? true : false
 
@@ -75,8 +75,8 @@ class TestController < ApplicationController
 			end
 			redirect_to :action => "index"
 		end
-		rescue => e
-			render :text => "エラーが発生しました。"
+		#rescue => e
+		#	render :text => "エラーが発生しました。"
 	end
 
   def index

@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(:version => 20121019221245) do
   end
 
   create_table "question_choices", :force => true do |t|
-    t.integer  "choice_id",   :null => false
-    t.integer  "question_id", :null => false
+    t.integer  "choice_id"
+    t.integer  "question_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -47,9 +47,9 @@ ActiveRecord::Schema.define(:version => 20121019221245) do
   create_table "questions", :force => true do |t|
     t.integer  "kind"
     t.integer  "sub_kind"
-    t.text     "question_body"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.text     "body"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "test_questions", :force => true do |t|
