@@ -12,7 +12,7 @@ class TestController < ApplicationController
 		@test = Test.new
 		# @question
 
-		pp params
+		# pp params
 		
 		# 初期化
 		i = 0
@@ -54,13 +54,14 @@ class TestController < ApplicationController
 						j += 1
 					end
 				when "2"		
+					p @choice
 					@choice = @question.choices.new
 					@choice.choice_text = ""
-					@choice.right = params[:question][i.to_s][:choices][0][:right] == "1" ? "t" : "f"
+					@choice.right = params[:question][i.to_s][:choices]["0"][:right] ? true : false
 					@choice.save
 				when "3"
 					@choice = @question.choices.new
-					@choice.choice_text = params[:question][i.to_s][:choices][0][:choice_text]
+					@choice.choice_text = params[:question][i.to_s][:choices]["0"][:choice_text]
 					@choice.right = "t"
 					@choice.save
 				when "4"
@@ -70,8 +71,8 @@ class TestController < ApplicationController
 				i += 1
 			end
 		end
-		rescue => e
-			render :text => "もう一度送信してください。"
+		# rescue => e
+		#	render :text => "もう一度送信してください。"
 	end
 
   def index
