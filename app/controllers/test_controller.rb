@@ -23,7 +23,7 @@ class TestController < ApplicationController
 			@test.sec = params[:test][:sec] != "" || params[:test][:sec] == "0" ? params[:test][:sec].to_i : 100	
 
 			# テストのセーブ
-			@test.save
+			pp @test.save!
 			pp "Test = ", @test
 			# pp "b"
 
@@ -32,7 +32,8 @@ class TestController < ApplicationController
 				@question.kind = params[:question][i.to_s][:kind]
 				@question.sub_kind = params[:question][i.to_s][:kind] == "1" ? params[:question][i.to_s][:sub_kind] : 0
 				@question.body = params[:question][i.to_s][:body]
-				# @question.question_id = i
+				pp @question
+				@question.question_id = (i + 1)
 
 				# 問題のセーブ
 				@question.save
@@ -52,9 +53,10 @@ class TestController < ApplicationController
 						# pp "params[:question][i.to_s][:choices][j.to_s][:choice]", params[:question][i.to_s][:choices][j.to_s][:choice_text]
 						#	pp "params[:question][i.to_s][:choices][j.to_s][:right]", params[:question][i.to_s][:choices][j.to_s][:right]
 						# pp "choice = ",	@choice
-
-						@choice.question_id = i
-						@choice.cho_	ice_id = j
+					
+						@questionChoiceIds = @choice.question_choices.build
+						@questionChoiceIds.question_id = (i + 1)
+						@questionChoiceIds.choice_id = (j + 1)
 						
 						@choice.save
 

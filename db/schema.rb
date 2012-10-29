@@ -43,11 +43,12 @@ ActiveRecord::Schema.define(:version => 20121019221245) do
 
   create_table "questions", :force => true do |t|
     t.integer  "test_id"
+    t.integer  "question_id"
     t.integer  "kind"
     t.integer  "sub_kind"
     t.text     "body"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "tests", :force => true do |t|
