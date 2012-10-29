@@ -1,0 +1,8 @@
+# Use the README file as a reference to customize settings.
+
+QuestionChoice:
+  fields:
+    default: question_id, choice_id
+    form: question_id, choice_id
+  relationships: 
+  application: Application

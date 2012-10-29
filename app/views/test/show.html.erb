@@ -1,0 +1,38 @@
+<h1><%= @test[0].title %></h1>
+<%= form_tag("/test/index", :multipart => true) do %>
+	<% @test[0].questions.each_with_index do |question, i| %>
+		<%= question.question_id %>問目の問題 - 
+		<% case question.kind %>
+		<% when 1 %>
+			選択問題<br />
+			<p><%= question.body %></p>
+			選択肢 : <br />
+			<% choices = Choice.find(:all, :include => :question_choices, :conditions => {"question_choices.test_id" => params[:id], "question_choices.question_id" => question.question_id }) %>
+			<% choices.each_with_index do |choice, j| %>
+				<%= j + 1 %> : <%= choice.choice_text %>
+				<%= check_box("choice", "right", {}, true, false) %>
+				<br />
+			<% end %>
+			<br />
+		<% when 2 %>
+			○×問題
+			<p><%= question.body %></p>
+			<% choice = Choice.find(:all, :include => :question_choices, :conditions => {"question_choices.test_id" => params[:id], "question_choices.question_id" => question.question_id, "question_choices.choice_id" => 1}) %>
+			○× : <br /> 
+			<select>
+				<option value = "">選択してください</option>
+				<option value = "1">○</option>
+				<option value = "0">×</option>
+			</select>
+			<br />
+			<br />
+		<% when 3 %>
+			一問一答<br />
+			<p><%= question.body %></p>
+			答えは、
+			<% choice = Choice.find(:all, :include => :question_choices, :conditions => {"question_choices.test_id" => params[:id], "question_choices.question_id" => question.question_id, "question_choices.choice_id" => 1}) %>
+			<input type = "text" />
+		<% end %>			
+	<% end %>
+	<p><%= submit_tag("答え合わせをする", :confirm => "送信しますか？") %></p>
+<% end %>

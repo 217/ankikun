@@ -1,0 +1,8 @@
+# Use the README file as a reference to customize settings.
+
+Wiki:
+  fields:
+    default: title, close
+    form: title, close
+  relationships: wiki_wikipages, wikipages
+  application: Application

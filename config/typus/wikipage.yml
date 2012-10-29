@@ -1,0 +1,8 @@
+# Use the README file as a reference to customize settings.
+
+Wikipage:
+  fields:
+    default: page_id, owner_id, title, body
+    form: page_id, owner_id, title, body
+  relationships: wiki_wikipages, wikis
+  application: Application
