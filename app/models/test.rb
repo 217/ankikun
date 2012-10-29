@@ -1,5 +1,5 @@
 class Test < ActiveRecord::Base
 	has_many :questions
 
- 	attr_accessible :question_num
+ 	attr_accessible :question_num, :min, :sec
 end

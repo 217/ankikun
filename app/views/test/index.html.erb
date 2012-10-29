@@ -4,11 +4,31 @@
 	<tr>
 		<th>テスト番号</th>
 		<th>タイトル</th>
+		<th>問題数</th>
+		<th>制限時間</th>
+		<th>作成日時</th>
+		<th>更新日時</th>
 	</tr>
 	<% @tests.each_with_index do |test, i| %>
 		<tr>
 			<td><%= test.id %></td>
 			<td><%= test.title %></td>
+			<td><%= test.questionNum %></td>
+			<td>
+				<% if test.min == 100 and test.sec == 100 %>
+					制限なし
+				<% elsif test.sec == 100 %>
+					<%= test.min %> : 00
+				<% else %>
+					<%= test.min %> : <%= test.sec %>
+				<% end %>
+			</td>
+			<td>
+				<%= test.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+			</td>
+			<td>
+				<%= test.updated_at.strftime("%Y-%m-%d %H:%M:%S") %>
+			</td>
 		</tr>
 	<% end %>
 </table>	

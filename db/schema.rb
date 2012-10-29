@@ -55,8 +55,9 @@ ActiveRecord::Schema.define(:version => 20121019221245) do
     t.integer  "min"
     t.integer  "sec"
     t.text     "title"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "questionNum"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "users", :force => true do |t|

@@ -3,6 +3,9 @@
 require 'pp'
 
 class TestController < ApplicationController
+	# タイムゾーンの設定
+	Time.zone = 'Asia/Tokyo'
+
   def new
 		@test = Test.new
 		@questions = [@test.questions.new]
@@ -24,7 +27,7 @@ class TestController < ApplicationController
 			@test.title = params[:test][:title]
 
 			# テストのセーブ
-			pp @test.save!
+			pp @test.save
 			pp "Test = ", @test
 			# pp "b"
 
@@ -82,6 +85,11 @@ class TestController < ApplicationController
 
 				i += 1
 			end
+			
+			Test.transaction do
+				# @test.update("questionNum = i")
+			end
+
 			redirect_to :action => "index"
 		end
 		#rescue => e
