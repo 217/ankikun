@@ -21,6 +21,7 @@ class TestController < ApplicationController
 			# 2桁までしか入力できないので、制限時間無制限の場合、3桁の100を代入
 			@test.min = params[:test][:min] != "" ? params[:test][:min].to_i : 100
 			@test.sec = params[:test][:sec] != "" || params[:test][:sec] == "0" ? params[:test][:sec].to_i : 100	
+			@test.title = params[:test][:title]
 
 			# テストのセーブ
 			pp @test.save!
@@ -89,7 +90,7 @@ class TestController < ApplicationController
 
   def index
 		# pp Test.find(:all, {:include => :test_questions})[0].test_questions
-		@tests = Test.find(:all, {:include => :test_questions, :conditions => {"test_questions.question_id" => 1}})
+		@tests = Test.find(:all, {:include => :questions, :conditions => {"questions.question_id" => 	1}})
 		# pp @tests
   end
 
