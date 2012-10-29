@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20121019221245) do
   create_table "question_choices", :force => true do |t|
     t.integer  "choice_id"
     t.integer  "question_id"
+    t.integer  "test_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

@@ -22,16 +22,23 @@ class TestController < ApplicationController
 		i = 0
 
 		Test.transaction do
+			while !params[:question][i.to_s].nil?
+				@test.questionNum = i
+				i += 1
+			end
+
 			# 2桁までしか入力できないので、制限時間無制限の場合、3桁の100を代入
 			@test.min = params[:test][:min] != "" ? params[:test][:min].to_i : 100
 			@test.sec = params[:test][:sec] != "" || params[:test][:sec] == "0" ? params[:test][:sec].to_i : 100	
 			@test.title = params[:test][:title]
+			@test.save
 
 			# テストのセーブ
 			# pp @test.save
-			# pp "Test = ", @test
+			# pp "TequestionNumst = ", @test
 			# pp "b"
 
+			i = 0
 			while !params[:question][i.to_s].nil?
 				@question = @test.questions.new
 				@question.kind = params[:question][i.to_s][:kind]
@@ -59,9 +66,10 @@ class TestController < ApplicationController
 						#	pp "params[:question][i.to_s][:choices][j.to_s][:right]", params[:question][i.to_s][:choices][j.to_s][:right]
 						# pp "choice = ",	@choice
 					
-						@questionChoiceIds = @choice.question_choices.build
-						@questionChoiceIds.question_id = (i + 1)
-						@questionChoiceIds.choice_id = (j + 1)
+						@ids = @choice.question_choices.build
+						@ids.test_id = @test.id
+						@ids.question_id = (i + 1)
+						@ids.choice_id = (j + 1)
 						
 						@choice.save
 
@@ -97,8 +105,9 @@ class TestController < ApplicationController
 				i += 1
 			end
 			
-			@test.questionNum = i.to_s
-			@test.save
+			# @test.questionNum = i.to_s
+			# pp "test = ", @test.save
+			pp @test
 
 			# pp "@test.sec = " , @test.sec
 			redirect_to :action => "index"
