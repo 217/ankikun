@@ -14,8 +14,8 @@ Ankikun::Application.routes.draw do
   get "sessions/callback"
 	
   get "test/new"
-
   get "test/create"
+
 	post "test/create"
 
   get "test/index"
@@ -59,6 +59,9 @@ Ankikun::Application.routes.draw do
 	match "/auth/:provider/callback" => "sessions#callback"
 	match "/logout" => "sessions#destroy", :as => :logout
 	
+	# Testのページのルーティング
+	match "test/:id/show" => "test#show"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

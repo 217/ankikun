@@ -37,7 +37,7 @@ class TestController < ApplicationController
 				@question.kind = params[:question][i.to_s][:kind]
 				@question.sub_kind = params[:question][i.to_s][:kind] == "1" ? params[:question][i.to_s][:sub_kind] : 0
 				@question.body = params[:question][i.to_s][:body]
-				pp @question
+				# pp @question
 				@question.question_id = (i + 1)
 
 				# 問題のセーブ
@@ -100,7 +100,7 @@ class TestController < ApplicationController
 			@test.questionNum = i.to_s
 			@test.save
 
-			pp "@test.sec = " , @test.sec
+			# pp "@test.sec = " , @test.sec
 			redirect_to :action => "index"
 		end
 		#rescue => e
@@ -120,4 +120,9 @@ class TestController < ApplicationController
   def destroy
 
   end
+
+	def show
+		@test = Test.find(:all, {:include => {:questions, :question_choices}}, :conditions => {"questions.test_id" => params[:id]})
+		pp "@test = ", @test
+	end
 end
