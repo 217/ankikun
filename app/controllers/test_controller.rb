@@ -23,7 +23,7 @@ class TestController < ApplicationController
 
 		Test.transaction do
 			while !params[:question][i.to_s].nil?
-				pp @test.questionNum = (i + 1)
+				@test.questionNum = (i + 1)
 				i += 1
 			end
 
