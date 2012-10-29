@@ -1,10 +1,11 @@
 <%# if @wiki and params[:id].nil? %>
 	<% 10.times{|i| %>
 		<%# 書き方を確認してもらう %>
-		<% if @wiki[0][i].nil? %>
+		<% if @wiki[i].nil? %>
 			<br>エラーが発生しています。解決できない場合、管理人にお知らせください。
 		<% else %>
-			<%= @wiki[0][i].wiki_wikipages[0].wiki_id %> <%= @wiki.wikipages.title %><br>
+			<% p "@wiki[i].wiki_wikipages = ", @wiki.wiki_wikipages %>
+			<%= @wiki[i].wiki_wikipages.wiki_id %> <%= @wiki[i].wikipages[0].title %><br>
 		<% end %>
 	<% } %>
 <%# else %> 

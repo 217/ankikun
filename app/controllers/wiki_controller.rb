@@ -1,11 +1,13 @@
 # -*- encoding: utf-8 -*-
+require "pp"
 class WikiController < ApplicationController
   def index
 		if params[:id].nil?
 			@wiki = Array.new
 			10.times{|t| 
-				@wiki << Wiki.find(:all, :include => :wiki_wikipages, :conditions => {"wiki_wikipages.wiki_id" => t+1}, :order => "wiki_wikipages.wiki_id", :limit => 10)
+				@wiki << Wiki.includes(:wiki_wikipages,:wikipage).find(:all, :include => :wiki_wikipages, :conditions => {"wiki_wikipages.wiki_id" => t+1}, :order => "wiki_wikipages.wiki_id", :limit => 10)
 			}
+			
 		else
 			@wiki = Wiki.find(:first, {:include => :wiki_wikipages, :conditions => {"wiki_wikipages.wiki_id" => params[:id]}})
 			if @wiki.nil?

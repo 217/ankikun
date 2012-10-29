@@ -28,15 +28,11 @@ class TestController < ApplicationController
 			# pp "b"
 
 			while !params[:question][i.to_s].nil?
-				@question = @test.questions.build
+				@question = @test.questions.new
 				@question.kind = params[:question][i.to_s][:kind]
 				@question.sub_kind = params[:question][i.to_s][:kind] == "1" ? params[:question][i.to_s][:sub_kind] : 0
 				@question.body = params[:question][i.to_s][:body]
-				#  
-				@wikiQuestionId = @question.test_questions.build
-				@wikiQuestionId.question_id = i
-				# IDのセーブ
-				# @wikiQuestionId.save
+				# @question.question_id = i
 
 				# 問題のセーブ
 				@question.save
@@ -56,10 +52,9 @@ class TestController < ApplicationController
 						# pp "params[:question][i.to_s][:choices][j.to_s][:choice]", params[:question][i.to_s][:choices][j.to_s][:choice_text]
 						#	pp "params[:question][i.to_s][:choices][j.to_s][:right]", params[:question][i.to_s][:choices][j.to_s][:right]
 						# pp "choice = ",	@choice
-						
-						@questionChoiceID = @choice.question_choices.build
-						@questionChoiceID.question_id = i
-						@questionChoiceID.choice_id = j
+
+						@choice.question_id = i
+						@choice.cho_	ice_id = j
 						
 						@choice.save
 
