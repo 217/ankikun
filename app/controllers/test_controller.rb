@@ -122,7 +122,7 @@ class TestController < ApplicationController
   end
 
 	def show
-		@test = Test.find(:all, {:include => {:questions, :question_choices}}, :conditions => {"questions.test_id" => params[:id]})
+		@test = Test.find(:all, :include => :questions, :conditions => {"questions.test_id" => params[:id]})
 		pp "@test = ", @test
 	end
 end
