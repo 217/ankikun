@@ -16,11 +16,17 @@
 			<td><%= test.questionNum %></td>
 			<td>
 				<% if test.min == 100 and test.sec == 100 %>
-					制限なし
+					なし
 				<% elsif test.sec == 100 %>
 					<%= test.min %> : 00
 				<% else %>
-					<%= test.min %> : <%= test.sec %>
+					<%= test.min %> : 
+					<%# 応急処置(後で変える) %>
+					<% if test.sec < 10 %>
+						0<%= test.sec %>
+					<% else %>
+						<%= test.sec %>
+					<% end %>
 				<% end %>
 			</td>
 			<td>

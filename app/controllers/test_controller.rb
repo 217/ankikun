@@ -3,8 +3,6 @@
 require 'pp'
 
 class TestController < ApplicationController
-	# タイムゾーンの設定
-	Time.zone = 'Asia/Tokyo'
 
   def new
 		@test = Test.new
@@ -12,6 +10,9 @@ class TestController < ApplicationController
   end
 
   def create
+		# タイムゾーンの設定
+		Time.zone = 'Asia/Tokyo'
+
 		@test = Test.new
 		# @question
 
@@ -27,8 +28,8 @@ class TestController < ApplicationController
 			@test.title = params[:test][:title]
 
 			# テストのセーブ
-			pp @test.save
-			pp "Test = ", @test
+			# pp @test.save
+			# pp "Test = ", @test
 			# pp "b"
 
 			while !params[:question][i.to_s].nil?
@@ -69,15 +70,25 @@ class TestController < ApplicationController
 						j += 1
 					end
 				when "2"		
-					p @choice
+					# p @choice
 					@choice = @question.choices.build
 					@choice.choice_text = ""
 					@choice.right = params[:question][i.to_s][:choices]["0"][:right] ? true : false
+					
+					@questionChoiceIds = @choice.question_choices.build
+					@questionChoiceIds.question_id = (i + 1)
+					@questionChoiceIds.choice_id = 1
+
 					@choice.save
 				when "3"
 					@choice = @question.choices.build
 					@choice.choice_text = params[:question][i.to_s][:choices]["0"][:choice_text]
 					@choice.right = "t"
+
+					@questionChoiceIds = @choice.question_choices.build
+					@questionChoiceIds.question_id = (i + 1)
+					@questionChoiceIds.choice_id = 1
+
 					@choice.save
 				when "4"
 					# まだ実装しない
@@ -86,10 +97,10 @@ class TestController < ApplicationController
 				i += 1
 			end
 			
-			Test.transaction do
-				# @test.update("questionNum = i")
-			end
+			@test.questionNum = i.to_s
+			@test.save
 
+			pp "@test.sec = " , @test.sec
 			redirect_to :action => "index"
 		end
 		#rescue => e
