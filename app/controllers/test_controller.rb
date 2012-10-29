@@ -16,14 +16,14 @@ class TestController < ApplicationController
 		@test = Test.new
 		# @question
 
-		# pp params
+		pp params
 		
 		# 初期化
 		i = 0
 
 		Test.transaction do
 			while !params[:question][i.to_s].nil?
-				@test.questionNum = i
+				pp @test.questionNum = (i + 1)
 				i += 1
 			end
 
