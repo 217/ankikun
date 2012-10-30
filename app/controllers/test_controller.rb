@@ -134,4 +134,8 @@ class TestController < ApplicationController
 		@test = Test.find(:all, :include => :questions, :conditions => {"questions.test_id" => params[:id]})
 		pp "@test = ", @test
 	end
+
+	def check
+		
+	end
 end
