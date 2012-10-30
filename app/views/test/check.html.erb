@@ -1,0 +1,21 @@
+<h1><%= @test[0].title %>の答え合わせ</h1>
+<% @test[0].questions.each_with_index do |question, i| %>
+	<% case question.kind %>
+	<% when 1 %>
+	<p>
+		<%= i %>問目の問題 : 
+		<%= question.body %>
+		<% choices = Choice.find(:all, :include => :question_choices, :conditions => {"question_choices.test_id" => params[:id], "question_choices.question_id" => question.question_id }) %>
+		<% choices.each_with_index do |choice, j| %>
+			<% pp "choice = ", choice %>
+			<% pp "params = ", params %>
+			<% if choice.right != params[:test][:question][i.to_s][:choices][j.to_s][:right] %>
+				残念。不正解です。
+				<% break %>
+			<% else %>
+				おめでとう。正解です。
+			<% end %>
+		<% end %>
+	</p>
+	<% end %>
+<% end %>

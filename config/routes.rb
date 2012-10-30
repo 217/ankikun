@@ -25,6 +25,7 @@ Ankikun::Application.routes.draw do
   get "test/destroy"
 
 	get "test/check"
+	post "test/check"
 
 	# Deviseログイン直後の戻り先user_rootを指定
   get "wiki/index", :as => :user_root

@@ -19,7 +19,7 @@
 	</p>
 </form>
 
-<%= form_tag("/test/index", :id => "testForm", :multipart => true) do %>
+<%= form_tag("/test/#{params[:id]}/check", :id => "testForm", :multipart => true) do %>
 	<% @test[0].questions.each_with_index do |question, i| %>
 		<%= question.question_id %>問目の問題 - 
 		<% case question.kind %>
