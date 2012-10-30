@@ -1,3 +1,5 @@
+<% javascript_include_tag "test_new.js" %>
+
 <h1>テストの新規作成</h1>
 <%= form_tag("/test/create", :multipart => true) do %>
 	<p>テスト名 : <input type = "text" name = "test[title]" /></p>
