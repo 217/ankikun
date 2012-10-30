@@ -37,9 +37,8 @@
 		<% when 2 %>
 			○×問題
 			<p><%= question.body %></p>
-			<% choice = Choice.find(:all, :include => :question_choices, :conditions => {"question_choices.test_id" => params[:id], "question_choices.question_id" => question.question_id, "question_choices.choice_id" => 1}) %>
 			○× : <br /> 
-			<select>
+			<select name = "question[<%= i.to_s %>][choices][0][right]">
 				<option value = "">選択してください</option>
 				<option value = "1">○</option>
 				<option value = "0">×</option>
@@ -50,7 +49,7 @@
 			一問一答<br />
 			<p><%= question.body %></p>
 			答えは、
-			<% choice = Choice.find(:all, :include => :question_choices, :conditions => {"question_choices.test_id" => params[:id], "question_choices.question_id" => question.question_id, "question_choices.choice_id" => 1}) %>
+			<% choice = Choice.find(:all, :include => :question_choices, :conditions => {"question_choices.test_id" => params[:id], "question_choices.question_id" => question.question_id }) %>
 			<input type = "text" />
 		<% end %>			
 	<% end %>

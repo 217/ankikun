@@ -3,9 +3,13 @@
 	<% case question.kind %>
 	<% when 1 %>
 		<%= i + 1 %>問目の問題 : 
-		<p><%= question.body %></p>
+		<br />
+		<%= question.body %>
 		<% choices = Choice.find(:all, :include => :question_choices, :conditions => {"question_choices.test_id" => params[:id], "question_choices.question_id" => question.question_id }) %>
-
+		
+		<br />
+		<br />
+		選択肢 : <br />
 		<%# ここらへんは全体的にコードがめちゃくちゃなので修正する %>
 		<% choices.each_with_index do |choice, j| %>
 			<%= j + 1 %> : <%= choice.choice_text %>
@@ -40,6 +44,28 @@
 			<p>不正解</p>
 		<% else %>
 			<p>正解！</p>
+		<% end %>
+	<% when 2 %>
+		<%= i + 1 %>問目の問題 : 
+		<br />
+		<%= question.body %>
+			<br />
+		<br />
+		<% choice = Choice.find(:all, :include => :question_choices, :conditions => {"question_choices.test_id" => params[:id], "question_choices.question_id" => question.question_id}) %>
+		<% right = nil %> 
+
+		<% if params[:question][i.to_s][:choices]["0"][:right] %>
+			<% right = true %>
+		<% else %>
+			<% right = false %>
+		<% end %>
+
+		<% pp choice[0] %>
+
+		<% if choice[0].right == right %>
+			<p>正解！</p>
+		<% else %>
+			<p>不正解</p>
 		<% end %>
 	<% end %>
 <% end %>
