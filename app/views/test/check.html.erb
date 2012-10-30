@@ -3,19 +3,31 @@
 	<% case question.kind %>
 	<% when 1 %>
 	<p>
-		<%= i %>問目の問題 : 
-		<%= question.body %>
+		<%= i + 1 %>問目の問題 : 
+		<p><%= question.body %></p>
 		<% choices = Choice.find(:all, :include => :question_choices, :conditions => {"question_choices.test_id" => params[:id], "question_choices.question_id" => question.question_id }) %>
 		<% choices.each_with_index do |choice, j| %>
 			<% pp "choice = ", choice %>
 			<% pp "params = ", params %>
-			<% if choice.right != params[:test][:question][i.to_s][:choices][j.to_s][:right] %>
-				残念。不正解です。
-				<% break %>
+			<%# とりあえずこれにする。あとで仕様変更 %>
+			<% if choice.right == true %>
+				<% right = "t" %>
 			<% else %>
-				おめでとう。正解です。
+				<% right = "f" %>
+			<% end %>
+
+			<% if right != params[:question][i.to_s][:choices][j.to_s][:right]  %>
+				残念。不正解です。
+				<% @wrong = true %>
+				<% break %>
 			<% end %>
 		<% end %>
+
+		<%# ここもあとで仕様を変更 %> 
+		<% if @wrong.nil? %>
+			おめでとう。正解です。
+		<% end %>
+
 	</p>
 	<% end %>
 <% end %>

@@ -30,7 +30,7 @@
 			<% choices = Choice.find(:all, :include => :question_choices, :conditions => {"question_choices.test_id" => params[:id], "question_choices.question_id" => question.question_id }) %>
 			<% choices.each_with_index do |choice, j| %>
 				<%= j + 1 %> : <%= choice.choice_text %>
-				<%= check_box("choice", "right", {}, true, false) %>
+				<%= check_box("question[#{i}][choices][#{j}]", "right", {}, "t", "f") %>
 				<br />
 			<% end %>
 			<br />
