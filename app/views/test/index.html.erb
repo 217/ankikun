@@ -18,6 +18,8 @@
 			<td>
 				<% if test.min == 100 and test.sec == 100 %>
 					なし
+				<% elsif test.min == 100 %>
+					0 : <%= test.sec %>
 				<% elsif test.sec == 100 %>
 					<%= test.min %> : 00
 				<% else %>
