@@ -12,7 +12,7 @@
 	<% @tests.each_with_index do |test, i| %>
 		<tr>
 			<td><%= test.id %></td>
-			<td><%= test.title %></td>
+			<td><%= link_to test.title, "/test/#{i + 1}/show" %></td>
 			<td><%= test.questionNum %></td>
 			<td>
 				<% if test.min == 100 and test.sec == 100 %>
