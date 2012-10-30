@@ -39,7 +39,6 @@ class TestController < ApplicationController
 			# pp "b"
 
 			i = 0
-
 			while !params[:question][i.to_s].nil?
 				@question = @test.questions.new
 				@question.kind = params[:question][i.to_s][:kind]
@@ -70,12 +69,12 @@ class TestController < ApplicationController
 						@ids = @choice.question_choices.build
 						@ids.test_id = @test.id
 						@ids.question_id = (i + 1)
-						# pp "j = ", j
 						@ids.choice_id = (j + 1)
 						
 						@choice.save
 
-						pp "@choice = ", @choice
+						pp @choice
+
 						j += 1
 					end
 				when "2"		
@@ -84,11 +83,9 @@ class TestController < ApplicationController
 					@choice.choice_text = ""
 					@choice.right = params[:question][i.to_s][:choices]["0"][:right] ? true : false
 					
-					@ids = @choice.question_choices.build
-					pp "test.id", @test.id
-					@ids.test_id = @test.id
-					@ids.question_id = (i + 1)
-					@ids.choice_id = 1
+					@questionChoiceIds = @choice.question_choices.build
+					@questionChoiceIds.question_id = (i + 1)
+					@questionChoiceIds.choice_id = 1
 
 					@choice.save
 				when "3"
@@ -96,10 +93,9 @@ class TestController < ApplicationController
 					@choice.choice_text = params[:question][i.to_s][:choices]["0"][:choice_text]
 					@choice.right = "t"
 
-					@ids = @choice.question_choices.build
-					@ids.test_id = @test.id
-					@ids.question_id = (i + 1)
-					@ids.choice_id = 1
+					@questionChoiceIds = @choice.question_choices.build
+					@questionChoiceIds.question_id = (i + 1)
+					@questionChoiceIds.choice_id = 1
 
 					@choice.save
 				when "4"
@@ -141,5 +137,6 @@ class TestController < ApplicationController
 
 	def check
 		@test = Test.find(:all, :include => :questions, :conditions => {"questions.test_id" => params[:id]})
+		pp @test
 	end
 end

@@ -3,11 +3,11 @@ require "pp"
 class WikiController < ApplicationController
   def index
 		if params[:id].nil?
-			@wiki = Array.new
-			10.times{|t| 
-				@wiki << Wiki.includes(:wiki_wikipages,:wikipage).find(:all, :include => :wiki_wikipages, :conditions => {"wiki_wikipages.wiki_id" => t+1}, :order => "wiki_wikipages.wiki_id", :limit => 10)
+			@wikis = Array.new
+			1.times{|t| 
+				@wikis << Wiki.find(:all, :include => :wikipages, :conditions => {"wikipages.wiki_id" => t+1, "wikipages.wikipage_id" => 1})
 			}
-			
+			pp @wikis
 		else
 			@wiki = Wiki.find(:first, {:include => :wiki_wikipages, :conditions => {"wiki_wikipages.wiki_id" => params[:id]}})
 			if @wiki.nil?
@@ -33,6 +33,7 @@ class WikiController < ApplicationController
 			wiki = Wiki.new(params[:wiki])
 			page = wiki.wikipages.build
 
+			page.wikipage_id = 1
 			page.title = "Wikiへようこそ！"
 			page.owner_id = 1
 			page.body = "hoge"

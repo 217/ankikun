@@ -1,16 +1,15 @@
-<%# if @wiki and params[:id].nil? %>
-	<% 10.times{|i| %>
-		<%# 書き方を確認してもらう %>
-		<% if @wiki[i].nil? %>
-			<br>エラーが発生しています。解決できない場合、管理人にお知らせください。
-		<% else %>
-			<% p "@wiki.wiki_pages = "@wiki.wiki_pages %?
-			<%= @wiki[i].wiki_wikipages.wiki_id %> <%= @wiki[i].wikipageas[0].title %><br>
-		<% end %>
-	<% } %>
-<%# else %> 
-	<h1><%#= @wiki.title %></h1>
-	<%#= link_to "編集", "edit" %> <%#= link_to "削除", {:controller => "wiki", :action => "destroy", :id => params[:id]} %>
-	<h2><%#= @wiki.wikipages[0].title %></h2>
-	<%#= @wiki.wikipages[0].body %>
-<%# end %>
+<%# 書き方を確認してもらう %>
+<table>
+	<tr>
+		<th>Wiki番号</th>
+		<th>Wikiタイトル</th>
+	</tr>
+	<% page = Wikipage.find(:first, :conditions => {:wiki_id => +1, :wikipage_id => 1}) %><br>
+	<% @wikis.each_with_index do |wiki, i| %>
+			<tr>
+				<td><%= i %></td>
+				<td><%= wiki.title %></td>
+			</tr>
+		</table>
+	<% end %>
+</table>
