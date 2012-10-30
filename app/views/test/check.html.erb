@@ -2,32 +2,44 @@
 <% @test[0].questions.each_with_index do |question, i| %>
 	<% case question.kind %>
 	<% when 1 %>
-	<p>
 		<%= i + 1 %>問目の問題 : 
 		<p><%= question.body %></p>
 		<% choices = Choice.find(:all, :include => :question_choices, :conditions => {"question_choices.test_id" => params[:id], "question_choices.question_id" => question.question_id }) %>
+
+		<%# ここらへんは全体的にコードがめちゃくちゃなので修正する %>
 		<% choices.each_with_index do |choice, j| %>
-			<% pp "choice = ", choice %>
-			<% pp "params = ", params %>
-			<%# とりあえずこれにする。あとで仕様変更 %>
-			<% if choice.right == true %>
-				<% right = "t" %>
+			<%= j + 1 %> : <%= choice.choice_text %>
+
+			<% if params[:question][i.to_s][:choices][j.to_s][:right] == "f" %>
+				<input type="checkbox" disabled />
 			<% else %>
-				<% right = "f" %>
+				<input type="checkbox" disabled checked />
 			<% end %>
 
-			<% if right != params[:question][i.to_s][:choices][j.to_s][:right]  %>
-				残念。不正解です。
+			<br />
+		<% end %>
+
+		<% @right %>
+		<% @wrong = false %>
+		<% @wrongs = Array.new %>
+
+		<% choices.each_with_index do |choice, j| %>
+			<% if params[:question][i.to_s][:choices][j.to_s][:right] == "t" %>
+				<% @right = true %>
+			<% else %>
+				<% @right = false %>
+			<% end %>
+
+			<% if choice.right != @right %>
 				<% @wrong = true %>
-				<% break %>
+				<% @wrongs[j] = true %>
 			<% end %>
 		<% end %>
 
-		<%# ここもあとで仕様を変更 %> 
-		<% if @wrong.nil? %>
-			おめでとう。正解です。
+		<% if @wrong %>
+			<p>不正解</p>
+		<% else %>
+			<p>正解！</p>
 		<% end %>
-
-	</p>
 	<% end %>
 <% end %>
