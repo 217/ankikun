@@ -70,9 +70,14 @@ class TestController < ApplicationController
 						@ids = @choice.question_choices.build
 						@ids.test_id = @test.id
 						@ids.question_id = (i + 1)
+
+						pp "j + 1 = ", (j + 1)
+
 						@ids.choice_id = (j + 1)
 						
-						@choice.save
+						@choice.save	
+
+						pp "@ids.choice_id = ", @ids.choice_id
 
 						pp @choice
 
@@ -84,9 +89,10 @@ class TestController < ApplicationController
 					@choice.choice_text = ""
 					@choice.right = params[:question][i.to_s][:choices]["0"][:right] ? true : false
 					
-					@questionChoiceIds = @choice.question_choices.build
-					@questionChoiceIds.question_id = (i + 1)
-					@questionChoiceIds.choice_id = 1
+					@ids = @choice.question_choices.build
+					@ids.test_id = @test.id
+					@ids.question_id = (i + 1)
+					@ids.choice_id = 1
 
 					@choice.save
 				when "3"

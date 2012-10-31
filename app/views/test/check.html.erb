@@ -41,5 +41,26 @@
 		<% else %>
 			<p>正解！</p>
 		<% end %>
+	<% when 2 %>
+		<p><%= question.body %></p>
+		<% choice = Choice.find(:first, :include => :question_choices, :conditions => {"question_choices.test_id" => params[:id], "question_choices.question_id" => question.question_id }) %>
+		<% @answer %>
+
+		<% if params[:question][i.to_s][:choices]["0"][:right] == "0" %>
+			<% @answer = false %>
+		<% else %>
+			<% @answer = true %>
+		<% end %>
+
+		<% if @answer == choice.right %>
+			<p>正解！</p>
+		<% else %>
+			<p>不正解</p>
+			<% if params[:question][i.to_s][:choices]["0"][:right] == "0" %>
+				答えは、○です。
+			<% else %>
+				答えは、×です。
+			<% end %>
+		<% end %>
 	<% end %>
 <% end %>
