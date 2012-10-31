@@ -47,12 +47,12 @@
 			</select>
 			<br />
 			<br />
-		<% when 3 %>
+		<% when 3 %>			
 			一問一答<br />
 			<p><%= question.body %></p>
 			答えは、
-			<input type = "text" />
-		<% end %>			
+			<%= text_field_tag "question[#{i.to_s}][choices][0][choice_text]" %>
+		<% end %>
 	<% end %>
 	<p><%= submit_tag("答え合わせをする", :confirm => "送信しますか？") %></p>
 <% end %>

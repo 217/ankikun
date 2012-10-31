@@ -100,9 +100,10 @@ class TestController < ApplicationController
 					@choice.choice_text = params[:question][i.to_s][:choices]["0"][:choice_text]
 					@choice.right = "t"
 
-					@questionChoiceIds = @choice.question_choices.build
-					@questionChoiceIds.question_id = (i + 1)
-					@questionChoiceIds.choice_id = 1
+					@ids = @choice.question_choices.build
+					@ids.test_id = @test.id
+					@ids.question_id = (i + 1)
+					@ids.choice_id = 1
 
 					@choice.save
 				when "4"
