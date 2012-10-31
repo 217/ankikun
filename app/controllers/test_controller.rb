@@ -61,6 +61,7 @@ class TestController < ApplicationController
 						@choice = @question.choices.new
 						@choice.choice_text = params[:question][i.to_s][:choices][j.to_s][:choice_text]
 						@choice.right = params[:question][i.to_s][:choices][j.to_s][:right] ? true : false
+						pp @choice
 
 						# pp "params[:question][i.to_s][:choices][j.to_s][:choice]", params[:question][i.to_s][:choices][j.to_s][:choice_text]
 						#	pp "params[:question][i.to_s][:choices][j.to_s][:right]", params[:question][i.to_s][:choices][j.to_s][:right]

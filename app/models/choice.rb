@@ -4,5 +4,5 @@ class Choice < ActiveRecord::Base
 
 	accepts_nested_attributes_for :questions
 
-	attr_accessible :choice_text, :right, :choice_id
+	attr_accessible :choice_text, :right
 end

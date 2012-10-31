@@ -35,9 +35,9 @@ ActiveRecord::Schema.define(:version => 20121019221245) do
   end
 
   create_table "question_choices", :force => true do |t|
-    t.integer  "choice_id"
     t.integer  "question_id"
     t.integer  "test_id"
+    t.integer  "choice_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -85,22 +85,14 @@ ActiveRecord::Schema.define(:version => 20121019221245) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
-  create_table "wiki_wikipages", :force => true do |t|
+  create_table "wikipages", :force => true do |t|
     t.integer  "wiki_id"
     t.integer  "wikipage_id"
+    t.integer  "owner_id",    :null => false
+    t.string   "title",       :null => false
+    t.text     "body",        :null => false
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-  end
-
-  add_index "wiki_wikipages", ["wiki_id"], :name => "index_wiki_wikipages_on_wiki_id", :unique => true
-  add_index "wiki_wikipages", ["wikipage_id"], :name => "index_wiki_wikipages_on_wikipage_id", :unique => true
-
-  create_table "wikipages", :force => true do |t|
-    t.integer  "owner_id",   :null => false
-    t.string   "title",      :null => false
-    t.text     "body",       :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "wikis", :force => true do |t|
