@@ -68,7 +68,7 @@ class TestController < ApplicationController
 						# pp "choice = ",	@choice
 					
 						@ids = @choice.question_choices.build
-						@ids.test_id = @test.id
+						# @ids.test_id = @test.id
 						@ids.question_id = (i + 1)
 
 						pp "j + 1 = ", (j + 1)
@@ -90,7 +90,7 @@ class TestController < ApplicationController
 					@choice.right = params[:question][i.to_s][:choices]["0"][:right] ? true : false
 					
 					@ids = @choice.question_choices.build
-					@ids.test_id = @test.id
+					# @ids.test_id = @test.id
 					@ids.question_id = (i + 1)
 					@ids.choice_id = 1
 
@@ -101,7 +101,7 @@ class TestController < ApplicationController
 					@choice.right = "t"
 
 					@ids = @choice.question_choices.build
-					@ids.test_id = @test.id
+					# @ids.test_id = @test.id
 					@ids.question_id = (i + 1)
 					@ids.choice_id = 1
 

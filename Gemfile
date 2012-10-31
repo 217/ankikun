@@ -51,3 +51,6 @@ gem 'devise'
 
 # 管理画面
 gem 'typus', :git => 'https://github.com/fesplugas/typus.git'
+
+# ブログエディタ
+gem 'bootstrap-wysihtml5-rails'
