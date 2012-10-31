@@ -7,7 +7,7 @@ class CreateQuestions < ActiveRecord::Migration
 			t.integer :kind				# 問題の種類
 			t.integer :sub_kind		# N択のNなどの種類
 
-			t.text :body
+			t.text :body# , :defalut => "", :null => false
 
       t.timestamps
     end
