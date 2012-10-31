@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20121019045150) do
   create_table "choices", :force => true do |t|
     t.integer  "question_id"
     t.integer  "choice_id"
+    t.integer  "test_id"
     t.text     "choice_text"
     t.boolean  "right"
     t.datetime "created_at",  :null => false

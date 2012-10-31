@@ -4,7 +4,7 @@
 	<% when 1 %>
 		<%= i + 1 %>問目の問題 : 
 		<p><%= question.body %></p>
-		<% choices = Choice.find(:all, :include => :question_choices, :conditions => {"question_choices.test_id" => params[:id], "question_choices.question_id" => question.question_id }) %>
+		<% choices = Choice.find(:all, :conditions => {:test_id => params[:id], :question_id => question.question_id }) %>
 
 		<%# ここらへんは全体的にコードがめちゃくちゃなので修正する %>
 		<% choices.each_with_index do |choice, j| %>

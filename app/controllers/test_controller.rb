@@ -61,6 +61,7 @@ class TestController < ApplicationController
 						@choice = @question.choices.new
 						@choice.choice_text = params[:question][i.to_s][:choices][j.to_s][:choice_text]
 						@choice.right = params[:question][i.to_s][:choices][j.to_s][:right] ? true : false
+						@choice.test_id = @test.id
 						@choice.question_id = @question.question_id
 						@choice.choice_id = (j + 1)
 						pp @choice
@@ -76,10 +77,9 @@ class TestController < ApplicationController
 					@choice.choice_text = ""
 					@choice.right = params[:question][i.to_s][:choices]["0"][:right] ? true : false
 					
-					@ids = @choice.question_choices.build
-					# @ids.test_id = @test.id
-					@ids.question_id = (i + 1)
-					@ids.choice_id = 1
+					@choice.test_id = @test.id
+					@choice.question_id = @question.question_id
+					@choice.choice_id = 1
 
 					@choice.save
 				when "3"
@@ -87,10 +87,9 @@ class TestController < ApplicationController
 					@choice.choice_text = params[:question][i.to_s][:choices]["0"][:choice_text]
 					@choice.right = "t"
 
-					@ids = @choice.question_choices.build
-					# @ids.test_id = @test.id
-					@ids.question_id = (i + 1)
-					@ids.choice_id = 1
+					@choice.test_id = @test.id
+					@choice.question_id = @question.question_id
+					@choice.choice_id = 1
 
 					@choice.save
 				when "4"
@@ -102,7 +101,7 @@ class TestController < ApplicationController
 			
 			# @test.questionNum = i.to_s
 			# pp "test = ", @test.save
-			pp @test
+			# pp @test
 
 			# pp "@test.sec = " , @test.sec
 			redirect_to :action => "index"
@@ -127,7 +126,7 @@ class TestController < ApplicationController
   end
 
 	def show
-		@test = Test.find(:all, :include => :questions, :conditions => {"questions.test_id" => params[:id],"questions.question_id" => params[:sub_id]})
+		@test = Test.find(:all, :include => :questions, :conditions => {"questions.test_id" => params[:id]})
 		pp "@test = ", @test
 	end
 

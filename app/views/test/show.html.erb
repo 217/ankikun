@@ -27,7 +27,7 @@
 			選択問題<br />
 			<p><%= question.body %></p>
 			選択肢 : <br />
-			<% choices = Choice.find(:all, :include => :question_choices, :conditions => {"question_choices.test_id" => params[:id], "question_choices.question_id" => question.question_id }) %>
+			<% choices = Choice.find(:all, :conditions => {:test_id => params[:id], :question_id => question.question_id }) %>
 			<% choices.each_with_index do |choice, j| %>
 				<%= j + 1 %> : <%= choice.choice_text %>
 				<%= check_box("question[#{i}][choices][#{j}]", "right", {}, "t", "f") %>
