@@ -1,3 +1,14 @@
+<textarea id="some-textarea" class='wysihtml5' placeholder="Enter text ..."></textarea>
+
+<script type="text/javascript">
+	$(function(){
+	  $('.wysihtml5').each(function(i, elem) {
+  	  $(elem).wysihtml5();
+  	});
+	});
+</script>
+
+<% if false %>
 <%= javascript_include_tag "jquery.wysiwyg.js" %>
 <%= javascript_include_tag %>
 <h1>Wikiを新規作成</h1>
@@ -19,4 +30,5 @@
 		<br>
 		<%= f.submit "送信" %>
 	<% end %>
+<% end %>
 <% end %>
