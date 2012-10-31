@@ -61,24 +61,11 @@ class TestController < ApplicationController
 						@choice = @question.choices.new
 						@choice.choice_text = params[:question][i.to_s][:choices][j.to_s][:choice_text]
 						@choice.right = params[:question][i.to_s][:choices][j.to_s][:right] ? true : false
+						@choice.question_id = @question.question_id
+						@choice.choice_id = (j + 1)
 						pp @choice
 
-						# pp "params[:question][i.to_s][:choices][j.to_s][:choice]", params[:question][i.to_s][:choices][j.to_s][:choice_text]
-						#	pp "params[:question][i.to_s][:choices][j.to_s][:right]", params[:question][i.to_s][:choices][j.to_s][:right]
-						# pp "choice = ",	@choice
-					
-						@ids = @choice.question_choices.build
-						# @ids.test_id = @test.id
-						@ids.question_id = (i + 1)
-
-						pp "j + 1 = ", (j + 1)
-
-						@ids.choice_id = (j + 1)
-						
 						@choice.save	
-
-						pp "@ids.choice_id = ", @ids.choice_id
-
 						pp @choice
 
 						j += 1
