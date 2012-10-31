@@ -66,5 +66,8 @@ Ankikun::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 	
 	# 追加
-	config.assets.precompile += %w( bootstrap-wysihtml5/wysiwyg-color.css )
+	config.assets.compile = true
+
+	config.serve_static_assets = true
+	config.assets.precompile += %w( *.js *.css *.png *.jpg )
 end

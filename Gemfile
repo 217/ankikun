@@ -53,4 +53,9 @@ gem 'devise'
 gem 'typus', :git => 'https://github.com/fesplugas/typus.git'
 
 # ブログエディタ
-gem 'bootstrap-wysihtml5-rails'
+gem 'cleditor-rails'
+
+gem 'ckeditor'
+gem 'paperclip'
+gem 'execjs'
+gem 'therubyracer'

@@ -1,4 +1,12 @@
 Ankikun::Application.routes.draw do
+  get "question_ask/new"
+
+  get "question_ask/create"
+
+  get "question_ask/index"
+
+  get "question_ask/show"
+
   get "question/index"
 
   get "question/new"
