@@ -15,7 +15,6 @@
     -->
 
 		<%# 提出用 %>
-		<% if false %>
     <% if user_signed_in? %>
         <%= current_user.email %>としてログインしています。
         <%= link_to "ログアウト", destroy_user_session_path, :method => :delete %>
@@ -32,8 +31,6 @@
     <% if notice %>
         <p id="notice"><%= notice %></p>
 		<% end %>
-		<% end %>
-
 <%= yield %>
 
 </body>

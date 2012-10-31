@@ -131,7 +131,8 @@ class TestController < ApplicationController
   end
 
   def edit
-		@test = Test.new
+		@question = Question.find(:all, :conditions => {:wiki_id => params[:id], :question_id => params[:sub_id]})
+		pp @question
   end
 
   def destroy
@@ -139,7 +140,7 @@ class TestController < ApplicationController
   end
 
 	def show
-		@test = Test.find(:all, :include => :questions, :conditions => {"questions.test_id" => params[:id]})
+		@test = Test.find(:all, :include => :questions, :conditions => {"questions.test_id" => params[:id],"questions.question_id" => params[:sub_id]})
 		pp "@test = ", @test
 	end
 

@@ -1,8 +1,12 @@
+<%= javascript_include_tag "jquery.wysiwyg.js" %>
+<%= javascript_include_tag %>
 <h1>Wikiを新規作成</h1>
 
 <% if params[:id].nil? %>
 	<%= form_for @wiki,:url => {:action => "create"} do |f| %>
 		<%= f.label :title %> : <%= f.text_field :title %>
+		<%= f.label :body %> : <br />
+		<%= f.text_area :body %>
 		<br>
 		<%= f.submit "送信" %>
 	<% end %>
