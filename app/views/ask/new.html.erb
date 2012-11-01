@@ -1,0 +1,10 @@
+<h1>質問の投稿</h1>
+<%= form_for @ask,:url => "/ask/create" do |f| %>
+	<p><%= f.label :title %> : <%= f.text_field :title %></p>
+	<%= f.fields_for :response do |f1| %>
+		<%= f1.label :body %> : <br />
+		<%= f1.text_area :body %>
+		<br />
+	<% end %>
+	<%= f.submit "送信" %>
+<% end %>

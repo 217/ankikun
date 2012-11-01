@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121019045150) do
+ActiveRecord::Schema.define(:version => 20121031181347) do
+
+  create_table "asks", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "choices", :force => true do |t|
     t.integer  "question_id"
@@ -45,6 +51,14 @@ ActiveRecord::Schema.define(:version => 20121019045150) do
     t.text     "body"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "responses", :force => true do |t|
+    t.integer  "ask_id"
+    t.integer  "response_num"
+    t.text     "body"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "tests", :force => true do |t|
