@@ -135,6 +135,7 @@ class TestController < ApplicationController
 
 	def check
 		@test = Test.find(:all, :include => :questions, :conditions => {"questions.test_id" => params[:id]})
+		@test[0].update_attribute(:updated_at, Time.now)
 		pp @test
 	end
 end

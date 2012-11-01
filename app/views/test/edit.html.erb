@@ -6,7 +6,8 @@
 		<% if question.kind == 1 %>
 			選択肢 : <br />
 			<% question.choices.each_with_index do |choice, j| %>	
-				<%= j + 1 %>
+				<%= choice.choice_id %> : 
+				<%= choice.choice_text %>
 			<% end %>
 		<% elsif question.kind == 2 %>
 
