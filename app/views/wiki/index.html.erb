@@ -1,17 +1,21 @@
 <% if params[:id].nil? %>
 	<h1>Wiki一覧</h1>	
+
 	<table>
 		<tr>
 			<th>Wiki番号</th>
 			<th>Wikiタイトル</th>
+			<th>作成時間</th>
+			<th>更新時間</th>
 		</tr>
-		<% page = Wikipage.find(:first, :conditions => {:wiki_id => 1, :wikipage_id => 1}) %><br>
+
 		<% @wikis.each_with_index do |wiki, i| %>
-				<tr>
-					<td><%= wiki.id %></td>
-					<td><%= link_to wiki.title, "/wiki/#{wiki.id}/index" %></td>
-				</tr>
-			</table>
+			<tr>
+				<td><%= wiki.id %></td>
+				<td><%= link_to wiki.title, "/wiki/#{wiki.id}/index" %></td>
+				<td><%= wiki.created_at %></td>
+				<td><%= wiki.updated_at %></td>
+			</tr>
 		<% end %>
 	</table>
 <% else %>

@@ -1,6 +1,20 @@
-<h1>TOP</h1>
+<h1>暗記君 ONLINE</h1>
+
 <% if user_signed_in? %>
-<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+	こんにちは！<%= current_user.email %>さん  <%= link_to "ログアウト", destroy_user_session_path, method: :delete %><br />
 <% else %>
-<%= link_to "ログイン", new_user_session_path %>
+	<%= link_to "ログイン", new_user_session_path %>
 <% end %>
+
+<h2>メニュー</h2>
+<ul>
+	<li><%= link_to "Wiki(まとめ)", "/wiki/index" %></li>
+	<li><%= link_to "Ask(質問)", "/ask/index" %></li>
+	<li><%= link_to "Test(テスト)", "/test/index" %></li>
+</ul>
+
+作成者 : <br />
+新名　哲成<br />
+<br />
+最新の暗記君 ONLINE : <br />
+<%= link_to "https://github.com/217/ankikun", "https://github.com/217/ankikun" %>

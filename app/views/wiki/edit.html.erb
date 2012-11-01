@@ -1,2 +1,11 @@
-<h1>Wiki#edit</h1>
-<p>Find me in app/views/wiki/edit.html.erb</p>
+<%= javascript_include_tag 'nicEdit' -%>
+<script type="text/javascript">
+       bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+</script>
+
+<h1><%= @wikipage.title %></h1>
+<%= form_for @wikipages, :url => {:action => "update"} do |f| %>
+	タイトル : <%= f.text_field :title %>
+	本文 : <%= f.text_area :body %>
+	<%= f.submit "送信" %>
+<% end %>

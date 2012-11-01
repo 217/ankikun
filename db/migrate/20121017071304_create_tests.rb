@@ -2,6 +2,7 @@
 class CreateTests < ActiveRecord::Migration
   def change
     create_table :tests do |t|
+			t.integer :user
 			t.integer :min					# 制限時間(分)
 			t.integer :sec					# 				(秒)
 			# テストのタイトル

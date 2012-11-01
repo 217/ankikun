@@ -1,4 +1,6 @@
+<%= link_to "トップページ", "http://localhost:3000/" %>
 <%= link_to "テストの新規作成", "/test/new" %>
+
 <h1>テストの一覧</h1>
 
 <table>
@@ -9,6 +11,7 @@
 		<th>制限時間</th>
 		<th>作成日時</th>
 		<th>更新日時</th>
+		<th></th>
 	</tr>
 	<% @tests.each_with_index do |test, i| %>
 		<tr>
@@ -37,6 +40,9 @@
 			</td>
 			<td>
 				<%= test.updated_at.strftime("%Y-%m-%d %H:%M:%S") %>
+			</td>
+			<td>
+				<%= link_to "編集","/test/#{test.id}/edit" %> <%= link_to "削除", "/test/#{test.id}/destroy" %>
 			</td>
 		</tr>
 	<% end %>

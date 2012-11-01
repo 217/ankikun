@@ -3,7 +3,7 @@ require "pp"
 class WikiController < ApplicationController
   def index
 		if params[:id].nil?
-			@wikis = Wiki.find(:all)	
+			@wikis = Wiki.find(:all)
 		else
 			@wiki = Wiki.find(:first, {:include => :wikipages, :conditions => {"wikipages.wiki_id" => params[:id]}})
 			if @wiki.nil?
@@ -13,14 +13,15 @@ class WikiController < ApplicationController
   end
 
   def show
-		@wiki = Wiki.find(:first,:conditions => {:wiki_id => params[:id],:page_iad => params[:sub_id]})
+		@wiki = Wiki.find(:first, :conditions => {:wiki_id => params[:id],:page_iad => params[:sub_id]})
   end
 
   def new
 		if params[:id].nil?
 			@wiki = Wiki.new
 		else
-			@page = Wiki.find(:first, {:include => :wiki_wikipages, :conditions => {"wiki_wikipages.wiki_id" => params[:id]}}).wikipages.build
+			@wiki = Wiki.find(params[:id])
+			@page = @wiki.wikipages.new
 		end
   end
 
@@ -42,18 +43,30 @@ class WikiController < ApplicationController
 				render :action => "/wiki/new"
 			end
 		else
-			page = Wiki.new(params[:wiki]).wikipages.build
-
-			page.wiki_wikipages.wiki_id = params[:id]
-
-			page.save
-
-			# page.wiki_wikipages =
+			wiki = Wiki.find(params[:id])
+			page = wiki.wikipages.build
+			page.title = params[:wikipage][:title]
+			page.body = params[:wikipage][:body]
+			
+			page.wiki_id = params[:id]
+			page.wikipage_id = (Wikipage.find(:last, :conditions => {:wiki_id => params[:id]}).wikipage_id + 1)
+			page.owner_id = current_user.id
+			
+			begin
+				Wiki.transaction do 
+					page.save!
+					wiki.updated_at = page.created_at
+					wiki.save!
+				end
+				redirect_to "/wiki/#{params[:id]}/index"
+			rescue => e
+				render :text => "データベースへの書き込みが失敗しました。"
+			end
 		end
   end
 
   def edit
-		
+		@page = Wikipage.find(:first, :conditions => {:wiki_id => params[:id], :wikipage_id => params[:sub_id]})
   end
 
   def update
