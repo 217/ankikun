@@ -1,3 +1,5 @@
+<%= link_to "トップページ", "http://localhost:3000/" %>
+<%= link_to "Testの一覧に戻る", "/test/index" %>
 <h1><%= @test[0].title %>の答え合わせ</h1>
 <% @test[0].questions.each_with_index do |question, i| %>
 	<% case question.kind %>

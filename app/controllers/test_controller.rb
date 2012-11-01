@@ -119,7 +119,13 @@ class TestController < ApplicationController
   end
 
   def destroy
-		
+		@test = Test.find(params[:id])
+		if current_user.id == @test.user
+			@test.destroy
+			redirect_to "/test/index"
+		else
+			render :text => "作成ユーザーでない為、削除する事は出来ません。"
+ 		end
   end
 
 	def show

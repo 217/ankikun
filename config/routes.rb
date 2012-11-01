@@ -59,6 +59,8 @@ Ankikun::Application.routes.draw do
 	# Testのページのルーティング
 	match "test/:id/show" => "test#show"
 	match "test/:id/check" => "test#check"
+	match "test/:id/destroy" => "test#destroy"
+	match "test/:id/edit" => "test#edit"
 
 	# Askのページのルーティング
 	match "ask/:id/show" => "ask#show"
