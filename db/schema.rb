@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(:version => 20121101080157) do
 
   create_table "asks", :force => true do |t|
     t.string   "title"
-    t.integer  "user"
+    t.boolean  "solution"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20121101080157) do
   create_table "responses", :force => true do |t|
     t.integer  "ask_id"
     t.integer  "response_num"
+    t.integer  "user"
     t.text     "body"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false

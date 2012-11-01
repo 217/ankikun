@@ -1,12 +1,35 @@
+<%= link_to "トップページ", "http://localhost:3000" %>
+<%= link_to "質問の一覧に戻る", "/ask/index" %>
 <h1><%= @ask.title %></h1>
+<h2>
+	<% if @ask.solution %>
+		回答受付中
+	<% else %>
+		解決済み
+	<% end %>
+</h2>
 
+<% pp "response = ", @ask.responses %>
 <% @ask.responses.each_with_index do |response, i| %>
-	<%= response.response_num %> : <br />
-	<%= response.body %><br />
+	<%= response.response_num %> - <%= User.find(response.user).email %>さん<br />
+	<%= response.body %>
+	<br />
+	<br />
 <% end %>
 
-<%= form_for @response, :url => "/ask/#{params[:id]}/create" do |f| %>
-		<%= f.label :body %> : <br />
-		<%= f.text_area :body %><br /	>
+<% if user_signed_in? %>
+	<% response = Response.find(:first, :conditions => {:ask_id => params[:id]}) %>
+
+	<% if response.user == current_user.id %>
+		<%= link_to "解決済みにする", "/ask/#{params[:id]}/update" %>
+	<% end %>
+
+	<% @response = @ask.responses.new %>
+	<%= form_for @response, :url => "/ask/#{params[:id]}/create" do |f| %>
+		レスポンス : <br />
+		<%= f.text_area :body, :cols => "120", :rows => "25"%><br /	>
 		<%= f.submit "送信" %>
+	<% end %>
+<% else %>
+	ログインすると書き込めるようになります。
 <% end %>

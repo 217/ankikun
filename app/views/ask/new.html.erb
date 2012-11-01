@@ -1,9 +1,12 @@
+<%= link_to "トップページ", "http://localhost:3000" %>
+<%= link_to "質問の一覧に戻る", "/ask/index" %>
+
 <h1>質問の投稿</h1>
-<%= form_for @ask,:url => "/ask/create" do |f| %>
-	<p><%= f.label :title %> : <%= f.text_field :title %></p>
+<%= form_for @ask, :url => "/ask/create" do |f| %>
+	<p>タイトル : <%= f.text_field :title %></p>
 	<%= f.fields_for :response do |f1| %>
 		<%= f1.label :body %> : <br />
-		<%= f1.text_area :body %>
+		<%= f1.text_area :body, :cols => "120", :rows => "25" %>
 		<br />
 	<% end %>
 	<%= f.submit "送信" %>

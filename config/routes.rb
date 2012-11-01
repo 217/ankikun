@@ -12,6 +12,8 @@ Ankikun::Application.routes.draw do
 
   get "ask/show"
 
+	get "ask/update"
+
   get "test/new"
   get "test/create"
 
@@ -26,8 +28,7 @@ Ankikun::Application.routes.draw do
 	get "test/check"
 	post "test/check"
 
-	# Deviseログイン直後の戻り先user_rootを指定
-  get "wiki/index"
+	get "wiki/index"
   get "wiki/show"
 
   get "wiki/new"
@@ -65,6 +66,7 @@ Ankikun::Application.routes.draw do
 	# Askのページのルーティング
 	match "ask/:id/show" => "ask#show"
 	match "ask/:id/create" => "ask#create"
+	match "ask/:id/update" => "ask#update"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
