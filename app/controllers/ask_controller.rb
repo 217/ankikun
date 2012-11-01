@@ -6,18 +6,36 @@ class AskController < ApplicationController
 	end
 
   def create
-		Ask.transaction do 
-			@ask = Ask.new
-			@ask.title = params[:ask][:title]
-			@ask.save!
-			
-			@response = @ask.responses.build(params[:ask][:response])
-			@response.response_num = @ask.id
-			@response.save!
-			redirect_to :action => "index"
+		if params[:id].nil?
+			begin 
+				Ask.transaction do 
+					@ask = Ask.new
+					@ask.title = params[:ask][:title]
+					@ask.save!
+					
+					@response = @ask.responses.build(params[:ask][:response])
+					@response.ask_id = @ask.id
+					@response.response_num = 1
+					@response.save!
+					redirect_to :action => "index"
+				end
+			rescue => e
+				render :text => "データの書き込みに失敗しました。"
+			end
+		else
+			begin 
+				Ask.transaction do
+					@ask = Ask.find(params[:id])
+					@response = @ask.responses.build
+					@response.response_num = (Response.find(:last, :conditions => {:ask_id => params[:id]}).response_num += 1)
+					@response.ask_id = @ask.id
+					@response.save!
+				end
+				redirect_to :action => "show"
+			rescue => e 
+				render :text => "データの書き込みに失敗しました。"
+			end
 		end
-		rescue => e
-			render :text => "データの書き込みに失敗しました。"
   end
 
   def index
@@ -25,5 +43,7 @@ class AskController < ApplicationController
 	end
 
   def show
+		@ask = Ask.find(params[:id])
+		@response = @ask.responses.new
   end
 end

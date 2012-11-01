@@ -1,2 +1,11 @@
-<h1>QuestionAsk#show</h1>
-<p>Find me in app/views/question_ask/show.html.erb</p>
+<h1><%= @ask.title %></h1>
+<% @ask.responses.each_with_index do |respons, i| %>
+	<%= i + 1 %> : <br />
+	<%= respons.body %><br />
+<% end %>
+
+<%= form_for @response, :url => "/ask/#{params[:id]}/create" do |f| %>
+		<%= f.label :body %> : <br />
+		<%= f.text_area :body %><br />
+		<%= f.submit "送信" %>
+<% end %>

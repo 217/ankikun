@@ -69,6 +69,7 @@ Ankikun::Application.routes.draw do
 
 	# Askのページのルーティング
 	match "ask/:id/show" => "ask#show"
+	match "ask/:id/create" => "ask#create"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
