@@ -1,0 +1,8 @@
+# Use the README file as a reference to customize settings.
+
+Response:
+  fields:
+    default: ask_id, response_num, user, body
+    form: ask_id, response_num, user, body
+  relationships: 
+  application: Application

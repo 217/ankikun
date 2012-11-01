@@ -64,9 +64,10 @@ class AskController < ApplicationController
 	def update
 		@ask = Ask.find(params[:id])
 		
+		# 謎のバグが発生する。
 		if @ask.responses[0].user == current_user.id
 			@ask.update_attribute(:solution,true)
-			redirect_to :action => "/ask/#{params[:id]}/show"
+			redirect_to "/ask/#{params[:id]}/show"
 		else
 			render :text => "投稿者でログインされないと、解決済みに出来ません。"
 		end
