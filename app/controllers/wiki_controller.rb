@@ -3,13 +3,9 @@ require "pp"
 class WikiController < ApplicationController
   def index
 		if params[:id].nil?
-			@wikis = Array.new
-			1.times{|t| 
-				@wikis << Wiki.find(:all, :include => :wikipages, :conditions => {"wikipages.wiki_id" => t+1, "wikipages.wikipage_id" => 1})
-			}
-			pp @wikis
+			@wikis = Wiki.find(:all)	
 		else
-			@wiki = Wiki.find(:first, {:include => :wiki_wikipages, :conditions => {"wiki_wikipages.wiki_id" => params[:id]}})
+			@wiki = Wiki.find(:first, {:include => :wikipages, :conditions => {"wikipages.wiki_id" => params[:id]}})
 			if @wiki.nil?
 				render :text => "Wikiが見つかりません。"
 			end
@@ -30,13 +26,14 @@ class WikiController < ApplicationController
 
   def create
 		if params[:id].nil?
-			wiki = Wiki.new(params[:wiki])
+			wiki = Wiki.new
+			wiki.title = params[:wiki][:title]
 			page = wiki.wikipages.build
 
 			page.wikipage_id = 1
-			page.title = "Wikiへようこそ！"
 			page.owner_id = 1
-			page.body = "hoge"
+			page.title = "トップページ"
+			page.body = params[:wiki][:wikipage][:body]
 			
 			# 生成したWikiのURLに飛びたい
 			if wiki.save
