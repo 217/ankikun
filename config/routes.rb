@@ -1,4 +1,8 @@
 Ankikun::Application.routes.draw do
+  devise_for :users
+
+  get "home/index", :as => :user_root
+
   get "ask/new"
 
   get "ask/create"
@@ -8,12 +12,6 @@ Ankikun::Application.routes.draw do
 
   get "ask/show"
 
-  get "welcome/index", :as => :welcome
-
-  devise_for :users
-
-  get "sessions/callback"
-	
   get "test/new"
   get "test/create"
 
@@ -29,8 +27,7 @@ Ankikun::Application.routes.draw do
 	post "test/check"
 
 	# Deviseログイン直後の戻り先user_rootを指定
-  get "wiki/index", :as => :user_root
-
+  get "wiki/index"
   get "wiki/show"
 
   get "wiki/new"
@@ -58,10 +55,6 @@ Ankikun::Application.routes.draw do
 	match "wiki/:id/:sub_id/update" => "wiki#update"
 	match "wiki/:id/:sub_id/destroy" => "wiki#destroy"
 	match "wiki/:id/:sub_id/show" => "wiki#show"
-
-	# Twitter、Facebookのルーティング
-	match "/auth/:provider/callback" => "sessions#callback"
-	match "/logout" => "sessions#destroy", :as => :logout
 	
 	# Testのページのルーティング
 	match "test/:id/show" => "test#show"
@@ -128,5 +121,5 @@ Ankikun::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 	#
-	root :to => "wiki#new"
+	root :to => "home#index"
 end

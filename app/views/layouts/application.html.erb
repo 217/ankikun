@@ -7,31 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-    <!--
-    <div>
-        <%= link_to "Twitterでlogin","/auth/twitter" %>
-        <%= link_to "facebookでlogin", "/auth/facebook" %>
-    </div>
-    -->
+	<p class="notice"><%= notice %></p>
+	<p class="alert"><%= alert %></p>
 
-		<%# 提出用 %>
-    <% if user_signed_in? %>
-        <%= current_user.email %>としてログインしています。
-        <%= link_to "ログアウト", destroy_user_session_path, :method => :delete %>
-    <% elsif current_omniuser %>
-        <%= current_omniuser.name %>さん
-       	<%= link_to "ログアウト", logout_path %>
-    <% else %>
-        <% #どちらでもログインしていなければ「ログイン」と「ユーザ登録」を表示。ログインをクリックするとログイン専用ページへ、ユーザ登録をクリックするとウェルカムページへ遷移させる %>
-        <%= link_to "ログイン", new_user_session_path %>
-        <%= link_to "ユーザ登録", welcome_path %>
-
-		<% end %>
-		
-    <% if notice %>
-        <p id="notice"><%= notice %></p>
-		<% end %>
-<%= yield %>
+	<%= yield %>
 
 </body>
 
