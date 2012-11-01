@@ -3,6 +3,7 @@ class CreateResponses < ActiveRecord::Migration
     create_table :responses do |t|
 			t.integer :ask_id
 			t.integer :response_num
+			t.integer :user
 
 			t.text :body
 
