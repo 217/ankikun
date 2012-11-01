@@ -27,9 +27,12 @@ class AskController < ApplicationController
 				Ask.transaction do
 					@ask = Ask.find(params[:id])
 					@response = @ask.responses.build
+					@response.body = params[:response][:body]
 					@response.response_num = (Response.find(:last, :conditions => {:ask_id => params[:id]}).response_num += 1)
 					@response.ask_id = @ask.id
 					@response.save!
+					@ask.updated_at = @response.created_at
+					@ask.save!
 				end
 				redirect_to :action => "show"
 			rescue => e 

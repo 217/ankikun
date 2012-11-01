@@ -1,11 +1,12 @@
 <h1><%= @ask.title %></h1>
-<% @ask.responses.each_with_index do |respons, i| %>
-	<%= i + 1 %> : <br />
-	<%= respons.body %><br />
+
+<% @ask.responses.each_with_index do |response, i| %>
+	<%= response.response_num %> : <br />
+	<%= response.body %><br />
 <% end %>
 
 <%= form_for @response, :url => "/ask/#{params[:id]}/create" do |f| %>
 		<%= f.label :body %> : <br />
-		<%= f.text_area :body %><br />
+		<%= f.text_area :body %><br /	>
 		<%= f.submit "送信" %>
 <% end %>
