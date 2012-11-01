@@ -21,7 +21,8 @@ class AskController < ApplicationController
   end
 
   def index
-  end
+		@asks = Ask.find(:all)
+	end
 
   def show
   end

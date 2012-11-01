@@ -1,2 +1,19 @@
-<h1>QuestionAsk#index</h1>
-<p>Find me in app/views/question_ask/index.html.erb</p>
+<h1>質問一覧</h1>
+<table>
+	<tr>
+		<th>質問番号</th>
+		<th>タイトル</th>
+		<th>レス数</th>
+		<th>作成日時</th>
+		<th>更新日時</th>
+	</tr>
+	<% @asks.each_with_index do |ask, i| %>
+		<tr>
+			<td><%= ask.id %></td>
+			<td><%= link_to ask.title, "/ask/#{ask.id}/show" %></td>
+			<td><%= ask.responses.size %></td>
+			<td><%= ask.created_at %></td>
+			<td><%= ask.updated_at %></td>
+		</tr>
+	<% end %>
+</table>
