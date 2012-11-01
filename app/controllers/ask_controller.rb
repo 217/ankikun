@@ -1,3 +1,5 @@
+# coding: utf-8
+
 class AskController < ApplicationController
   def new
 		@ask = Ask.new
@@ -12,7 +14,10 @@ class AskController < ApplicationController
 			@response = @ask.responses.build(params[:ask][:response])
 			@response.response_num = @ask.id
 			@response.save!
+			redirect_to :action => "index"
 		end
+		rescue => e
+			render :text => "データの書き込みに失敗しました。"
   end
 
   def index
