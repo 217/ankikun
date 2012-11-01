@@ -56,7 +56,7 @@ $(function(){
 		// 選択肢の数だけフォームを生成
 		for(var i = 0;i < choiceNum;i++){
 			if(i === 0){
-				$("#body" + questionId).after("<div id = \"choice" + questionId + "\">1つ目の選択肢 : <input type = \"text\" size = \"128\", maxlinght = \"256\", name = \"question[" + questionId + "][choices][" + i + "][choice_text]\" /> <input type = \"checkbox\" name=\"question[" + questionId + "][choices][" + i + "][right]\" />");
+				$("#body" + questionId).after("<div id = \"choice" + questionId + "\"><p>チェック欄は、正解な物にチェックをつけてください。</p>1つ目の選択肢 : <input type = \"text\" size = \"128\", maxlinght = \"256\", name = \"question[" + questionId + "][choices][" + i + "][choice_text]\" /> <input type = \"checkbox\" name=\"question[" + questionId + "][choices][" + i + "][right]\" />");
 			}else{
 				$("input[name = \"question[" + questionId + "][choices][" + (i - 1) + "][right]\"]").after("<br>" + (i + 1) + "つ目の選択肢 : <input type = \"text\" size = \"128\", maxlinght = \"256\", name = \"question[" + questionId + "][choices][" + i + "][choice_text]\" /> <input type = \"checkbox\" name=\"question[" + questionId +"][choices][" + i + "][right]\" />");
 			}
