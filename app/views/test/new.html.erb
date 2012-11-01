@@ -4,7 +4,7 @@
 
 <h1>テストの新規作成</h1>
 <%= form_tag("/test/create", :multipart => true) do %>
-	<p>テスト名 : <input type = "text" name = "test[title]" /></p>
+	<p>テスト名 : <input type = "text" name = "test[title]" onKeyPress="return submitStop(event);"/></p>
 	<p>
 		制限時間(入力しなくても良い) :
 		<!-- ここでは、都合が悪いため、あえてselectを使用する -->

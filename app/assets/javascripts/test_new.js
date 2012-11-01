@@ -1,3 +1,10 @@
+function submitStop(e){
+    if (!e) var e = window.event;
+ 
+    if(e.keyCode == 13)
+        return false;
+}
+
 // jQueryのソース
 //
 // JavaScriptは、\[改行]で文字列を複数行に渡り分割する事が出来るが、今回はVimが対応していない為使用しない。
