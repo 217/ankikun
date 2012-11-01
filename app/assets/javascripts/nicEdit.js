@@ -11,27 +11,26 @@ var bkExtend=function(){var A=arguments;if(A.length==1){A=[this,A[0]]}for(var B 
 
 var nicEditorConfig = bkClass.extend({
 	buttons : {
-		'bold' : {name : __('Click to Bold'), command : 'Bold', tags : ['B','STRONG'], css : {'font-weight' : 'bold'}, key : 'b'},
-		'italic' : {name : __('Click to Italic'), command : 'Italic', tags : ['EM','I'], css : {'font-style' : 'italic'}, key : 'i'},
-		'underline' : {name : __('Click to Underline'), command : 'Underline', tags : ['U'], css : {'text-decoration' : 'underline'}, key : 'u'},
-		'left' : {name : __('Left Align'), command : 'justifyleft', noActive : true},
-		'center' : {name : __('Center Align'), command : 'justifycenter', noActive : true},
-		'right' : {name : __('Right Align'), command : 'justifyright', noActive : true},
-		'justify' : {name : __('Justify Align'), command : 'justifyfull', noActive : true},
-		'ol' : {name : __('Insert Ordered List'), command : 'insertorderedlist', tags : ['OL']},
-		'ul' : 	{name : __('Insert Unordered List'), command : 'insertunorderedlist', tags : ['UL']},
+		'bold' : {name : __('太字'), command : 'Bold', tags : ['B','STRONG'], css : {'font-weight' : 'bold'}, key : 'b'},
+		'italic' : {name : __('イタリック'), command : 'Italic', tags : ['EM','I'], css : {'font-style' : 'italic'}, key : 'i'},
+		'underline' : {name : __('下線'), command : 'Underline', tags : ['U'], css : {'text-decoration' : 'underline'}, key : 'u'},
+		'left' : {name : __('左寄せ'), command : 'justifyleft', noActive : true},
+		'center' : {name : __('真ん中寄せ'), command : 'justifycenter', noActive : true},
+		'right' : {name : __('右寄せ'), command : 'justifyright', noActive : true},
+		'justify' : {name : __('均等揃え'), command : 'justifyfull', noActive : true},
+		'ol' : {name : __('数字リスト'), command : 'insertorderedlist', tags : ['OL']},
+		'ul' : 	{name : __('リスト'), command : 'insertunorderedlist', tags : ['UL']},
 		'subscript' : {name : __('Click to Subscript'), command : 'subscript', tags : ['SUB']},
 		'superscript' : {name : __('Click to Superscript'), command : 'superscript', tags : ['SUP']},
 		'strikethrough' : {name : __('Click to Strike Through'), command : 'strikeThrough', css : {'text-decoration' : 'line-through'}},
 		'removeformat' : {name : __('Remove Formatting'), command : 'removeformat', noActive : true},
-		'indent' : {name : __('Indent Text'), command : 'indent', noActive : true},
-		'outdent' : {name : __('Remove Indent'), command : 'outdent', noActive : true},
+		'indent' : {name : __('インデント'), command : 'indent', noActive : true},
+		'outdent' : {name : __('インデントを削除'), command : 'outdent', noActive : true},
 		'hr' : {name : __('Horizontal Rule'), command : 'insertHorizontalRule', noActive : true}
 	},
-	// 変更
 	iconsPath : '/assets/nicEditorIcons.gif',
 	buttonList : ['save','bold','italic','underline','left','center','right','justify','ol','ul','fontSize','fontFamily','fontFormat','indent','outdent','image','upload','link','unlink','forecolor','bgcolor'],
-	iconList : {"bgcolor":1,"forecolor":2,"bold":3,"center":4,"hr":5,"indent":6,"italic":7,"justify":8,"left":9,"ol":10,"outdent":11,"removeformat":12,"right":13,"save":24,"strikethrough":15,"subscript":16,"superscript":17,"ul":18,"underline":19,"image":20,"link":21,"unlink":22,"close":23,"arrow":25}
+	iconList : {"bgcolor":1,"forecolor":2,"bold":3,"center":4,"hr":5,"indent":6,"italic":7,"justify":8,"left":9,"ol":10,"outdent":11,"removeformat":12,"right":13,"save":14,"strikethrough":15,"subscript":16,"superscript":17,"ul":18,"underline":19,"link":20,"unlink":21,"close":22,"arrow":23}
 	
 });
 ;
@@ -65,39 +64,20 @@ var nicEditorSelect=bkClass.extend({construct:function(D,A,C,B){this.options=C.b
 
 var nicLinkOptions = {
 	buttons : {
-		'link' : {name : 'Add Link', type : 'nicLinkButton', tags : ['A']},
-		'unlink' : {name : 'Remove Link',  command : 'unlink', noActive : true}
+		'link' : {name : 'リンクの作成', type : 'nicLinkButton', tags : ['A']},
+		'unlink' : {name : 'リンクの削除',  command : 'unlink', noActive : true}
 	}
 };
 
-var nicLinkButton=nicEditorAdvancedButton.extend({addPane:function(){this.ln=this.ne.selectedInstance.selElm().parentTag("A");this.addForm({"":{type:"title",txt:"Add/Edit Link"},href:{type:"text",txt:"URL",value:"http://",style:{width:"150px"}},title:{type:"text",txt:"Title"},target:{type:"select",txt:"Open In",options:{"":"Current Window",_blank:"New Window"},style:{width:"100px"}}},this.ln)},submit:function(C){var A=this.inputs.href.value;if(A=="http://"||A==""){alert("You must enter a URL to Create a Link");return false}this.removePane();if(!this.ln){var B="javascript:nicTemp();";this.ne.nicCommand("createlink",B);this.ln=this.findElm("A","href",B)}if(this.ln){this.ln.setAttributes({href:this.inputs.href.value,title:this.inputs.title.value,target:this.inputs.target.options[this.inputs.target.selectedIndex].value})}}});nicEditors.registerPlugin(nicPlugin,nicLinkOptions);
+var nicLinkButton=nicEditorAdvancedButton.extend({addPane:function(){this.ln=this.ne.selectedInstance.selElm().parentTag("A");this.addForm({"":{type:"title",txt:"リンクの作成"},href:{type:"text",txt:"URL",value:"http://",style:{width:"150px"}},title:{type:"text",txt:"タイトル"},target:{type:"select",txt:"開くモード",options:{"":"新しいタブ",_blank:"新しいウィンドウ"},style:{width:"100px"}}},this.ln)},submit:function(C){var A=this.inputs.href.value;if(A=="http://"||A==""){alert("You must enter a URL to Create a Link");return false}this.removePane();if(!this.ln){var B="javascript:nicTemp();";this.ne.nicCommand("createlink",B);this.ln=this.findElm("A","href",B)}if(this.ln){this.ln.setAttributes({href:this.inputs.href.value,title:this.inputs.title.value,target:this.inputs.target.options[this.inputs.target.selectedIndex].value})}}});nicEditors.registerPlugin(nicPlugin,nicLinkOptions);
 
 
 var nicColorOptions = {
 	buttons : {
-		'forecolor' : {name : __('Change Text Color'), type : 'nicEditorColorButton', noClose : true},
-		'bgcolor' : {name : __('Change Background Color'), type : 'nicEditorBgColorButton', noClose : true}
+		'forecolor' : {name : __('文字色'), type : 'nicEditorColorButton', noClose : true},
+		'bgcolor' : {name : __('背景色'), type : 'nicEditorBgColorButton', noClose : true}
 	}
 };
 
 var nicEditorColorButton=nicEditorAdvancedButton.extend({addPane:function(){var D={0:"00",1:"33",2:"66",3:"99",4:"CC",5:"FF"};var H=new bkElement("DIV").setStyle({width:"270px"});for(var A in D){for(var F in D){for(var E in D){var I="#"+D[A]+D[E]+D[F];var C=new bkElement("DIV").setStyle({cursor:"pointer",height:"15px","float":"left"}).appendTo(H);var G=new bkElement("DIV").setStyle({border:"2px solid "+I}).appendTo(C);var B=new bkElement("DIV").setStyle({backgroundColor:I,overflow:"hidden",width:"11px",height:"11px"}).addEvent("click",this.colorSelect.closure(this,I)).addEvent("mouseover",this.on.closure(this,G)).addEvent("mouseout",this.off.closure(this,G,I)).appendTo(G);if(!window.opera){C.onmousedown=B.onmousedown=bkLib.cancelEvent}}}}this.pane.append(H.noSelect())},colorSelect:function(A){this.ne.nicCommand("foreColor",A);this.removePane()},on:function(A){A.setStyle({border:"2px solid #000"})},off:function(A,B){A.setStyle({border:"2px solid "+B})}});var nicEditorBgColorButton=nicEditorColorButton.extend({colorSelect:function(A){this.ne.nicCommand("hiliteColor",A);this.removePane()}});nicEditors.registerPlugin(nicPlugin,nicColorOptions);
-
-
-var nicImageOptions = {
-	buttons : {
-		'image' : {name : 'Add Image', type : 'nicImageButton', tags : ['IMG']}
-	}
-	
-};
-
-var nicImageButton=nicEditorAdvancedButton.extend({addPane:function(){this.im=this.ne.selectedInstance.selElm().parentTag("IMG");this.addForm({"":{type:"title",txt:"Add/Edit Image"},src:{type:"text",txt:"URL",value:"http://",style:{width:"150px"}},alt:{type:"text",txt:"Alt Text",style:{width:"100px"}},align:{type:"select",txt:"Align",options:{none:"Default",left:"Left",right:"Right"}}},this.im)},submit:function(B){var C=this.inputs.src.value;if(C==""||C=="http://"){alert("You must enter a Image URL to insert");return false}this.removePane();if(!this.im){var A="javascript:nicImTemp();";this.ne.nicCommand("insertImage",A);this.im=this.findElm("IMG","src",A)}if(this.im){this.im.setAttributes({src:this.inputs.src.value,alt:this.inputs.alt.value,align:this.inputs.align.value})}}});nicEditors.registerPlugin(nicPlugin,nicImageOptions);
-
-
-var nicSaveOptions = {
-	buttons : {
-		'save' : {name : __('Save this content'), type : 'nicEditorSaveButton'}
-	}
-};
-
-var nicEditorSaveButton=nicEditorButton.extend({init:function(){if(!this.ne.options.onSave){this.margin.setStyle({display:"none"})}},mouseClick:function(){var B=this.ne.options.onSave;var A=this.ne.selectedInstance;B(A.getContent(),A.elm.id,A)}});nicEditors.registerPlugin(nicPlugin,nicSaveOptions);
 
