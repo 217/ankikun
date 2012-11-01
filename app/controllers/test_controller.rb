@@ -115,7 +115,7 @@ class TestController < ApplicationController
   end
 
   def edit
-		@question = Question.find(:all, :conditions => {:wiki_id => params[:id], :question_id => params[:sub_id]})
+		@test = params(params[:id])
   end
 
   def destroy

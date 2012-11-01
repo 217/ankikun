@@ -1,7 +1,17 @@
-<%= form_for @test, :url => {:action => "create"} do |f| %>
-	<%= f.text_area :body %>
-<% end %>
-<% @test1 = Test.new %>
-<%= form_for @test1, :url => {:action => "create"} do |f| %>
-	<%= f.text_area :body %>
+<%= form_for @test, :url => {:action => "/test/#{params[:id]}/update"} do |f| %>
+	<% @test.questions.each_with_index do |question, i| %>
+		<%= question.question_id %>問目 : 
+		<p><%= question.body %></p>
+		<br />
+		<% if question.kind == 1 %>
+			選択肢 : <br />
+			<% question.choices.each_with_index do |choice, j| %>	
+				<%= j + 1 %>
+			<% end %>
+		<% elsif question.kind == 2 %>
+
+		<% elsif question.kind == 3 %>
+
+		<% end %>
+	<% end %>
 <% end %>
