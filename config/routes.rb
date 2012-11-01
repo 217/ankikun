@@ -1,4 +1,6 @@
 Ankikun::Application.routes.draw do
+  get "ask/update"
+
   devise_for :users
 
   get "home/index", :as => :user_root

@@ -3,9 +3,9 @@
 <h1><%= @ask.title %></h1>
 <h2>
 	<% if @ask.solution %>
-		回答受付中
-	<% else %>
 		解決済み
+	<% else %>
+		回答受付中
 	<% end %>
 </h2>
 
@@ -20,7 +20,7 @@
 <% if user_signed_in? %>
 	<% response = Response.find(:first, :conditions => {:ask_id => params[:id]}) %>
 
-	<% if response.user == current_user.id %>
+	<% if response.user == current_user.id and !@ask.solution %>
 		<%= link_to "解決済みにする", "/ask/#{params[:id]}/update" %>
 	<% end %>
 
