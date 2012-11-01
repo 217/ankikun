@@ -3,7 +3,7 @@ class CreateWikipages < ActiveRecord::Migration
     create_table :wikipages do |t|
 			t.integer :wiki_id 
 			t.integer :wikipage_id
-      t.integer :owner_id , :null => false
+      t.integer :owner_id
       t.string :title , :null => false
       t.text :body, :null => false
 

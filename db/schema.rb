@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(:version => 20121101080157) do
   create_table "wikipages", :force => true do |t|
     t.integer  "wiki_id"
     t.integer  "wikipage_id"
-    t.integer  "owner_id",    :null => false
+    t.integer  "owner_id"
     t.string   "title",       :null => false
     t.text     "body",        :null => false
     t.datetime "created_at",  :null => false
