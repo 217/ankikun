@@ -3,7 +3,6 @@
 <% if params[:id].nil? %>
 	<%= link_to "Wikiを新規作成", "/wiki/new" %>
 
-	
 	<h1>Wiki一覧</h1>	
 
 	<table>
@@ -29,8 +28,20 @@
 	<%= link_to "ページを新規作成", "/wiki/#{params[:id]}/new" %>
 
 	<center>
-		<h1><%= @wiki.title %></h1>
+		<h1><%= @wiki.title %></h1>	
 	</center>
 	<% toppage = Wikipage.find(:first, :conditions => {:wiki_id => params[:id], :wikipage_id => 1}) %>
 	<%= toppage.body.html_safe %>
+	<table>
+		<tr>
+			<th>ページID</th>
+			<th>ページタイトル</th>
+		</tr>
+		<% @wikipages.each_with_index do |wikipage, i| %>
+			<% if wikipage.wikipage_id != 1 %>
+				<td><%= wikipage.wikipage_id %></td>
+				<td><%= link_to wikipage.title, "/wiki/#{@wikipage.wiki_id}/#{@wikipage.wikipage_id}/show" %></td>
+			<% end %>
+		<% end %>
+	</table>
 <% end %>

@@ -2,10 +2,15 @@
 require "pp"
 class WikiController < ApplicationController
   def index
+		# /wiki/index
 		if params[:id].nil?
 			@wikis = Wiki.find(:all)
+
+		# /wiki/:id/index
 		else
 			@wiki = Wiki.find(:first, {:include => :wikipages, :conditions => {"wikipages.wiki_id" => params[:id]}})
+			@wikipages = Wikipage.find(:all, :conditions => {:wiki_id => params[:id]})
+
 			if @wiki.nil?
 				render :text => "Wikiが見つかりません。"
 			end
@@ -35,17 +40,20 @@ class WikiController < ApplicationController
 				wiki = Wiki.new
 				wiki.title = params[:wiki][:title]
 				wiki.user = current_user.id
+				begin 
+					Wiki.transaction do
+						wiki.save!
+						page = wiki.wikipages.new
 	
-				page = wiki.wikipages.build
-
-				page.wikipage_id = 1
-				page.title = "トップページ"
-				page.body = params[:wiki][:wikipage][:body]
+						page.wiki_id = wiki.id
+						page.wikipage_id = 1
+						page.title = "トップページ"
+						page.body = params[:wiki][:wikipage][:body]
 				
-				if wiki.save
-					redirect_to "/wiki/#{wiki.id}/index"
-				else
-					render :text => "データベースへの書き込みが失敗しました。"
+						redirect_to "/wiki/#{wiki.id}/index"
+					end
+				rescue => e
+					render :text => "データベースへの格納に失敗しました。"
 				end
 			else
 				wiki = Wiki.find(params[:id])
@@ -74,7 +82,7 @@ class WikiController < ApplicationController
   end
 
   def edit
-		if user_signed_in?
+		if user_sined_in?
 			@page = Wikipage.find(:first, :conditions => {:wiki_id => params[:id], :wikipage_id => params[:sub_id]})
 		else
 			render :text => "ログインしてください。"
