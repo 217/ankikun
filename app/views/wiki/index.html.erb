@@ -1,5 +1,7 @@
 <%= link_to "トップページに戻る", "http://localhost:3000/" %>
 
+<%# Wiki の新規作成 %>
+<%# /wiki/index %>
 <% if params[:id].nil? %>
 	<%= link_to "Wikiを新規作成", "/wiki/new" %>
 
@@ -17,11 +19,13 @@
 			<tr>
 				<td><%= wiki.id %></td>
 				<td><%= link_to wiki.title, "/wiki/#{wiki.id}/index" %></td>
-				<td><%= wiki.created_at %></td>
-				<td><%= wiki.updated_at %></td>
+				<td><%= wiki.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+				<td><%= wiki.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
 			</tr>
 		<% end %>
 	</table>
+<%# Wikiのページの新規作成 %>
+<%# /wiki/:id/new %>
 <% else %>
 	<%= link_to "Wikiの一覧に戻る", "/wiki/index" %>
 	<%= link_to "トップページを編集", "/wiki/edit" %>
@@ -40,7 +44,7 @@
 		<% @wikipages.each_with_index do |wikipage, i| %>
 			<% if wikipage.wikipage_id != 1 %>
 				<td><%= wikipage.wikipage_id %></td>
-				<td><%= link_to wikipage.title, "/wiki/#{@wikipage.wiki_id}/#{@wikipage.wikipage_id}/show" %></td>
+				<td><%= link_to wikipage.title, "/wiki/#{wikipage.wiki_id}/#{wikipage.wikipage_id}/show" %></td>
 			<% end %>
 		<% end %>
 	</table>

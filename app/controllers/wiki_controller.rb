@@ -18,13 +18,19 @@ class WikiController < ApplicationController
   end
 
   def show
-		@wiki = Wiki.find(:first, :conditions => {:wiki_id => params[:id],:page_iad => params[:sub_id]})
+		# /wiki/:id/:sub_id/show
+		@wiki = Wiki.find(:first, :conditions => {:wiki_id => params[:id],:page_id => params[:sub_id]})
   end
 
   def new
 		if user_signed_in?
+			# Wikiの新規作成
+			# /wiki/new
 			if params[:id].nil?
 				@wiki = Wiki.new
+				
+			# Wikiのページの新規作成
+			# /wiki/:id/new
 			else
 				@wiki = Wiki.find(params[:id])
 				@page = @wiki.wikipages.new
