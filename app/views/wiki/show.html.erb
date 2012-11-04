@@ -1,3 +1,8 @@
+<%# Wikiのページ観覧 %>
+<%# /wiki/:id/:sub_id/show %>
+<%= link_to "トップページに戻る", "http://localhost:3000/" %>
+<%= link_to "Wikiの一覧に戻る", "/wiki/index" %>
+<%= link_to "Wikiに戻る", "/wiki/#{params[:id]}/index" %>
 <center>
 	<h1><%= @wiki.title %></h1>
 	<h3><%= @page.title %></h3>

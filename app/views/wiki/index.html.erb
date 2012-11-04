@@ -1,6 +1,6 @@
 <%= link_to "トップページに戻る", "http://localhost:3000/" %>
 
-<%# Wiki の新規作成 %>
+<%# Wiki の一覧 %>
 <%# /wiki/index %>
 <% if params[:id].nil? %>
 	<%= link_to "Wikiを新規作成", "/wiki/new" %>
@@ -24,8 +24,8 @@
 			</tr>
 		<% end %>
 	</table>
-<%# Wikiのページの新規作成 %>
-<%# /wiki/:id/new %>
+<%# Wikiを表示 %>
+<%# /wiki/:id/index %>
 <% else %>
 	<%= link_to "Wikiの一覧に戻る", "/wiki/index" %>
 	<%= link_to "トップページを編集", "/wiki/edit" %>

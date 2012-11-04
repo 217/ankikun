@@ -3,12 +3,14 @@
        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
 </script>
 
+<%# /wiki/new %>
+<%# Wikiを新規作成 %>
 <% if params[:id].nil? %>
 	<%= link_to "トップページ", "http://localhost:3000/" %>
 	<%= link_to "Wikiの一覧まで戻る", "/wiki/index" %>
 	<h1>Wikiを新規作成</h1>
 
-	<%= form_for @wiki,:url => {:action => "create"} do |f| %>
+	<%= form_for @wiki, :url => {:action => "create"} do |f| %>
 		Wikiタイトル : <%= f.text_field :title %>
 		<br />
 		<br />
@@ -20,7 +22,12 @@
 		<br>
 		<%= f.submit "送信" %>
 	<% end %>
+<%# /wiki/:id/new %>
+<%# Wikiのページを新規作成 %>
 <% else %> 
+	<%= link_to "トップページ", "http://localhost:3000/" %>
+	<%= link_to "Wikiの一覧まで戻る", "/wiki/index" %>
+	<%= link_to "Wikiに戻る", "/wiki/#{params[:id]}/index" %>
 	<h1>ページの新規作成</h1>
 	<%= form_for @page, :url => {:action =>"create"} do |f| %>
 		ページタイトル : <%= f.text_field :title %>

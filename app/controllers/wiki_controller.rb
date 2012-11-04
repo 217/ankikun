@@ -42,6 +42,8 @@ class WikiController < ApplicationController
 
   def create
 		if user_signed_in?
+			# /wiki/create
+			# Wikiを作成する
 			if params[:id].nil?
 				wiki = Wiki.new
 				wiki.title = params[:wiki][:title]
@@ -56,11 +58,14 @@ class WikiController < ApplicationController
 						page.title = "トップページ"
 						page.body = params[:wiki][:wikipage][:body]
 				
+						page.save!
 						redirect_to "/wiki/#{wiki.id}/index"
 					end
 				rescue => e
 					render :text => "データベースへの格納に失敗しました。"
 				end
+			# /wiki/:id/create
+			# Wikiのページを作成する
 			else
 				wiki = Wiki.find(params[:id])
 				page = wiki.wikipages.build
@@ -88,7 +93,7 @@ class WikiController < ApplicationController
   end
 
   def edit
-		if user_sined_in?
+		if user_signed_in?
 			@page = Wikipage.find(:first, :conditions => {:wiki_id => params[:id], :wikipage_id => params[:sub_id]})
 		else
 			render :text => "ログインしてください。"
