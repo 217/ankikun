@@ -121,13 +121,17 @@ class WikiController < ApplicationController
 			# /wiki/:id/update
 			elsif params[:sub_id].nil?
 				@wikipage = Wikipage.find(:first, :conditions => {:wiki_id => params[:id], :wikipage_id => 1})
-				@wikipage.update_attributes = {:body => params[:wikipage][:body], :updated_at => Time.now}
+				pp @wikipage
+				@wikipage.update_attributes(:body => params[:wikipage][:body])
+
 				redirect_to :action => "index"
 			# Wikiのページのアップデート
 			# /wiki/:id/:sub_id/update
 			else
 				@wikipage = Wikipage.find(:first, :conditions => {:wiki_id => params[:id], :wikipage_id => params[:sub_id]})
-				@wikipage.update_attributes = {:body => params[:wikipage][:body], :updated_at => Time.now}
+				pp @wikipage
+				@wikipage.update_attributes(:body => params[:wikipage][:body])
+
 				redirect_to :action => "index"
 			end
 		end
