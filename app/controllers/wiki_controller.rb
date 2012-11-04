@@ -94,14 +94,43 @@ class WikiController < ApplicationController
 
   def edit
 		if user_signed_in?
-			@page = Wikipage.find(:first, :conditions => {:wiki_id => params[:id], :wikipage_id => params[:sub_id]})
+			# /wiki/editは禁止
+			if params[:id].nil?
+				render :text => "その領域にはアクセスできません。"
+
+			# Wikiのトップページを編集
+			# /wiki/:id/edit
+			elsif params[:sub_id].nil?
+				@wikipage = Wikipage.find(:first, :conditions => {:wiki_id => params[:id], :wikipage_id => 1})
+			# Wikiのページを編集
+			# /wiki/:id/:sub_id/edit
+			else
+				@wikipage = Wikipage.find(:first, :conditions => {:wiki_id => params[:id], :wikipage_id => params[:sub_id]})
+			end
 		else
 			render :text => "ログインしてください。"
 		end
   end
 
   def update
-		
+		if user_signed_in?
+			# /wiki/updateは禁止
+			if params[:id].nil?
+				render :text => "その領域にはアクセスできません。"
+			# Wikiのトップページのアップデート
+			# /wiki/:id/update
+			elsif params[:sub_id].nil?
+				@wikipage = Wikipage.find(:first, :conditions => {:wiki_id => params[:id], :wikipage_id => 1})
+				@wikipage.update_attributes = {:body => params[:wikipage][:body], :updated_at => Time.now}
+				redirect_to :action => "index"
+			# Wikiのページのアップデート
+			# /wiki/:id/:sub_id/update
+			else
+				@wikipage = Wikipage.find(:first, :conditions => {:wiki_id => params[:id], :wikipage_id => params[:sub_id]})
+				@wikipage.update_attributes = {:body => params[:wikipage][:body], :updated_at => Time.now}
+				redirect_to :action => "index"
+			end
+		end
   end
 
   def destroy

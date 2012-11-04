@@ -4,8 +4,8 @@
 </script>
 
 <h1><%= @wikipage.title %></h1>
-<%= form_for @wikipages, :url => {:action => "update"} do |f| %>
-	タイトル : <%= f.text_field :title %>
-	本文 : <%= f.text_area :body %>
+<%= form_for @wikipage, :url => {:action => "update"} do |f| %>
+	タイトル : <%= f.text_field :title %><br />
+	本文 : <%= f.text_area :body, :cols => "120", :rows => "25" %>
 	<%= f.submit "送信" %>
 <% end %>
