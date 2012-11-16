@@ -59,3 +59,23 @@ gem 'ckeditor'
 gem 'paperclip'
 gem 'execjs'
 gem 'therubyracer'
+
+# Rspec
+group :development, :test do
+  gem "email_spec", ">= 1.2.1"
+  gem "cucumber-rails", ">= 1.3.0", :require => false
+  gem "capybara", ">= 1.1.2"
+  gem "database_cleaner", ">= 0.7.2"
+  gem "launchy", ">= 2.1.0" 
+  
+  # http://d.hatena.ne.jp/mallowlabs/20110611/jenkinsrubytests
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'simplecov', :require => false
+  gem 'simplecov-rcov', :require => false
+end 
+
+# debug
+group :development, :test do
+  gem 'awesome_print', '~> 1.0.2'
+end

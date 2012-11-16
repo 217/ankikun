@@ -23,11 +23,22 @@ ActiveRecord::Schema.define(:version => 20121101080157) do
   create_table "choices", :force => true do |t|
     t.integer  "question_id"
     t.integer  "choice_id"
-    t.integer  "test_id"
+    t.integer  "exam_id"
     t.text     "choice_text"
     t.boolean  "right"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "exams", :force => true do |t|
+    t.integer  "user"
+    t.integer  "min"
+    t.integer  "sec"
+    t.string   "title",       :default => "テスト", :null => false
+    t.integer  "questionNum"
+    t.boolean  "type"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "omniusers", :force => true do |t|
@@ -39,7 +50,7 @@ ActiveRecord::Schema.define(:version => 20121101080157) do
   end
 
   create_table "questions", :force => true do |t|
-    t.integer  "test_id"
+    t.integer  "exam_id"
     t.integer  "question_id"
     t.integer  "kind"
     t.integer  "sub_kind"
@@ -55,16 +66,6 @@ ActiveRecord::Schema.define(:version => 20121101080157) do
     t.text     "body"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-  end
-
-  create_table "tests", :force => true do |t|
-    t.integer  "user"
-    t.integer  "min"
-    t.integer  "sec"
-    t.string   "title",       :default => "テスト", :null => false
-    t.integer  "questionNum"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
   end
 
   create_table "users", :force => true do |t|

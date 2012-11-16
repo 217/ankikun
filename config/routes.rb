@@ -16,19 +16,19 @@ Ankikun::Application.routes.draw do
 
 	get "ask/update"
 
-  get "test/new"
-  get "test/create"
+  get "exam/new"
+  get "exam/create"
 
-	post "test/create"
+	post "exam/create"
 
-  get "test/index"
+  get "exam/index"
 
-  get "test/edit"
+  get "exam/edit"
 
-  get "test/destroy"
+  get "exam/destroy"
 
-	get "test/check"
-	post "test/check"
+	get "exam/check"
+	post "exam/check"
 
 	get "wiki/index"
   get "wiki/show"
@@ -59,11 +59,11 @@ Ankikun::Application.routes.draw do
 	match "wiki/:id/:sub_id/destroy" => "wiki#destroy"
 	match "wiki/:id/:sub_id/show" => "wiki#show"
 	
-	# Testのページのルーティング
-	match "test/:id/show" => "test#show"
-	match "test/:id/check" => "test#check"
-	match "test/:id/destroy" => "test#destroy"
-	match "test/:id/edit" => "test#edit"
+	# examのページのルーティング
+	match "exam/:id/show" => "exam#show"
+	match "exam/:id/check" => "exam#check"
+	match "exam/:id/destroy" => "exam#destroy"
+	match "exam/:id/edit" => "exam#edit"
 
 	# Askのページのルーティング
 	match "ask/:id/show" => "ask#show"

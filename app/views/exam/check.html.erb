@@ -1,0 +1,92 @@
+<%= link_to "トップページ", "http://localhost:3000/" %>
+<%= link_to "Examの一覧に戻る", "/exam/index" %>
+<h1><%= @exam[0].title %>の答え合わせ</h1>
+<% @exam[0].questions.each_with_index do |question, i| %>
+	<% case question.kind %>
+	<% when 1 %>
+		<%= i + 1 %>問目の問題 - N択問題: 
+		<p><%= question.body %></p>
+		<% choices = Choice.find(:all, :conditions => {:exam_id => params[:id], :question_id => question.question_id }) %>
+
+		<%# ここらへんは全体的にコードがめちゃくちゃなので修正する %>
+		<% choices.each_with_index do |choice, j| %>
+			<%= j + 1 %> : <%= choice.choice_text %>
+
+			<% if params[:question][i.to_s][:choices][j.to_s][:right] == "f" %>
+				<input type="checkbox" disabled />
+			<% else %>
+				<input type="checkbox" disabled checked />
+			<% end %>
+
+			<br />
+		<% end %>
+
+		<% @right %>
+		<% @wrong = false %>
+		<% @wrongs = Array.new %>
+
+		<% choices.each_with_index do |choice, j| %>
+			<% if params[:question][i.to_s][:choices][j.to_s][:right] == "t" %>
+				<% @right = true %>
+			<% else %>
+				<% @right = false %>
+			<% end %>
+
+			<% if choice.right != @right %>
+				<% @wrong = true %>
+				<% @wrongs[j] = true %>
+			<% end %>
+		<% end %>
+
+		<% if @wrong %>
+			<p>不正解</p>
+		<% else %>
+			<p>正解！</p>
+		<% end %>
+	<% when 2 %>
+		<%= i + 1 %>問目の問題 - ○×問題: 
+		<p><%= question.body %></p>
+
+		<p>
+		貴方が選んだ答えは、
+		<% @answer %>
+		<% if params[:question][i.to_s][:choices]["0"][:right] == "0" %>
+			<% @answer = false %>
+			×
+		<% else %>
+			<% @answer = true %>
+			○
+		<% end %>
+		</p>
+
+		<% choice = Choice.find(:first, :conditions => {:exam_id => params[:id], :question_id => question.question_id }) %>
+		
+		<% if @answer == choice.right %>
+			<p>正解！</p>
+		<% else %>
+			<p>不正解</p>
+			<% if params[:question][i.to_s][:choices]["0"][:right] == "0" %>
+				答えは、○です。
+			<% else %>
+				答えは、×です。
+			<% end %>
+		<% end %>
+	<% when 3 %>
+		<%= i + 1 %>問目の問題 - 一問一答 : 
+		<p><%= question.body %></p>
+		<% choice = Choice.find(:first, :conditions => {:exam_id => params[:id], :question_id => question.question_id }) %>
+
+		<% @answer = params[:question][i.to_s][:choices]["0"][:choice_text] %>
+
+		<p>
+		貴方の解答は、
+		<%= @answer %>
+		</p>
+		<% if @answer == choice.choice_text %>
+			<p>正解！</p>
+		<% else %>
+			<p>不正解</p>
+			答えは、<%= choice.choice_text %>です。
+		<% end %>
+	<% end %>
+<% end %>

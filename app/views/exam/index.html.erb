@@ -1,0 +1,53 @@
+<%= link_to "トップページ", "http://localhost:3000/" %>
+<%= link_to "テストの新規作成", "/exam/new" %>
+
+<h1>テストの一覧</h1>
+
+<table>
+	<tr>
+		<th>テスト番号</th>
+		<th>タイトル</th>
+		<th>問題数</th>
+		<th>制限時間</th>
+		<th>作成者</th>
+		<th>作成日時</th>
+		<th>更新日時</th>
+		<th></th>
+	</tr>
+	<% @exams.each_with_index do |exam, i| %>
+		<tr>
+			<td><%= exam.id %></td>
+			<td><%= link_to exam.title, "/exam/#{exam.id}/show" %></td>
+			<td><%= exam.questionNum %></td>
+			<td>
+				<% if exam.min == 100 and exam.sec == 100 %>
+					なし
+				<% elsif exam.min == 100 %>
+					0 : <%= exam.sec %>
+				<% elsif exam.sec == 100 %>
+					<%= exam.min %> : 00
+				<% else %>
+					<%= exam.min %> : 
+					<%# 応急処置(後で変える) %>
+					<% if exam.sec < 10 %>
+						0<%= exam.sec %>
+					<% else %>
+						<%= exam.sec %>
+					<% end %>
+				<% end %>
+			</td>
+			<td>
+				<%= User.find(exam.user).email %>
+			</td>
+			<td>
+				<%= exam.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+			</td>
+			<td>
+				<%= exam.updated_at.strftime("%Y-%m-%d %H:%M:%S") %>
+			</td>
+			<td>
+				<%#= link_to "編集","/exam/#{exam.id}/edit" %> <%= link_to "削除", "/exam/#{exam.id}/destroy" %>
+			</td>
+		</tr>
+	<% end %>
+</table>	

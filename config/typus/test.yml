@@ -1,6 +1,6 @@
 # Use the README file as a reference to customize settings.
 
-Test:
+Exam:
   fields:
     default: questions
     form: questions
