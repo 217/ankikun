@@ -100,9 +100,9 @@ class ExamController < ApplicationController
 							@choice.save!
             # 穴埋め
             when "4"
-              params[:question][i.to_s][:body].scan(/#\{.+\}/).size.times do |choice_i|
+              params[:question][i.to_s][:body].scan(/#\{[^\}]+\}/).size.times do |choice_i|
                 @choice = @question.choices.new
-                @choice.choice_text = params[:question][i.to_s][:body].scan(/#\{.+\}/)[choice_i]
+                @choice.choice_text = params[:question][i.to_s][:body].scan(/#\{[^\}]+\}/)[choice_i]
                 @choice.right = "t"
 
                 @choice.exam_id = @exam.id
