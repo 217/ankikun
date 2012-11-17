@@ -1,33 +1,33 @@
-<%= javascript_include_tag "test_show.js" %>
+<%= javascript_include_tag "exam_show.js" %>
 
-<h1><%= @test[0].title %></h1>
+<h1><%= @exam[0].title %></h1>
 
 <form name = "timer">
 	<p>
-		<% if @test[0].min == 100 and @test[0].sec == 100 %>
+		<% if @exam[0].min == 100 and @exam[0].sec == 100 %>
 			制限時間はありません
-		<% elsif @test[0].min == 100 %>
-			<% @test[0].min = 0 %>
+		<% elsif @exam[0].min == 100 %>
+			<% @exam[0].min = 0 %>
 			制限時間 : 
-			<input type = "text" value = "<%= @test[0].min %>" />分
-			<input type = "text" value = "<%= @test[0].sec %>" />秒
+			<input type = "text" value = "<%= @exam[0].min %>" />分
+			<input type = "text" value = "<%= @exam[0].sec %>" />秒
 		<% else %>
 			制限時間 : 
-			<input type = "text" value = "<%= @test[0].min %>" />分
-			<input type = "text" value = "<%= @test[0].sec %>" />秒
+			<input type="text" value="<%= @exam[0].min %>" />分
+			<input type="text" value="<%= @exam[0].sec %>" />秒
 		<% end %>
 	</p>
 </form>
 
-<%= form_tag("/test/#{params[:id]}/check", :id => "testForm", :multipart => true) do %>
-	<% @test[0].questions.each_with_index do |question, i| %>
+<%= form_tag("/exam/#{params[:id]}/check", :id => "examForm", :multipart => true) do %>
+	<% @exam[0].questions.each_with_index do |question, i| %>
 		<%= question.question_id %>問目の問題 - 
 		<% case question.kind %>
 		<% when 1 %>
 			選択問題<br />
 			<p><%= question.body %></p>
 			選択肢 : <br />
-			<% choices = Choice.find(:all, :conditions => {:test_id => params[:id], :question_id => question.question_id }) %>
+			<% choices = Choice.find(:all, :conditions => {:exam_id => params[:id], :question_id => question.question_id }) %>
 			<% choices.each_with_index do |choice, j| %>
 				<%= j + 1 %> : <%= choice.choice_text %>
 				<%= check_box("question[#{i}][choices][#{j}]", "right", {}, "t", "f") %>
@@ -51,7 +51,17 @@
 			一問一答<br />
 			<p><%= question.body %></p>
 			答えは、
-			<%= text_field_tag "question[#{i.to_s}][choices][0][choice_text]" %>
+      <%= text_field_tag "question[#{i.to_s}][choices][0][choice_text]" %>
+    <% when 4 %>
+      穴埋め<br />
+      <p>
+      <% j = 0 %>
+      <%= question.body.gsub(/#\{[^\}]+\}/) {|m| %>
+        <% m = "<input question[#{i.to_s}][choices][#{j.to_s}][choice_text] />" %>
+        <% j += 1 %>
+        <% m %>
+      <% }.html_safe() %>
+      </p>
 		<% end %>
 	<% end %>
 	<p><%= submit_tag("答え合わせをする", :confirm => "送信しますか？") %></p>
