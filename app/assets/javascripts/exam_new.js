@@ -125,6 +125,8 @@ $(function(){
 			}else if(selectId == 4){
         init(questionId);
         createTextArea(selectId,questionId);
+        $("#body"+questionId).after("<input name = \"commit\" type=\"submit\" value=\"送信\"/><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
+        addEvent(questionId);
       }
 		});
 	}

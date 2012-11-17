@@ -1,6 +1,8 @@
 # coding: utf-8
 # デバッグ用
+# 一応require
 require 'pp'
+require 'awesome_print'
 
 class ExamController < ApplicationController
   def new
@@ -21,7 +23,7 @@ class ExamController < ApplicationController
 			
 			# 初期化
 			i = 0	
-			begin
+			#begin
 				Exam.transaction do
 					while !params[:question][i.to_s].nil?
 						@exam.questionNum = (i + 1)
@@ -42,7 +44,7 @@ class ExamController < ApplicationController
 
 					i = 0
 					while !params[:question][i.to_s].nil?
-						@question = @exam.questions.new
+            @question = @exam.questions.new
 						@question.kind = params[:question][i.to_s][:kind]
 						@question.sub_kind = params[:question][i.to_s][:kind] == "1" ? params[:question][i.to_s][:sub_kind] : 0
 						@question.body = params[:question][i.to_s][:body]
@@ -52,7 +54,7 @@ class ExamController < ApplicationController
 						# 問題のセーブ
 						@question.save
 					
-						pp "Question = ", @question
+						# pp "Question = ", @question
 			
 						case params[:question][i.to_s][:kind]
 						when "1"
@@ -65,7 +67,7 @@ class ExamController < ApplicationController
 								@choice.right = params[:question][i.to_s][:choices][j.to_s][:right] ? true : false
 								@choice.exam_id = @exam.id
 								@choice.question_id = @question.question_id
-								@choice.choice_id = (j + 1)
+								@choice.choice_id = (j+1)
 								pp @choice
 
 								@choice.save!
@@ -73,8 +75,9 @@ class ExamController < ApplicationController
 
 								j += 1
 							end
+            # ○×問題
 						when "2"		
-							# p @choice
+							#p @choice
 							@choice = @question.choices.build
 							@choice.choice_text = ""
 							@choice.right = params[:question][i.to_s][:choices]["0"][:right] ? true : false
@@ -84,6 +87,7 @@ class ExamController < ApplicationController
 							@choice.choice_id = 1
 
 							@choice.save!
+            # 一問一答
 						when "3"
 							@choice = @question.choices.build
 							@choice.choice_text = params[:question][i.to_s][:choices]["0"][:choice_text]
@@ -94,15 +98,26 @@ class ExamController < ApplicationController
 							@choice.choice_id = 1
 	
 							@choice.save!
-						end
+            # 穴埋め
+            when "4"
+              params[:question][i.to_s][:body].scan(/#\{.+\}/).size.times do |choice_i|
+                @choice = @question.choices.new
+                @choice.choice_text = params[:question][i.to_s][:body].scan(/#\{.+\}/)[choice_i]
+                @choice.right = "t"
 
+                @choice.exam_id = @exam.id
+  							@choice.question_id = @question.question_id
+                @choice.choice_id = choice_i+1
+                @choice.save!
+              end
+            end
 						i += 1
 					end
 					redirect_to :action => "index"
 				end
-			rescue => e
-				render :text => "エラーが発生しました。"
-			end
+			#rescue => e
+			#	render :text => "エラーが発生しました。"
+			#end
 		else 
 			render :text => "ログインしてください。"
 		end

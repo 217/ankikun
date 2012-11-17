@@ -1,9 +1,16 @@
-Ankikun::Application.routes.draw do
+# なるべく、RESTfulなルーティングを心がけた。
+Ankikun::Application.routes.draw do 
   get "ask/update"
 
   devise_for :users
 
   get "home/index", :as => :user_root
+
+  resources :wiki
+	match "wiki/:id/:sub_id/edit" => "wiki#edit"
+	match "wiki/:id/:sub_id/update" => "wiki#update"
+	match "wiki/:id/:sub_id/destroy" => "wiki#destroy"
+	match "wiki/:id/:sub_id/show" => "wiki#show"
 
   get "ask/new"
 
@@ -29,35 +36,6 @@ Ankikun::Application.routes.draw do
 
 	get "exam/check"
 	post "exam/check"
-
-	get "wiki/index"
-  get "wiki/show"
-
-  get "wiki/new"
-	post "wiki/new"
-
-  get "wiki/create"
-	post "wiki/create"
-
-  get "wiki/edit"
-
-  get "wiki/update"
-
-  get "wiki/destroy"
-
-	# Wikiのトップページのルーティング
-	match "wiki/:id/index" => "wiki#index"
-	match "wiki/:id/new" => "wiki#new"
-	match "wiki/:id/create" => "wiki#create"
-	match "wiki/:id/edit" => "wiki#edit"
-	match "wiki/:id/update" => "wiki#update"
-	match "wiki/:id/destroy" => "wiki#destroy"
-
-	# Wikiのページのルーティング
-	match "wiki/:id/:sub_id/edit" => "wiki#edit"
-	match "wiki/:id/:sub_id/update" => "wiki#update"
-	match "wiki/:id/:sub_id/destroy" => "wiki#destroy"
-	match "wiki/:id/:sub_id/show" => "wiki#show"
 	
 	# examのページのルーティング
 	match "exam/:id/show" => "exam#show"
