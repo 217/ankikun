@@ -1,20 +1,20 @@
 <%= javascript_include_tag "exam_show.js" %>
 
-<h1><%= @exam[0].title %></h1>
+<h1><%= @exam.title %></h1>
 
 <form name = "timer">
 	<p>
-		<% if @exam[0].min == 100 and @exam[0].sec == 100 %>
+		<% if @exam.min == 100 and @exam.sec == 100 %>
 			制限時間はありません
-		<% elsif @exam[0].min == 100 %>
-			<% @exam[0].min = 0 %>
+		<% elsif @exam.min == 100 %>
+			<% @exam.min = 0 %>
 			制限時間 : 
-			<input type = "text" value = "<%= @exam[0].min %>" />分
-			<input type = "text" value = "<%= @exam[0].sec %>" />秒
+			<input type = "text" value = "<%= @exam.min %>" />分
+			<input type = "text" value = "<%= @exam.sec %>" />秒
 		<% else %>
 			制限時間 : 
-			<input type="text" value="<%= @exam[0].min %>" />分
-			<input type="text" value="<%= @exam[0].sec %>" />秒
+			<input type="text" value="<%= @exam.min %>" />分
+			<input type="text" value="<%= @exam.sec %>" />秒
 		<% end %>
 	</p>
 </form>

@@ -145,9 +145,7 @@ class ExamController < ApplicationController
   end
 
 	def show
-		@exam = Exam.find(params[:id]).includes(:question)
-    
-		pp "@exam = ", @exam1
+		@exam = Exam.includes(:questions).find(params[:id])
 	end
 
 	def check
