@@ -5,129 +5,108 @@ require 'pp'
 require 'awesome_print'
 
 class ExamController < ApplicationController
+  before_filter :login?, :only => "new"
+  before_filter :login?, :only => "create"
+
+private
+  def login?
+    if !user_signed_in?
+      render :text => "ログインしてください。"
+    end
+  end
+
+public
   def new
-		if user_signed_in?
-			@exam = Exam.new
-			@questions = [@exam.questions.new]
-		else
-			render :text => "ログインしてください。"
-		end
+		@exam = Exam.new
+		@questions = [@exam.questions.new]
   end
 
   def create
-    # before filter
-		if user_signed_in?
-			@exam = Exam.new
-			# @question
+    # 初期化
+    i = 0	
+    #begin
+      Exam.transaction do
+        while !params[:question][i.to_s].nil?
+          @exam.questionNum = (i + 1)
+          i += 1
+        end
+        
+        #q = QuestionParametar.new(parames[:exam])	 _#Active::Model 参照
+        #if q.valid?
+        # 2桁までしか入力できないので、制限時間無制限の場合、3桁の100を代入
+        @exam = Exam.create!(
+                         :min => params[:exam][:min] != "" ? params[:exam][:min].to_i : 100,
+                         :sec => params[:exam][:sec] != "" || params[:exam][:sec] == "0" ? params[:exam][:sec].to_i : 100,
+                         :title => params[:exam][:title],
+                         :user => current_user.id
+                        )
+        i = 0
+        while !params[:question][i.to_s].nil?
+          @question = @exam.questions.create!(
+                                      :kind => params[:question][i.to_s][:kind],
+                                      :sub_kind => params[:question][i.to_s][:kind] == "1" ? params[:question][i.to_s][:sub_kind] : 0,
+                                      :body => params[:question][i.to_s][:body],
+                                      :question_id => (i+1)
+                                      )
+          case params[:question][i.to_s][:kind]
+          when "1"
+            j = 0
 
-			pp params
-			
-			# 初期化
-			i = 0	
-			#begin
-				Exam.transaction do
-					while !params[:question][i.to_s].nil?
-						@exam.questionNum = (i + 1)
-						i += 1
-					end
-          
-          #q = QuestionParametar.new(parames[:exam])	 _#Active::Model 参照
-          #if q.valid?
-					# 2桁までしか入力できないので、制限時間無制限の場合、3桁の100を代入
-					@exam.min = params[:exam][:min] != "" ? params[:exam][:min].to_i : 100
-					@exam.sec = params[:exam][:sec] != "" || params[:exam][:sec] == "0" ? params[:exam][:sec].to_i : 100
-					@exam.title = params[:exam][:title]
-					@exam.user = current_user.id
-					@exam.save
-	
-					# テストのセーブ
-					# pp @exam.save
-					# pp "TequestionNumst = ", @exam
-					# pp "b"
-
-					i = 0
-					while !params[:question][i.to_s].nil?
-            @question = @exam.questions.new
-						@question.kind = params[:question][i.to_s][:kind]
-						@question.sub_kind = params[:question][i.to_s][:kind] == "1" ? params[:question][i.to_s][:sub_kind] : 0
-						@question.body = params[:question][i.to_s][:body]
-						# pp @question
-						@question.question_id = (i + 1)
-
-						# 問題のセーブ
-						@question.save
-
-						# pp "Question = ", @question
-			
-						case params[:question][i.to_s][:kind]
-						when "1"
-							j = 0
-	
-							while !params[:question][i.to_s][:choices][j.to_s].nil?
-                choice_params = params[:question][i.to_s][:choices][j.to_s]
-								# 選択肢の代入
-                ################################
-                # @question を、@いらない
-                #############################
-                @question.choices.create!(
-                                          :choice_text => choice_params[:choice_text],
-                                          :right => choice_params[:right] ? true : false,
-                                          :exam_id => @exam.id,
-                                          :choice_id => (j+1)
-                                          )
-								j += 1
-							end
-            # ○×問題
-						when "2"		
-							#p @choice
-							@choice = @question.choices.build
-							@choice.choice_text = ""
-							@choice.right = params[:question][i.to_s][:choices]["0"][:right] ? true : false
-							@choice.exam_id = @exam.id
-							@choice.question_id = @question.question_id
-							@choice.choice_id = 1
-
-							@choice.save!
-            # 一問一答
-						when "3"
-							@choice = @question.choices.build
-							@choice.choice_text = params[:question][i.to_s][:choices]["0"][:choice_text]
-							@choice.right = "t"
-
-							@choice.exam_id = @exam.id
-							@choice.question_id = @question.question_id
-							@choice.choice_id = 1
-	
-							@choice.save!
-            # 穴埋め
-            when "4"
-              params[:question][i.to_s][:body].scan(/#\{[^\}]+\}/).size.times do |choice_i|
-                @choice = @question.choices.new
-                @choice.choice_text = params[:question][i.to_s][:body].scan(/#\{[^\}]+\}/)[choice_i]
-                @choice.right = "t"
-
-                @choice.exam_id = @exam.id
-  							@choice.question_id = @question.question_id
-                @choice.choice_id = choice_i+1
-                @choice.save!
-              end
+            while !params[:question][i.to_s][:choices][j.to_s].nil?
+              choice_params = params[:question][i.to_s][:choices][j.to_s]
+              # 選択肢の代入
+              ################################
+              # @question を、@いらない
+              #############################
+              @question.choices.create!(
+                                        :choice_text => choice_params[:choice_text],
+                                        :right => choice_params[:right] ? true : false,
+                                        :exam_id => @exam.id,
+                                        :choice_id => (j+1)
+                                        )
+              j += 1
             end
-						i += 1
-					end
-					redirect_to :action => "index"
-				end
-			#rescue => e
-			#	render :text => "エラーが発生しました。"
-			#end
-		else 
-			render :text => "ログインしてください。"
-		end
+          # ○×問題
+          when "2"		
+            #p @choice
+            @question.choices.build(
+                                    :choice_text => "",
+                                    :right => params[:question][i.to_s][:choices]["0"][:right] ? true : false,
+                                    :exam_id => @exam.id,
+                                    :question_id => @question.question_id,
+                                    :choice_id => 1
+                                    ).save!
+          # 一問一答
+          when "3"
+            @question.choices.build(
+                                    :choice_text => params[:question][i.to_s][:choices]["0"][:choice_text],
+                                    :right => "t",
+                                    :exam_id => @exam.id,
+                                    :choide_id => 1
+                                    ).save!
+          # 穴埋め
+          when "4"
+            params[:question][i.to_s][:body].scan(/#\{[^\}]+\}/).size.times do |choice_num|
+              @question.choices.build(
+                                    :choice_text => params[:question][i.to_s][:body].scan(/#\{[^\}]+\}/)[choice_num],
+                                    :right => "t",
+                                    :exam_id => @exam.id,
+                                    :choice_id => choice_num
+                                    ).save!
+            end
+          end
+          i += 1
+        end
+        redirect_to :action => "index"
+      end
+    # 本当はこれをつける
+    #rescue => e
+    #	render :text => "エラーが発生しました。"
+    #end
 	end
 
   def index
-		# pp Exam.find(:all, {:include => :exam_questions})[0].exam_questions
 		@exams = Exam.find(:all, {:include => :questions, :conditions => {"questions.question_id" => 	1}})
-		# pp @exams
   end
 
   def edit
@@ -149,8 +128,7 @@ class ExamController < ApplicationController
 	end
 
 	def check
-		@exam = Exam.find(:all, :include => :questions, :conditions => {"questions.exam_id" => params[:id]})
-		@exam[0].update_attribute(:updated_at, Time.now)
-		pp @exam
+		@exam = Exam.includes(:questions).find(params[:id])
+		@exam.update_attribute(:updated_at, Time.now)
 	end
 end

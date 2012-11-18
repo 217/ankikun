@@ -57,7 +57,7 @@
       <% j = 0 %>
       <%# #{~}にマッチするものをテキストボックスに変換 %>
       <% html_str = question.body.gsub(/#\{[^\}]+\}/) {|m| %>
-        <% m = "<input question[#{i.to_s}][choices][#{j.to_s}][choice_text] />" %>
+        <% m = "<input type=\"text\" name=\"question[#{i.to_s}][choices][#{j.to_s}][choice_text]\" />" %>
         <% j += 1 %>
         <% m %>
       <% } %>

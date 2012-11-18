@@ -1,7 +1,7 @@
 <%= link_to "トップページ", "http://localhost:3000/" %>
-<%= link_to "Examの一覧に戻る", "/exam/index" %>
-<h1><%= @exam[0].title %>の答え合わせ</h1>
-<% @exam[0].questions.each_with_index do |question, i| %>
+<%= link_to "試験の一覧に戻る", "/exam/index" %>
+<h1><%= @exam.title %>の答え合わせ</h1>
+<% @exam.questions.each_with_index do |question, i| %>
 	<% case question.kind %>
 	<% when 1 %>
 		<%= i + 1 %>問目の問題 - N択問題: 
@@ -90,14 +90,22 @@
     <% end %>
   <% when 4 %>
     <%= i+1 %>問目の問題 - 穴埋め問題
-    <p>問題文</p>
+    <p>貴方の回答</p>
     <%# #{~}にマッチするものをテキストボックスに変換 %>
     <% j = 0 %>
     <% html_str = question.body.gsub(/#\{[^\}]+\}/) {|m| %>
-        <% m = "<input question[#{i.to_s}][choices][#{j.to_s}][choice_text] value=\"\" readonly />" %>
-        <% j += 1 %>
-        <% m %>
+      <% m = "<input value=\"#{params[:question][i.to_s][:choices][j.to_s][:choice_text]}\" readonly />" %>
+      <% j += 1 %>
+      <% m %>
     <% } %>
     <%= html_str.gsub(/(\r\n?)|(\n)/,"<br />").html_safe() %>
+
+    <% choices = Choice.find(:all, :conditions => {:exam_id => params[:id], :question_id => question.question_id }) %>
+
+    <% choice.each_with_index do |choice,j| %>
+      <% if params[:question][i.to_s][:choices][j.to_s][:choice_text] != choice.choice_text %>
+        
+      <% end %>
+    <% end %>
 	<% end %>
 <% end %>
