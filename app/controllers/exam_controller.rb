@@ -15,6 +15,7 @@ class ExamController < ApplicationController
   end
 
   def create
+    # before filter
 		if user_signed_in?
 			@exam = Exam.new
 			# @question
@@ -29,10 +30,12 @@ class ExamController < ApplicationController
 						@exam.questionNum = (i + 1)
 						i += 1
 					end
-	
+          
+          #q = QuestionParametar.new(parames[:exam])	 _#Active::Model 参照
+          #if q.valid?
 					# 2桁までしか入力できないので、制限時間無制限の場合、3桁の100を代入
 					@exam.min = params[:exam][:min] != "" ? params[:exam][:min].to_i : 100
-					@exam.sec = params[:exam][:sec] != "" || params[:exam][:sec] == "0" ? params[:exam][:sec].to_i : 100	
+					@exam.sec = params[:exam][:sec] != "" || params[:exam][:sec] == "0" ? params[:exam][:sec].to_i : 100
 					@exam.title = params[:exam][:title]
 					@exam.user = current_user.id
 					@exam.save
@@ -53,7 +56,7 @@ class ExamController < ApplicationController
 
 						# 問題のセーブ
 						@question.save
-					
+
 						# pp "Question = ", @question
 			
 						case params[:question][i.to_s][:kind]
@@ -61,18 +64,17 @@ class ExamController < ApplicationController
 							j = 0
 	
 							while !params[:question][i.to_s][:choices][j.to_s].nil?
+                choice_params = params[:question][i.to_s][:choices][j.to_s]
 								# 選択肢の代入
-								@choice = @question.choices.new
-								@choice.choice_text = params[:question][i.to_s][:choices][j.to_s][:choice_text]
-								@choice.right = params[:question][i.to_s][:choices][j.to_s][:right] ? true : false
-								@choice.exam_id = @exam.id
-								@choice.question_id = @question.question_id
-								@choice.choice_id = (j+1)
-								pp @choice
-
-								@choice.save!
-								pp @choice
-
+                ################################
+                # @question を、@いらない
+                #############################
+                @question.choices.create!(
+                                          :choice_text => choice_params[:choice_text],
+                                          :right => choice_params[:right] ? true : false,
+                                          :exam_id => @exam.id,
+                                          :choice_id => (j+1)
+                                          )
 								j += 1
 							end
             # ○×問題
@@ -81,7 +83,6 @@ class ExamController < ApplicationController
 							@choice = @question.choices.build
 							@choice.choice_text = ""
 							@choice.right = params[:question][i.to_s][:choices]["0"][:right] ? true : false
-					
 							@choice.exam_id = @exam.id
 							@choice.question_id = @question.question_id
 							@choice.choice_id = 1
@@ -144,8 +145,9 @@ class ExamController < ApplicationController
   end
 
 	def show
-		@exam = Exam.find(:all, :include => :questions, :conditions => {"questions.exam_id" => params[:id]})
-		pp "@exam = ", @exam
+		@exam = Exam.find(params[:id]).includes(:question)
+    
+		pp "@exam = ", @exam1
 	end
 
 	def check

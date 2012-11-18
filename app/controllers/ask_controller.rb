@@ -40,6 +40,9 @@ class AskController < ApplicationController
 						@response.ask_id = @ask.id
 						@response.user = current_user.id
 						@response.save!
+            ###########################################################
+            # 関連先も保存するやつに変更
+            ###########################################################
 						@ask.update_attribute(:updated_at, @response.created_at)
 					end
 					redirect_to :action => "show"

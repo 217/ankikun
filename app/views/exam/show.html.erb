@@ -20,15 +20,14 @@
 </form>
 
 <%= form_tag("/exam/#{params[:id]}/check", :id => "examForm", :multipart => true) do %>
-	<% @exam[0].questions.each_with_index do |question, i| %>
+	<% @exam.questions.each_with_index do |question, i| %>
 		<%= question.question_id %>問目の問題 - 
 		<% case question.kind %>
 		<% when 1 %>
 			選択問題<br />
 			<p><%= question.body %></p>
 			選択肢 : <br />
-			<% choices = Choice.find(:all, :conditions => {:exam_id => params[:id], :question_id => question.question_id }) %>
-			<% choices.each_with_index do |choice, j| %>
+      <% question.choices.each_with_index do |choice, j| %>
 				<%= j + 1 %> : <%= choice.choice_text %>
 				<%= check_box("question[#{i}][choices][#{j}]", "right", {}, "t", "f") %>
 				<br />

@@ -87,6 +87,17 @@
 		<% else %>
 			<p>不正解</p>
 			答えは、<%= choice.choice_text %>です。
-		<% end %>
+    <% end %>
+  <% when 4 %>
+    <%= i+1 %>問目の問題 - 穴埋め問題
+    <p>問題文</p>
+    <%# #{~}にマッチするものをテキストボックスに変換 %>
+    <% j = 0 %>
+    <% html_str = question.body.gsub(/#\{[^\}]+\}/) {|m| %>
+        <% m = "<input question[#{i.to_s}][choices][#{j.to_s}][choice_text] value=\"\" readonly />" %>
+        <% j += 1 %>
+        <% m %>
+    <% } %>
+    <%= html_str.gsub(/(\r\n?)|(\n)/,"<br />").html_safe() %>
 	<% end %>
 <% end %>
