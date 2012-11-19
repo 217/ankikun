@@ -108,8 +108,8 @@ GEM
     launchy (2.1.2)
       addressable (~> 2.3)
     libv8 (3.3.10.4)
-    libwebsocket (0.1.5)
-      addressable
+    libwebsocket (0.1.6)
+      websocket
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -222,6 +222,7 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.1)
       rack (>= 1.0)
+    websocket (1.0.3)
     xpath (1.0.0)
       nokogiri (~> 1.3)
 

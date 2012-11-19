@@ -1,12 +1,25 @@
-<%= stylesheet_link_tag "home_index.css" %>
-<!-- このh1の後は改行しない。 -->
-<h1>暗記君 ONLINE</h1>
+<%#= stylesheet_link_tag "home_index.css" %>
 
-<% if user_signed_in? %>
-	こんにちは！<%= current_user.email %>さん  <%= link_to "ログアウト", destroy_user_session_path, method: :delete %><br />
-<% else %>
-	<%= link_to "ログイン", new_user_session_path %>
-<% end %>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner">
+<div class="container">
+<ul class="nav">
+
+  <li class="active">
+    <h1 class="brand" href="#">暗記君 ONLINE</h1>
+  </li>
+
+  <li>
+  <% if user_signed_in? %>
+    こんにちは！<%= current_user.email %>さん<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+  <% else %>
+    <%= link_to "ログイン", new_user_session_path %>
+  <% end %>
+  </li>
+</ul>
+</div>
+</div>
+</div>
 
 <h2>メニュー</h2>
 <ul>
@@ -18,5 +31,5 @@
 作成者 : <br />
 新名　哲成<br />
 <br />
-最新の暗記君 ONLINE : <br />
+暗記君 ONLINE : <br />
 <%= link_to "https://github.com/217/ankikun", "https://github.com/217/ankikun" %>
