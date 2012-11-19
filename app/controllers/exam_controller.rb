@@ -5,9 +5,6 @@ require 'pp'
 require 'awesome_print'
 
 class ExamController < ApplicationController
-  before_filter :login?, :only => "new"
-  before_filter :login?, :only => "create"
-
 private
   def login?
     if !user_signed_in?
@@ -16,6 +13,9 @@ private
   end
 
 public
+  before_filter :login?, :only => "new"
+  before_filter :login?, :only => "create"
+
   def new
 		@exam = Exam.new
 		@questions = [@exam.questions.new]
@@ -26,20 +26,22 @@ public
     i = 0	
     #begin
       Exam.transaction do
-        while !params[:question][i.to_s].nil?
-          @exam.questionNum = (i + 1)
-          i += 1
-        end
-        
-        #q = QuestionParametar.new(parames[:exam])	 _#Active::Model 参照
-        #if q.valid?
-        # 2桁までしか入力できないので、制限時間無制限の場合、3桁の100を代入
-        @exam = Exam.create!(
+        @exam = Exam.new(
                          :min => params[:exam][:min] != "" ? params[:exam][:min].to_i : 100,
                          :sec => params[:exam][:sec] != "" || params[:exam][:sec] == "0" ? params[:exam][:sec].to_i : 100,
                          :title => params[:exam][:title],
                          :user => current_user.id
                         )
+        while !params[:question][i.to_s].nil?
+          @exam.questionNum = (i + 1)
+          i += 1
+        end
+        @exam.save!
+
+        #q = QuestionParametar.new(parames[:exam])	 _#Active::Model 参照
+        #if q.valid?
+        # 2桁までしか入力できないので、制限時間無制限の場合、3桁の100を代入
+        
         i = 0
         while !params[:question][i.to_s].nil?
           @question = @exam.questions.create!(

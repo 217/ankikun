@@ -3,4 +3,6 @@ class Question < ActiveRecord::Base
 	has_many :choices
 
 	attr_accessible :kind, :sub_kind, :body	,:exam_id, :question_id
+ 
+  p "kind = ", :kind
 end

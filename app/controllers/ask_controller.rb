@@ -2,57 +2,58 @@
 require "pp"
 
 class AskController < ApplicationController
+private
+  def login?
+    if !user_signed_in?
+      render :text => "ログインしてください。"
+    end
+  end
+public
+  before_filter :login?, :only => "new"
+  before_filter :login?, :only => "create"
+
   def new
-		if user_signed_in?
-			@ask = Ask.new
-		else
-			render :text => "ログインしてください"
-		end
+		@ask = Ask.new
 	end
 
   def create
-		if user_signed_in?
-			if params[:id].nil?
-				begin 
-					Ask.transaction do 
-						@ask = Ask.new
-						@ask.title = params[:ask][:title]
-						@ask.solution = false
-						@ask.save!
-					
-						@response = @ask.responses.build(params[:ask][:response])
-						@response.ask_id = @ask.id
-						@response.response_num = 1
-						@response.user = current_user.id
-						@response.save!
-						redirect_to :action => "index"
-					end
-				rescue => e
-					render :text => "データの書き込みに失敗しました。"
-				end
-			else
-				begin 
-					Ask.transaction do
-						@ask = Ask.find(params[:id])
-						@response = @ask.responses.new
-						@response.body = params[:response][:body]
-						@response.response_num = (Response.find(:last, :conditions => {:ask_id => params[:id]}).response_num += 1)
-						@response.ask_id = @ask.id
-						@response.user = current_user.id
-						@response.save!
-            ###########################################################
-            # 関連先も保存するやつに変更
-            ###########################################################
-						@ask.update_attribute(:updated_at, @response.created_at)
-					end
-					redirect_to :action => "show"
-				#rescue => e 
-				#	render :text => "データの書き込みに失敗しました。"
-				end
-			end
-		else 
-			render :text => "ログインしてください	"
-		end
+    if params[:id].nil?
+      begin 
+        Ask.transaction do 
+          @ask = Ask.create!(
+                          :title => params[:ask][:title],
+                          :solution => false
+                        )
+          @response = @ask.responses.build(params[:ask][:response])
+          @response.ask_id = @ask.id
+          @response.response_num = 1
+          @response.user = current_user.id
+          @response.save!
+          redirect_to :action => "index"
+        end
+      rescue => e
+        render :text => "データの書き込みに失敗しました。"
+      end
+    else
+      begin 
+        Ask.transaction do
+          @ask = Ask.find(params[:id])
+          @ask.responses.create!(
+                                  :body => params[:response][:body],
+                                  :response_num => (Response.find(:last, :conditions => {:ask_id => params[:id]}).response_num += 1),
+                                  :ask_id => @ask.id,
+                                  :user => current_user.id
+                                ).save!
+          ###########################################################
+          # 関連先も保存するやつに変更
+          ###########################################################
+          @ask.update_attribute(:updated_at, @response.created_at)
+        end
+        redirect_to :action => "show"
+      #rescue => e 
+      #	render :text => "データの書き込みに失敗しました。"
+      end
+    end
   end
 
   def index
