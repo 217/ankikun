@@ -4,12 +4,14 @@
 
 <h1>テストの新規作成</h1>
 <%= form_tag("/exam/create", :multipart => true) do %>
+  <!--
   <p>テストタイプ : 
-  <select name="exam[type]">
+    <select name="exam[type]">
     <option value="nomal">通常採点</option>
     <option value="admin">提出採点</option>
   </select>
   </p>
+  -->
   <p>テスト名 : <input type = "text" name = "exam[title]" onKeyPress="return submitStop(event);"/></p>
 	<p>
 		制限時間(入力しなくても良い) :
