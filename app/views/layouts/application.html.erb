@@ -17,7 +17,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-        <a class="brand" href="localhost:3000">
+        <a class="brand" href="http://localhost:3000">
           暗記君 ONLINE
         </a>
 				<div class="nav-collapse">
@@ -35,6 +35,10 @@
               <li><%= link_to "勉強、まとめ", "http://localhost:3000/wiki/index" %></li>
               <li><%= link_to "質問", "http://localhost:3000/ask/index" %></li>
               <li class="active"><%= link_to "試験", "http://localhost:3000/exam/index" %></li>
+            <% else %>
+              <li><%= link_to "勉強、まとめ", "http://localhost:3000/wiki/index" %></li>
+              <li><%= link_to "質問", "http://localhost:3000/ask/index" %></li>
+              <li><%= link_to "試験", "http://localhost:3000/exam/index" %></li>
             <% end %>
 					</ul>
 				</div>

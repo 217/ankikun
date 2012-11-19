@@ -1,35 +1,28 @@
 <%#= stylesheet_link_tag "home_index.css" %>
 
-<div class="navbar navbar-fixed-top">
-<div class="navbar-inner">
+<% if user_signed_in? %>
+  こんにちは！<%= current_user.email %>さん<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+<% else %>
+  <%= link_to "ログイン", new_user_session_path %>
+<% end %>
+
 <div class="container">
-<ul class="nav">
-
-  <li class="active">
-    <h1 class="brand" href="#">暗記君 ONLINE</h1>
-  </li>
-
-  <li>
-  <% if user_signed_in? %>
-    こんにちは！<%= current_user.email %>さん<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-  <% else %>
-    <%= link_to "ログイン", new_user_session_path %>
-  <% end %>
-  </li>
-</ul>
+    <div id="header">
+      <h2>メニュー</h2>
+    </div>
+    <div class="row">
+      <ul>
+        <li><%= link_to "まとめ", "/wiki/index" %></li>
+        <li><%= link_to "質問", "/ask/index" %></li>
+        <li><%= link_to "試験", "/exam/index" %></li>
+      </ul>
+    </div>
+    <div id="footer">
+      <br />
+      作成者 : <br />
+      新名　哲成<br />
+      <br />
+      暗記君 ONLINE : <br />
+      <%= link_to "https://github.com/217/ankikun", "https://github.com/217/ankikun" %>
+    </div>
 </div>
-</div>
-</div>
-
-<h2>メニュー</h2>
-<ul>
-	<li><%= link_to "まとめ", "/wiki/index" %></li>
-	<li><%= link_to "質問", "/ask/index" %></li>
-	<li><%= link_to "試験", "/exam/index" %></li>
-</ul>
-
-作成者 : <br />
-新名　哲成<br />
-<br />
-暗記君 ONLINE : <br />
-<%= link_to "https://github.com/217/ankikun", "https://github.com/217/ankikun" %>
