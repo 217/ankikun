@@ -144,6 +144,5 @@ class WikiController < ApplicationController
 	def show
 		@wiki = Wiki.find(params[:id])
 		@page = Wikipage.find(:first, :conditions => {:wiki_id => params[:id], :wikipage_id => params[:sub_id]})
-	end
+	end 
 end
-

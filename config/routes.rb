@@ -6,7 +6,26 @@ Ankikun::Application.routes.draw do
 
   get "home/index", :as => :user_root
 
-  resources :wiki
+  # wikiのルーティング
+  # これでないとバグが発生する
+  get "wiki/index"
+  get "wiki/show"
+  get "wiki/new"
+	post "wiki/new"
+  get "wiki/create"
+	post "wiki/create"
+  get "wiki/edit"
+  get "wiki/update"
+  get "wiki/destroy"
+
+  # Wikiのトップページのルーティング
+	match "wiki/:id/index" => "wiki#index"
+	match "wiki/:id/new" => "wiki#new"
+	match "wiki/:id/create" => "wiki#create"
+	match "wiki/:id/edit" => "wiki#edit"
+	match "wiki/:id/update" => "wiki#update"
+	match "wiki/:id/destroy" => "wiki#destroy"
+  # Wikiの子ページのルーティング
 	match "wiki/:id/:sub_id/edit" => "wiki#edit"
 	match "wiki/:id/:sub_id/update" => "wiki#update"
 	match "wiki/:id/:sub_id/destroy" => "wiki#destroy"
