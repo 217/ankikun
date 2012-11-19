@@ -2,7 +2,7 @@
 # デバッグ用
 # 一応require
 require 'pp'
-require 'awesome_print'
+#require 'awesome_print'
 
 class ExamController < ApplicationController
 private
