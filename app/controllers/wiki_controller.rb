@@ -5,15 +5,11 @@ class WikiController < ApplicationController
 		# /wiki/index
 		if params[:id].nil?
 			@wikis = Wiki.find(:all)
-
-		# /wiki/:id/index
+  		# /wiki/:id/index
 		else
 			@wiki = Wiki.find(:first, {:include => :wikipages, :conditions => {"wikipages.wiki_id" => params[:id]}})
 			@wikipages = Wikipage.find(:all, :conditions => {:wiki_id => params[:id]})
-
-			if @wiki.nil?
-				render :text => "Wikiが見つかりません。"
-			end
+      @toppage = Wikipage.find(:first, :conditions => {:wiki_id => params[:id], :wikipage_id => 1})
 		end
   end
 

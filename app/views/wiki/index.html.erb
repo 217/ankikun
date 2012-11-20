@@ -1,11 +1,9 @@
-<%= link_to "トップページに戻る", "http://localhost:3000/" %>
-
 <%# Wiki の一覧 %>
 <%# /wiki/index %>
 <% if params[:id].nil? %>
-	<%= link_to "Wikiを新規作成", "/wiki/new" %>
+  <%= link_to "Wikiを新規作成", "/wiki/new" %>
 
-	<h1>Wiki一覧</h1>	
+  <h1>Wiki一覧</h1>
 
 	<table>
 		<tr>
@@ -13,7 +11,7 @@
 			<th>Wikiタイトル</th>
 			<th>作成時間</th>
 			<th>更新時間</th>
-		</tr>
+    </tr>
 
 		<% @wikis.each_with_index do |wiki, i| %>
 			<tr>
@@ -27,25 +25,17 @@
 <%# Wikiを表示 %>
 <%# /wiki/:id/index %>
 <% else %>
-	<%= link_to "Wikiの一覧に戻る", "/wiki/index" %>
-	<%= link_to "トップページを編集", "/wiki/#{params[:ida]}/edit" %>
-	<%= link_to "ページを新規作成", "/wiki/#{params[:id]}/new" %>
-
-	<center>
-		<h1><%= @wiki.title %></h1>	
-	</center>
-	<% toppage = Wikipage.find(:first, :conditions => {:wiki_id => params[:id], :wikipage_id => 1}) %>
-	<%= toppage.body.html_safe %>
-	<table>
-		<tr>
-			<th>ページID</th>
-			<th>ページタイトル</th>
-		</tr>
-		<% @wikipages.each_with_index do |wikipage, i| %>
-			<% if wikipage.wikipage_id != 1 %>
-				<td><%= wikipage.wikipage_id %></td>
-				<td><%= link_to wikipage.title, "/wiki/#{wikipage.wiki_id}/#{wikipage.wikipage_id}/show" %></td>
-			<% end %>
-		<% end %>
-	</table>
+  <center>
+		<h1><%= @wiki.title %></h1>
+  </center>
+  <div class="row">
+    <div class="span3">
+      <ul class="nav nav-pills nav-stacked">
+        <% @wikipages.each_with_index do |wikipage, i| %>
+          <li><%= link_to wikipage.title, "/wiki/#{wikipage.wiki_id}/#{wikipage.wikipage_id}/show" %></li>
+		    <% end %>
+      </ul>
+    </div>
+    <div class="span9"><%= @toppage.body.html_safe %></div>
+  </div>
 <% end %>

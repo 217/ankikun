@@ -9,6 +9,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <p class="notice"><%= notice %></p>
+	<p class="alert"><%= alert %></p>
   <!-- メニューバー -->
   <div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
@@ -71,11 +73,6 @@
 		</div>
   </div>
 
-	<p class="notice"><%= notice %></p>
-	<p class="alert"><%= alert %></p>
-
 	<%= yield %>
-
 </body>
-
 </html>

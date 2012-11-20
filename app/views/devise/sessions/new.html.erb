@@ -1,17 +1,21 @@
-<h2>ログイン</h2>
+<div class="hero-unit">
+  <%= render "devise/shared/links" %>
+  <br />
+  <h1>ログイン</h1>
+  <br />
+  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+    <%= f.label "メールアドレス" %>
+    <%= f.email_field :email %>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label "メールアドレス" %><br />
-  <%= f.email_field :email %></div>
+    <%= f.label "パスワード" %>
+    <%= f.password_field :password %>
 
-  <div><%= f.label "パスワード" %><br />
-  <%= f.password_field :password %></div>
+    <br />
 
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
+    <% if devise_mapping.rememberable? -%>
+      パスワードを保存 : <%= f.check_box :remember_me %>
+    <% end -%>
 
-  <div><%= f.submit "ログイン" %></div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+    <div><%= f.submit "ログイン" %>
+  <% end %>
+</div>
