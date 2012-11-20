@@ -1,7 +1,5 @@
 # なるべく、RESTfulなルーティングを心がけた。
-Ankikun::Application.routes.draw do 
-  get "ask/update"
-
+Ankikun::Application.routes.draw do
   devise_for :users
 
   get "home/index", :as => :user_root
@@ -32,27 +30,18 @@ Ankikun::Application.routes.draw do
 	match "wiki/:id/:sub_id/show" => "wiki#show"
 
   get "ask/new"
-
   get "ask/create"
 	post "ask/create"
-
   get "ask/index"
-
   get "ask/show"
-
 	get "ask/update"
 
   get "exam/new"
   get "exam/create"
-
 	post "exam/create"
-
   get "exam/index"
-
   get "exam/edit"
-
   get "exam/destroy"
-
 	get "exam/check"
 	post "exam/check"
 	

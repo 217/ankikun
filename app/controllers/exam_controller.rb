@@ -11,7 +11,6 @@ private
       render :text => "ログインしてください。"
     end
   end
-
 public
   before_filter :login?, :only => "new"
   before_filter :login?, :only => "create"
@@ -24,7 +23,7 @@ public
   def create
     # 初期化
     i = 0	
-    #begin
+    begin
       Exam.transaction do
         @exam = Exam.new(
                          :min => params[:exam][:min] != "" ? params[:exam][:min].to_i : 100,
@@ -102,9 +101,9 @@ public
         redirect_to :action => "index"
       end
     # 本当はこれをつける
-    #rescue => e
-    #	render :text => "エラーが発生しました。"
-    #end
+    rescue => e
+    render :text => "エラーが発生しました。"
+    end
 	end
 
   def index
