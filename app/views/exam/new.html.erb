@@ -1,20 +1,22 @@
-<%= link_to "トップページ", "http://localhost:3000/" %>
 <%= link_to "試験の一覧に戻る", "/exam/index" %>
 <%= javascript_include_tag "exam_new.js" %>
-
-<h1>テストの新規作成</h1>
-<%= form_tag("/exam/create", :multipart => true) do %>
-  <!--
-  完成してない。
-  <p>テストタイプ : 
-    <select name="exam[type]">
-    <option value="nomal">通常採点</option>
-    <option value="admin">提出採点</option>
-  </select>
-  </p>
-  -->
-  <p>テスト名 : <input type = "text" name = "exam[title]" onKeyPress="return submitStop(event);"/></p>
-	<p>
+<div class="container">
+  <div id="header">
+    <h1>テストの新規作成</h1>
+    <%= form_tag("/exam/create", :multipart => true) do %>
+    <!--
+    完成してない。
+    <p>テストタイプ : 
+      <select name="exam[type]">
+        <option value="nomal">通常採点</option>
+        <option value="admin">提出採点</option>
+      </select>
+    </p>
+    -->
+  </div>
+  <div class="row">
+    <p>テスト名 : <input type = "text" name = "exam[title]" onKeyPress="return submitStop(event);"/></p>
+	  <p>
 		制限時間(入力しなくても良い) :
 		<!-- ここでは、都合が悪いため、あえてselectを使用する -->
 		<select name = "exam[min]">
@@ -42,7 +44,7 @@
 			<option value = "21">21</option>
 			<option value = "22">22</option>
 			<option value = "23">23</option>
-			<option value = "24">24</option>			
+      <option value = "24">24</option>
 			<option value = "25">25</option>
 			<option value = "26">26</option>
 			<option value = "27">27</option>
@@ -55,7 +57,7 @@
 			<option value = "34">34</option>
 			<option value = "35">35</option>
 			<option value = "36">36</option>
-			<option value = "37">37</option>	
+			<option value = "37">37</option>
 			<option value = "38">38</option>
 			<option value = "39">39</option>
 			<option value = "40">40</option>
@@ -88,7 +90,7 @@
 			<option value = "2">02</option>
 			<option value = "3">03</option>
 			<option value = "4">04</option>
-			<option value = "5">05</option>	
+			<option value = "5">05</option>
 			<option value = "6">06</option>
 			<option value = "7">07</option>
 			<option value = "8">08</option>
@@ -110,7 +112,7 @@
 			<option value = "24">24</option>
 			<option value = "25">25</option>
 			<option value = "26">26</option>
-			<option value = "27">27</option>	
+      <option value = "27">27</option>
 			<option value = "28">28</option>
 			<option value = "29">29</option>
 			<option value = "30">30</option>
@@ -144,20 +146,24 @@
 			<option value = "58">58</option>
 			<option value = "59">59</option>
 		</select>
-	</p>
+    </p>
 
-	<div id = "form0">
-		<% @questions.each_with_index do |question, i| %>
-			<% @question = question %>
-			<%= i + 1 %>問目 : 
-			<select name = "question[<%= i %>][kind]">
-				<option value="0">選択してください</option>
-				<option value="1">N択問題</option>
-				<option value="2">○×問題</option>
-        <option value="3">一問一答</option>
-        <option value="4">穴埋め</option>
-        <option value="5">記述問題</option>
-			</select>
-		<% end %>
-	</div>
-<% end %>
+    <div id = "form0">
+      <% @questions.each_with_index do |question, i| %>
+        <% @question = question %>
+        <%= i + 1 %>問目 : 
+        <select name = "question[<%= i %>][kind]">
+          <option value="0">選択してください</option>
+          <option value="1">N択問題</option>
+          <option value="2">○×問題</option>
+          <option value="3">一問一答</option>
+          <option value="4">穴埋め</option>
+          <!--
+          <option value="5">記述問題</option>
+          -->
+        </select>
+      <% end %>
+    </div>
+  <% end %>
+  </div>
+</div>

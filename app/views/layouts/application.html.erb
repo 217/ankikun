@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
   <title>Ankikun</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= stylesheet_link_tag    "bootstrap", "bootstrap-responsive" %>
@@ -9,6 +9,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <!-- メニューバー -->
   <div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
@@ -22,24 +23,36 @@
         </a>
 				<div class="nav-collapse">
 					<ul class="nav">
-            <% case controller.controller_name %>
-            <% when "wiki" %>
-              <li class="active"><%= link_to "勉強、まとめ", "http://localhost:3000/wiki/index" %></li>
-              <li><%= link_to "質問", "http://localhost:3000/ask/index" %></li>
-              <li><%= link_to "試験", "http://localhost:3000/exam/index" %></li>
-            <% when "ask" %>
-              <li><%= link_to "勉強、まとめ", "http://localhost:3000/wiki/index" %></li>
-              <li class="active"><%= link_to "質問", "http://localhost:3000/ask/index" %></li>
-              <li><%= link_to "試験", "http://localhost:3000/exam/index" %></li>
-            <% when "exam" %>
-              <li><%= link_to "勉強、まとめ", "http://localhost:3000/wiki/index" %></li>
-              <li><%= link_to "質問", "http://localhost:3000/ask/index" %></li>
-              <li class="active"><%= link_to "試験", "http://localhost:3000/exam/index" %></li>
-            <% else %>
-              <li><%= link_to "勉強、まとめ", "http://localhost:3000/wiki/index" %></li>
-              <li><%= link_to "質問", "http://localhost:3000/ask/index" %></li>
-              <li><%= link_to "試験", "http://localhost:3000/exam/index" %></li>
-            <% end %>
+            <li class="dropdown">
+            <a href="http://localhost:3000/wiki/index" class="dropdown-toggle" data-toggle="dropdown">
+              勉強、まとめ
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "まとめの一覧", "http://localhost:3000/wiki/index" %></li>
+              <li><%= link_to "まとめの新規作成", "http://localhost:3000/wiki/new" %></li>
+            </ul>
+            </li>
+            <li class="dropdown">
+              <a href="http://localhost:3000/wiki/index" class="dropdown-toggle" data-toggle="dropdown">
+                質問
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "質問の一覧", "http://localhost:3000/ask/index" %></li>
+                <li><%= link_to "質問の新規作成", "http://localhost:3000/ask/new" %></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="http://localhost:3000/wiki/index" class="dropdown-toggle" data-toggle="dropdown">
+                試験
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "試験の一覧", "http://localhost:3000/exam/index" %></li>
+                <li><%= link_to "試験の新規作成", "http://localhost:3000/exam/new" %></li>
+              </ul>
+            </li>
 					</ul>
 				</div>
 			</div>
