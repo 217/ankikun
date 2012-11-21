@@ -62,15 +62,15 @@ $(function(){
 		// 選択肢の数だけフォームを生成
 		for(var i = 0;i < choiceNum;i++){
 			if(i === 0){
-				$("#body" + questionId).after("<div id = \"choice" + questionId + "\"><p>チェック欄は、正解な物にチェックをつけてください。</p>1つ目の選択肢 : <input type = \"text\" size = \"128\", maxlinght = \"256\", name = \"question[" + questionId + "][choices][" + i + "][choice_text]\" /> <input type = \"checkbox\" name=\"question[" + questionId + "][choices][" + i + "][right]\" />");
+				$("#body" + questionId).after("<div id = \"choice" + questionId + "\"><p>チェック欄は、正解な物にチェックをつけてください。</p>1つ目の選択肢 : <input type = \"text\" class=\"span3\"size = \"128\", maxlinght = \"256\", name = \"question[" + questionId + "][choices][" + i + "][choice_text]\" /> <input type = \"checkbox\" name=\"question[" + questionId + "][choices][" + i + "][right]\" />");
 			}else{
-				$("input[name = \"question[" + questionId + "][choices][" + (i - 1) + "][right]\"]").after("<br>" + (i + 1) + "つ目の選択肢 : <input type = \"text\" size = \"128\", maxlinght = \"256\", name = \"question[" + questionId + "][choices][" + i + "][choice_text]\" /> <input type = \"checkbox\" name=\"question[" + questionId +"][choices][" + i + "][right]\" />");
+				$("input[name = \"question[" + questionId + "][choices][" + (i - 1) + "][right]\"]").after("<br>" + (i + 1) + "つ目の選択肢 : <input type = \"text\" class=\"span3\" size = \"128\", maxlinght = \"256\", name = \"question[" + questionId + "][choices][" + i + "][choice_text]\" /> <input type = \"checkbox\" class=\"span3\" name=\"question[" + questionId +"][choices][" + i + "][right]\" />");
 			}
 
 			// divの終了タグと送信ボタン
 			// ここも、===ではなく、==。(文字と数値の為)
 			if((i + 1) == choiceNum){
-				$("input[name = \"question[" + questionId + "][choices][" + i + "][right]\"]").after("<br></div><input name=\"commit\" type=\"submit\" value=\"送信\" /><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
+				$("input[name = \"question[" + questionId + "][choices][" + i + "][right]\"]").after("<br></div><input name=\"commit\" class=\"btn\" type=\"submit\" value=\"送信\" /><input type = \"button\" class=\"btn\" value = \"問題を追加\" id = \"add\" />");
 			}
 		}
 		addEvent(questionId);
@@ -103,7 +103,7 @@ $(function(){
 			// N択問題を表す1
 			if(selectId == 1){
 				init(questionId);
-				$(this).after("<div id = \"sub_kind" + questionId  + "\">何択か : <input type = \"text\" name = \"question[" + questionId + "][sub_kind]\" size = \"2\", maxlinght = \"2\" /></div>");
+				$(this).after("<div id = \"sub_kind" + questionId  + "\">何択か : <input type = \"text\" class=\"span3\" name = \"question[" + questionId + "][sub_kind]\" size = \"2\", maxlinght = \"2\" /></div>");
 				createTextArea(selectId,questionId);
 				$("input[name = \"question[" + questionId + "][sub_kind]\"]").bind("change",function(){ 
 					$("#choice" + questionId).remove();
@@ -114,18 +114,18 @@ $(function(){
 			}else if(selectId == 2){
 				init(questionId);
 				createTextArea(selectId,questionId);
-				$("#body" + questionId).after("<div id = \"TrueOrFalse" + questionId + "\">○か×か。<select name = \"question[" + questionId + "][choices][0][right]\" ><option value = \"1\">○</option><option value = \"0\">×</option></div><br /><input name=\"commit\" type=\"submit\" value=\"送信\" /><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
+				$("#body" + questionId).after("<div id = \"TrueOrFalse" + questionId + "\">○か×か。<select name = \"question[" + questionId + "][choices][0][right]\" ><option value = \"1\">○</option><option value = \"0\">×</option></div><br /><input name=\"commit\" class=\"btn\" type=\"submit\" value=\"送信\" /><input type = \"button\" class=\"btn\" value = \"問題を追加\" id = \"add\" />");
 				addEvent(questionId);
 			}else if(selectId == 3){
 				init(questionId);
 				createTextArea(selectId,questionId);
-				$("#body" + questionId).after("<div id = \"right" + questionId + "\">正解は、<input type = \"text\" size = \"16\" maxlinght = \"16\" name = \"question[" + questionId + "][choices][0][choice_text]\" /></div><input name = \"commit\" type=\"submit\" value=\"送信\"/><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
+				$("#body" + questionId).after("<div id = \"right" + questionId + "\">正解は、<input type = \"text\" class=\"span3\" size = \"16\" maxlinght = \"16\" name = \"question[" + questionId + "][choices][0][choice_text]\" /></div><input name = \"commit\" type=\"submit\" value=\"送信\"/><input type = \"button\" class=\"btn\" value = \"問題を追加\" id = \"add\" />");
 
 				addEvent(questionId);
 			}else if(selectId == 4){
         init(questionId);
         createTextArea(selectId,questionId);
-        $("#body"+questionId).after("<input name = \"commit\" type=\"submit\" value=\"送信\"/><input type = \"button\" value = \"問題を追加\" id = \"add\" />");
+        $("#body"+questionId).after("<input name=\"commit\" class=\"btn\" type=\"submit\" value=\"送信\"/><input type = \"button\" class=\"btn\" value = \"問題を追加\" id = \"add\" />");
         addEvent(questionId);
       }
 		});

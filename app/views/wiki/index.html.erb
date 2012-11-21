@@ -30,6 +30,7 @@
   </center>
   <div class="row">
     <div class="span3">
+      <ul>ページ一覧</ul>
       <ul class="nav nav-pills nav-stacked">
         <% @wikipages.each_with_index do |wikipage, i| %>
           <li><%= link_to wikipage.title, "/wiki/#{wikipage.wiki_id}/#{wikipage.wikipage_id}/show" %></li>
