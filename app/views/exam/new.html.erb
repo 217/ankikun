@@ -3,7 +3,9 @@
 <div class="container">
   <div id="header">
     <h1>テストの新規作成</h1>
-    <%= form_tag("/exam/create", :multipart => true) do %>
+  </div>
+
+  <%= form_tag("/exam/create", :multipart => true) do %>
     <!--
     完成してない。
     <p>テストタイプ : 
@@ -13,8 +15,6 @@
       </select>
     </p>
     -->
-  </div>
-  <div class="row">
     <p>テスト名 : <input type = "text" name = "exam[title]" onKeyPress="return submitStop(event);"/></p>
 
 	  <p>
