@@ -1,8 +1,9 @@
 class CreateRecords < ActiveRecord::Migration
   def change
     create_table :records do |t|
+			t.integer :exam_id
       t.integer :questionNum
-      t.integer :tureQuestion
+      t.integer :trueQuestion
 
       t.timestamps
     end

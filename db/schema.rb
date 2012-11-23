@@ -60,8 +60,9 @@ ActiveRecord::Schema.define(:version => 20121123200856) do
   end
 
   create_table "records", :force => true do |t|
+    t.integer  "exam_id"
     t.integer  "questionNum"
-    t.integer  "tureQuestion"
+    t.integer  "trueQuestion"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end

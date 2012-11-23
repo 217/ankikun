@@ -133,10 +133,10 @@ public
 	end
 
 	def record
-		@record = Record.create!(
-															:true_question => session[:true_question],
-															:question_num => sessiton[:question_num]
-														)
-	reset_session
+		Record.create!(
+										:trueQuestion => session[:true_question],
+										:questionNum => session[:question_num]
+									)
+		reset_session
 	end
 end

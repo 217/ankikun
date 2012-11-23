@@ -44,12 +44,14 @@ Ankikun::Application.routes.draw do
   get "exam/destroy"
 	get "exam/check"
 	post "exam/check"
+	get "exam/record"
 	
 	# examのページのルーティング
 	match "exam/:id/show" => "exam#show"
 	match "exam/:id/check" => "exam#check"
 	match "exam/:id/destroy" => "exam#destroy"
 	match "exam/:id/edit" => "exam#edit"
+	match "exam/:id/record" => "exam#record"
 
 	# Askのページのルーティング
 	match "ask/:id/show" => "ask#show"
