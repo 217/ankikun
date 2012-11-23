@@ -9,10 +9,9 @@ private
     end
   end
 public
-  before_filter :login?, :only => "new"
-  before_filter :login?, :only => "create"
-
-  def new
+  before_filter :login?, :only => ["new", "create"]
+	
+	def new
 		@ask = Ask.new
 	end
 

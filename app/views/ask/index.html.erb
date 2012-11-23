@@ -1,22 +1,26 @@
-<%= link_to "トップページ", "http://localhost:3000" %>
-<%= link_to "質問する", "/ask/new" %>
+<div class="container">
+  <div id="header">
+		<h1>質問一覧</h1>
+	</div>
 
-<h1>質問一覧</h1>
-<table>
-	<tr>
-		<th>質問番号</th>
-		<th>タイトル</th>
-		<th>レス数</th>
-		<th>作成日時</th>
-		<th>更新日時</th>
-	</tr>
-	<% @asks.each_with_index do |ask, i| %>
-		<tr>
-			<td><%= ask.id %></td>
-			<td><%= link_to ask.title, "/ask/#{ask.id}/show" %></td>
-			<td><%= ask.responses.size %></td>
-			<td><%= ask.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
-			<td><%= ask.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
-		</tr>
-	<% end %>
-</table>
+	<div class="row">
+		<table class="table table-striped">
+			<tr>
+				<th>質問番号</th>
+				<th>タイトル</th>
+				<th>レス数</th>
+				<th>作成日時</th>
+				<th>更新日時</th>
+			</tr>
+			<% @asks.each_with_index do |ask, i| %>
+				<tr>
+					<td><%= ask.id %></td>
+					<td><%= link_to ask.title, "/ask/#{ask.id}/show" %></td>
+					<td><%= ask.responses.size %></td>
+					<td><%= ask.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+					<td><%= ask.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+				</tr>
+			<% end %>
+		</table>
+	</div>
+</div>

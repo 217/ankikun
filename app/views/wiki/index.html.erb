@@ -1,27 +1,32 @@
 <%# Wiki の一覧 %>
 <%# /wiki/index %>
 <% if params[:id].nil? %>
-  <%= link_to "Wikiを新規作成", "/wiki/new" %>
+	<div class="container">
+		<div id="header">
+			<h1>Wiki一覧</h1>
+		</div>
+		
 
-  <h1>Wiki一覧</h1>
+  	<div class="row">
+			<table class="table table-striped">
+				<tr>
+					<th>Wiki番号</th>
+					<th>Wikiタイトル</th>
+					<th>作成時間</th>
+					<th>更新時間</th>
+				</tr>
 
-	<table>
-		<tr>
-			<th>Wiki番号</th>
-			<th>Wikiタイトル</th>
-			<th>作成時間</th>
-			<th>更新時間</th>
-    </tr>
-
-		<% @wikis.each_with_index do |wiki, i| %>
-			<tr>
-				<td><%= wiki.id %></td>
-				<td><%= link_to wiki.title, "/wiki/#{wiki.id}/index" %></td>
-				<td><%= wiki.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
-				<td><%= wiki.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
-			</tr>
-		<% end %>
-	</table>
+				<% @wikis.each_with_index do |wiki, i| %>
+					<tr>
+						<td><%= wiki.id %></td>
+						<td><%= link_to wiki.title, "/wiki/#{wiki.id}/index" %></td>
+						<td><%= wiki.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+						<td><%= wiki.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+					</tr>
+				<% end %>
+			</table>
+		</div>
+	</div>
 <%# Wikiを表示 %>
 <%# /wiki/:id/index %>
 <% else %>
