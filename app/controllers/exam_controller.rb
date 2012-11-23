@@ -7,12 +7,22 @@ require 'pp'
 class ExamController < ApplicationController
 private
   def login?
-    if !user_signed_in?
+    unless user_signed_in?
       render :text => "ログインしてください。"
     end
   end
+
+	def session_exist?
+		pp session[:true_question]
+		pp session[:question_num]
+
+		if session[:true_question].nil? and session[:question_num].nil?
+			render :text => "問題の履歴がありません。"
+		end
+	end
 public
   before_filter :login?, :only => ["new","create","record"]
+	before_filter :session_exist?, :only => "record"
 
   def new
 		@exam = Exam.new
@@ -137,6 +147,7 @@ public
 										:trueQuestion => session[:true_question],
 										:questionNum => session[:question_num]
 									)
-		reset_session
+		# reset_sessionを使うと、Deviseまでログアウトされる
+		session[:true_question] = session[:question_num] = nil
 	end
 end
