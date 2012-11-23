@@ -1,5 +1,6 @@
-<%= link_to "トップページ", "http://localhost:3000/" %>
-<%= link_to "試験の一覧に戻る", "/exam/index" %>
+<% session[:question_num] = @exam.questionNum %>
+<% session[:true_question] = 0 %>
+
 <h1><%= @exam.title %>の答え合わせ</h1>
 <% @exam.questions.each_with_index do |question, i| %>
 	<% case question.kind %>
@@ -42,6 +43,7 @@
 			<p>不正解</p>
 		<% else %>
 			<p>正解！</p>
+			<% session[:true_question] += 1 %>
 		<% end %>
 	<% when 2 %>
 		<%= i + 1 %>問目の問題 - ○×問題: 
@@ -65,6 +67,7 @@
 			<p>正解！</p>
 		<% else %>
 			<p>不正解</p>
+			<% sesstion[:true_question] += 1 %>
 			<% if params[:question][i.to_s][:choices]["0"][:right] == "0" %>
 				答えは、○です。
 			<% else %>
@@ -84,6 +87,7 @@
 		</p>
 		<% if @answer == choice.choice_text %>
 			<p>正解！</p>
+			<% session[:true_question] += 1 %>			
 		<% else %>
 			<p>不正解</p>
 			答えは、<%= choice.choice_text %>です。
@@ -104,8 +108,14 @@
 
     <% choice.each_with_index do |choice,j| %>
       <% if params[:question][i.to_s][:choices][j.to_s][:choice_text] != choice.choice_text %>
-        
+      	
       <% end %>
     <% end %>
 	<% end %>
+<% end %>
+
+<% if user_signed_in? %>
+	<%= link_to "この試験の成績を確認する。", "/exam/#{params[:id]}/record" %>
+<% else %>
+	<%= link_to "試験の一覧に戻る", "/exam/index" %>
 <% end %>

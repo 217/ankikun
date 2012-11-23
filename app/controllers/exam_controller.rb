@@ -12,7 +12,7 @@ private
     end
   end
 public
-  before_filter :login?, :only => ["new","create"]
+  before_filter :login?, :only => ["new","create","record"]
 
   def new
 		@exam = Exam.new
@@ -130,5 +130,13 @@ public
 	def check
 		@exam = Exam.includes(:questions).find(params[:id])
 		@exam.update_attribute(:updated_at, Time.now)
+	end
+
+	def record
+		@record = Record.create!(
+															:true_question => session[:true_question],
+															:question_num => sessiton[:question_num]
+														)
+	reset_session
 	end
 end

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  questionNum: 1
+  tureQuestion: 1
+
+two:
+  questionNum: 1
+  tureQuestion: 1
