@@ -43,8 +43,8 @@ gem 'jquery-rails'
 # omniauth
 gem 'omniauth'
 # この二つがないと、うまく機能しない
-gem 'omniauth-twitter'
-gem 'omniauth-facebook'
+# gem 'omniauth-twitter'
+# gem 'omniauth-facebook'
 
 # 認証システム
 gem 'devise'
@@ -60,6 +60,7 @@ gem 'paperclip'
 gem 'execjs'
 gem 'therubyracer'
 
+=begin
 # Rspec
 group :development, :test do
   gem "email_spec", ">= 1.2.1"
@@ -74,6 +75,7 @@ group :development, :test do
   gem 'simplecov', :require => false
   gem 'simplecov-rcov', :require => false
 end 
+=end
 
 # debug
 #group :development do
