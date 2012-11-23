@@ -12,8 +12,7 @@ private
     end
   end
 public
-  before_filter :login?, :only => "new"
-  before_filter :login?, :only => "create"
+  before_filter :login?, :only => ["new","create"]
 
   def new
 		@exam = Exam.new

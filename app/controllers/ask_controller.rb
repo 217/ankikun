@@ -4,7 +4,7 @@ require "pp"
 class AskController < ApplicationController
 private
   def login?
-    if !user_signed_in?
+    unless user_signed_in?
       render :text => "ログインしてください。"
     end
   end
@@ -17,7 +17,7 @@ public
 
   def create
     if params[:id].nil?
-      begin 
+      #begin 
         Ask.transaction do 
           @ask = Ask.create!(
                           :title => params[:ask][:title],
@@ -30,9 +30,9 @@ public
           @response.save!
           redirect_to :action => "index"
         end
-      rescue => e
-        render :text => "データの書き込みに失敗しました。"
-      end
+      #rescue => e
+       # render :text => "データの書き込みに失敗しました。"
+      #end
     else
       begin 
         Ask.transaction do
