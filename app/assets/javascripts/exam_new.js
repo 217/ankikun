@@ -62,9 +62,9 @@ $(function(){
 		// 選択肢の数だけフォームを生成
 		for(var i = 0;i < choiceNum;i++){
 			if(i === 0){
-				$("#body" + questionId).after("<div id = \"choice" + questionId + "\"><p>チェック欄は、正解な物にチェックをつけてください。</p>1つ目の選択肢 : <input type = \"text\" class=\"span3\"size = \"128\", maxlinght = \"256\", name = \"question[" + questionId + "][choices][" + i + "][choice_text]\" /> <input type = \"checkbox\" name=\"question[" + questionId + "][choices][" + i + "][right]\" />");
+				$("#body" + questionId).after("<div id = \"choice" + questionId + "\"><b>チェック欄は、正解な物にチェックをつけてください。</b><br />1つ目の選択肢 : <input type = \"text\" class=\"span3\"size = \"128\", maxlinght = \"256\", name = \"question[" + questionId + "][choices][" + i + "][choice_text]\" /> <input type = \"checkbox\" name=\"question[" + questionId + "][choices][" + i + "][right]\" />");
 			}else{
-				$("input[name = \"question[" + questionId + "][choices][" + (i - 1) + "][right]\"]").after("<br>" + (i + 1) + "つ目の選択肢 : <input type = \"text\" class=\"span3\" size = \"128\", maxlinght = \"256\", name = \"question[" + questionId + "][choices][" + i + "][choice_text]\" /> <input type = \"checkbox\" class=\"span3\" name=\"question[" + questionId +"][choices][" + i + "][right]\" />");
+				$("input[name = \"question[" + questionId + "][choices][" + (i - 1) + "][right]\"]").after("<br />" + (i + 1) + "つ目の選択肢 : <input type = \"text\" class=\"span3\" size = \"128\" maxlinght = \"256\" name = \"question[" + questionId + "][choices][" + i + "][choice_text]\" /> <input type = \"checkbox\" name=\"question[" + questionId +"][choices][" + i + "][right]\" />");
 			}
 
 			// divの終了タグと送信ボタン

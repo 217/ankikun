@@ -38,7 +38,7 @@ body > #container {
 
 input{
 	font-size: 15px;
-	width: 150px;
+	width: 450px;
 }
 
 input.size2{
@@ -50,6 +50,6 @@ input.size2{
  */
 textarea{
 	font-size: 15px;
-	width: 400px;
+	width: 450px;
 	height: 300px;
 }
