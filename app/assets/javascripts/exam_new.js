@@ -103,7 +103,7 @@ $(function(){
 			// N択問題を表す1
 			if(selectId == 1){
 				init(questionId);
-				$(this).after("<div id = \"sub_kind" + questionId  + "\">何択か : <input type = \"text\" class=\"span3\" name = \"question[" + questionId + "][sub_kind]\" size = \"2\", maxlinght = \"2\" /></div>");
+				$(this).after("<div id = \"sub_kind" + questionId  + "\">何択か : <input type = \"text\" class=\"size2 span3\" name = \"question[" + questionId + "][sub_kind]\" maxlength=\"2\" /></div>");
 				createTextArea(selectId,questionId);
 				$("input[name = \"question[" + questionId + "][sub_kind]\"]").bind("change",function(){ 
 					$("#choice" + questionId).remove();

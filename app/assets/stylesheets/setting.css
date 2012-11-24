@@ -1,0 +1,21 @@
+/*
+ * input
+ */
+
+input{
+	font-size: 15px;
+	width: 150px;
+}
+
+input.size2{
+	width: 30px !important;
+}
+
+/*
+ * textarea
+ */
+textarea{
+	font-size: 15px;
+	width: 400px;
+	height: 300px;
+}

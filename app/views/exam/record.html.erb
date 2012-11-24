@@ -1,1 +1,7 @@
-せいせきー
+<% require 'gchart' %>
+<%= image_tag Gchart.line(
+													:title => "成績",
+													:data => [[0, 40, 10, 70, 20],[41, 10, 80, 50]],
+													:line_colors => "FF0000,00FF00",
+													:axis_with_labels => 'x', :axis_labels => [['7月', '8月', '9月', '10月', '11月']]
+													) %>
