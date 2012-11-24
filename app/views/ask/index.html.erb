@@ -9,6 +9,7 @@
 				<th>質問番号</th>
 				<th>タイトル</th>
 				<th>レス数</th>
+				<th>解決済み</th>
 				<th>作成日時</th>
 				<th>更新日時</th>
 			</tr>
@@ -17,6 +18,12 @@
 					<td><%= ask.id %></td>
 					<td><%= link_to ask.title, "/ask/#{ask.id}/show" %></td>
 					<td><%= ask.responses.size %></td>
+					<td>
+						<% if ask.solution %>
+							○
+						<% else %>
+							×
+						<% end %>
 					<td><%= ask.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
 					<td><%= ask.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
 				</tr>
