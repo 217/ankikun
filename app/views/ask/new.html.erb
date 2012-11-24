@@ -5,7 +5,7 @@
 <%= form_for @ask, :url => "/ask/create" do |f| %>
 	<p>タイトル : <%= f.text_field :title %></p>
 	<%= f.fields_for :response do |f1| %>
-		<%= f1.label :body %> : <br />
+		本文 : <br />
 		<%= f1.text_area :body, :cols => "120", :rows => "25" %>
 		<br />
 	<% end %>
