@@ -17,7 +17,7 @@ public
 
   def create
     if params[:id].nil?
-      #begin 
+      begin 
         Ask.transaction do 
           @ask = Ask.create!(
                           :title => params[:ask][:title],
@@ -30,27 +30,22 @@ public
           @response.save!
           redirect_to :action => "index"
         end
-      #rescue => e
-       # render :text => "データの書き込みに失敗しました。"
-      #end
+      rescue => e
+       render :text => "データの書き込みに失敗しました。"
+      end
     else
       begin 
         Ask.transaction do
-          @ask = Ask.find(params[:id])
-          @ask.responses.create!(
-                                  :body => params[:response][:body],
-                                  :response_num => (Response.find(:last, :conditions => {:ask_id => params[:id]}).response_num += 1),
-                                  :ask_id => @ask.id,
-                                  :user => current_user.id
-                                ).save!
-          ###########################################################
-          # 関連先も保存するやつに変更
-          ###########################################################
-          @ask.update_attribute(:updated_at, @response.created_at)
+          ask = Ask.find(params[:id])
+          ask.responses.create!(
+               	                :body => params[:response][:body],
+          	                    :response_num => (Response.find(:last, :conditions => {:ask_id => params[:id]}).response_num += 1),
+                                :user => current_user.id
+                                )
         end
         redirect_to :action => "show"
-      #rescue => e 
-      #	render :text => "データの書き込みに失敗しました。"
+      rescue => e 
+      	render :text => "データの書き込みに失敗しました。"
       end
     end
   end
