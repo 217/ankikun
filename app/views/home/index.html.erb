@@ -1,22 +1,19 @@
 <%#= stylesheet_link_tag "home_index.css" %>
 
 <div class="container">
-    <div id="header">
-      <h2>メニュー</h2>
-    </div>
-    <div class="row">
-      <ul>
-        <li><%= link_to "まとめ", "/wiki/index" %></li>
-        <li><%= link_to "質問", "/ask/index" %></li>
-        <li><%= link_to "試験", "/exam/index" %></li>
-      </ul>
-    </div>
-    <div id="footer">
-      <br />
-      作成者 : <br />
-      新名　哲成<br />
-      <br />
-      暗記君 ONLINE : <br />
-      <%= link_to "https://github.com/217/ankikun", "https://github.com/217/ankikun" %>
-    </div>
+  <div id="header">
+    <h2>メニュー</h2>
+  </div>
+  <div class="row">
+    <ul>
+      <li><h3><%= link_to "まとめ", "/wiki/index" %></h3></li>
+      <li><h3><%= link_to "質問", "/ask/index" %></h3></li>
+      <li><h3><%= link_to "試験", "/exam/index" %></h3></li>
+    </ul>
+	</div>
+	<div id="footer">
+		<%= link_to "暗記君 ONLINE", "http://github.com/217/ankikun" %><br />
+		Copyright &copy 2012 Tetsunari Niina. All rights reserved.
+		<br />
+　</div>
 </div>
