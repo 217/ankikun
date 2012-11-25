@@ -11,19 +11,17 @@ private
       render :text => "ログインしてください。"
     end
   end
-
+=begin
 	def session_exist?
-		pp session[:true_question]
-		pp session[:question_num]
-
 		if session[:true_question].nil? and session[:question_num].nil?
 			render :text => "問題の履歴がありません。"
 		end
 	end
+=end
 public
   before_filter :login?, :only => ["new","create","record"]
 	before_filter :session_exist?, :only => "record"
-
+  
   def new
 		@exam = Exam.new
 		@questions = [@exam.questions.new]
@@ -109,9 +107,8 @@ public
         end
         redirect_to :action => "index"
       end
-    # 本当はこれをつける
-    # rescue => e
-    # render :text => "エラーが発生しました。"
+    rescue ActiveRecord::RecordInvalid => e
+      render :action => :new
     end
 	end
 
@@ -142,6 +139,7 @@ public
 		@exam.update_attribute(:updated_at, Time.now)
 	end
 
+=begin
 	def record
 		Record.create!(
 										:trueQuestion => session[:true_question],
@@ -150,4 +148,6 @@ public
 		# reset_sessionを使うと、Deviseまでログアウトされる
 		session[:true_question] = session[:question_num] = nil
 	end
+=end
+
 end
