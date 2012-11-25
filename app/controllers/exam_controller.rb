@@ -110,8 +110,8 @@ public
         redirect_to :action => "index"
       end
     # 本当はこれをつける
-    rescue => e
-    render :text => "エラーが発生しました。"
+    # rescue => e
+    # render :text => "エラーが発生しました。"
     end
 	end
 
