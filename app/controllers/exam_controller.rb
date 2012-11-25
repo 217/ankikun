@@ -13,9 +13,6 @@ private
   end
 
 	def session_exist?
-		pp session[:true_question]
-		pp session[:question_num]
-
 		if session[:true_question].nil? and session[:question_num].nil?
 			render :text => "問題の履歴がありません。"
 		end
@@ -110,8 +107,8 @@ public
         redirect_to :action => "index"
       end
     # 本当はこれをつける
-    rescue => e
-    render :text => "エラーが発生しました。"
+    #rescue => e
+    #	render :text => "エラーが発生しました。"
     end
 	end
 
@@ -142,6 +139,8 @@ public
 		@exam.update_attribute(:updated_at, Time.now)
 	end
 
+# 今回は実装しない
+=begin
 	def record
 		Record.create!(
 										:trueQuestion => session[:true_question],
@@ -150,4 +149,5 @@ public
 		# reset_sessionを使うと、Deviseまでログアウトされる
 		session[:true_question] = session[:question_num] = nil
 	end
+=end
 end
