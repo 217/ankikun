@@ -1,19 +1,36 @@
+<div class="hero-unit">
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span6">
+        <h1>暗記君 ONLINE</h1>
+        <h2>アカウント作成</h2>
+        <h3>貴方の学習をサポートします！！</h3>
+      </div>
+      <div class="span5 offset1">
+        <%= render "devise/shared/links" %>
+        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
 
-<h2>アカウント作成</h2>
+          <div>
+            <%= f.label "メールアドレス" %>
+            <%= f.email_field :email %>
+          </div>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+          <div>
+            <%= f.label "パスワード" %>
+            <%= f.password_field :password %>
+          </div>
 
-  <div><%= f.label "メールアドレス" %><br />
-  <%= f.email_field :email %></div>
-
-  <div><%= f.label "パスワード" %><br />
-  <%= f.password_field :password %></div>
-
-  <div><%= f.label "パスワード確認" %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.submit "送信" %></div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+          <div>
+            <%= f.label "パスワード確認" %>
+            <%= f.password_field :password_confirmation %>
+          </div>
+          
+          <div>
+            <%= f.submit "送信" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

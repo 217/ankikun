@@ -107,14 +107,8 @@ public
         end
         redirect_to :action => "index"
       end
-<<<<<<< HEAD
     rescue ActiveRecord::RecordInvalid => e
       render :action => :new
-=======
-    # 本当はこれをつける
-    #rescue => e
-    #	render :text => "エラーが発生しました。"
->>>>>>> cfccaee2a479c63034f78483e97eb4ecb8a6ec32
     end
 	end
 
@@ -145,10 +139,6 @@ public
 		@exam.update_attribute(:updated_at, Time.now)
 	end
 
-<<<<<<< HEAD
-=======
-# 今回は実装しない
->>>>>>> cfccaee2a479c63034f78483e97eb4ecb8a6ec32
 =begin
 	def record
 		Record.create!(
@@ -159,8 +149,5 @@ public
 		session[:true_question] = session[:question_num] = nil
 	end
 =end
-<<<<<<< HEAD
 
-=======
->>>>>>> cfccaee2a479c63034f78483e97eb4ecb8a6ec32
 end
