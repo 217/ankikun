@@ -11,12 +11,14 @@ private
 public
 	belongs_to :exam
 	has_many :choices
-	validates_presence_of :kind
-	validates_presence_of :subkind, :if => :kind1?
+	# validates_presence_of :kind
+	# validates_presence_of :sub_kind, :if => :kind1?
 
+=begin
   validates :kind, :presence => true
   validate :sub_kind, :presence => true, :if => Proc.new{:kind == 1}
   validates :body, :presence => true
+=end
 
 	attr_accessible :kind, :sub_kind, :body ,:exam_id, :question_id
 end

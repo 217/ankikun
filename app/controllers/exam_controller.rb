@@ -107,8 +107,9 @@ public
         end
         redirect_to :action => "index"
       end
-    rescue ActiveRecord::RecordInvalid => e
-      render :action => :new
+    # 複雑なvalidateのやり方がわからなかったので、今回は使用しない
+    #rescue ActiveRecord::RecordInvalid => e
+    #  render :action => :new
     end
 	end
 

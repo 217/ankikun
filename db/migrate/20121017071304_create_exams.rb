@@ -6,7 +6,7 @@ class CreateExams < ActiveRecord::Migration
 			t.integer :min					# 制限時間(分)
 			t.integer :sec					# 				(秒)
 			# テストのタイトル
-			t.string 	:title, :default => "テスト", :null => false
+			t.string 	:title, :default => "テスト"
 			t.integer :questionNum	# 問題数
       t.boolean :type         # テストの種類
       t.timestamps
