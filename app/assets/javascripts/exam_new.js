@@ -81,7 +81,7 @@ $(function(){
 		var questionId = new Number(questionId);
 		var nextQuestionId = questionId + 1;
 
-		var tag = "<div id = \"form" + nextQuestionId + "\"><br />" + (nextQuestionId + 1) + "問目<br />問題形式 : <select name = \"question[" + nextQuestionId + "][kind]\"><option value=\"0\">選択してください</option><option value=\"1\">N択問題</option><option value=\"2\">○×問題</option><option value=\"3\">一問一答</option></select><br /></div>";
+		var tag = "<div id = \"form" + nextQuestionId + "\"><br />" + (nextQuestionId + 1) + "問目<br />問題形式 : <select name = \"question[" + nextQuestionId + "][kind]\"><option value=\"0\">選択してください</option><option value=\"1\">N択問題</option><option value=\"2\">○×問題</option><option value=\"3\">一問一答</option><option value=\"4\">穴埋問題</option></select><br /></div>";
 		
 		$("#add").bind("click",function(){
 			// 送信ボタンを削除

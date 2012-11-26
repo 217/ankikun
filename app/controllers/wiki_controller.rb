@@ -153,6 +153,7 @@ public
 
 	def show
 		@wiki = Wiki.find(params[:id])
+    @wikipages = Wikipage.find(:all, :conditions => {:wiki_id => params[:id]})
 		@page = Wikipage.find(:first, :conditions => {:wiki_id => params[:id], :wikipage_id => params[:sub_id]})
 	end 
 end

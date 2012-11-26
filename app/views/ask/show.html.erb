@@ -1,35 +1,37 @@
-<%= link_to "トップページ", "http://localhost:3000" %>
-<%= link_to "質問の一覧に戻る", "/ask/index" %>
-<h1><%= @ask.title %></h1>
-<h2>
-	<% if @ask.solution %>
-		解決済み
-	<% else %>
-		回答受付中
-	<% end %>
-</h2>
+<div class="container">
+  <div class="row">
+    <h1><%= @ask.title %></h1>
+    <h2>
+      <% if @ask.solution %>
+        解決済み
+      <% else %>
+        回答受付中
+      <% end %>
+    </h2>
 
-<% pp "response = ", @ask.responses %>
-<% @ask.responses.each_with_index do |response, i| %>
-	<%= response.response_num %> - <%= User.find(response.user).email %>さん<br />
-	<%= response.body %>
-	<br />
-	<br />
-<% end %>
+    <% pp "response = ", @ask.responses %>
+    <% @ask.responses.each_with_index do |response, i| %>
+      <%= response.response_num %> - <%= User.find(response.user).email %>さん<br />
+      <%= response.body %>
+      <br />
+      <br />
+    <% end %>
 
-<% if user_signed_in? %>
-	<% response = Response.find(:first, :conditions => {:ask_id => params[:id]}) %>
+    <% if user_signed_in? %>
+      <% response = Response.find(:first, :conditions => {:ask_id => params[:id]}) %>
 
-	<% if response.user == current_user.id and !@ask.solution %>
-		<%= link_to "解決済みにする", "/ask/#{params[:id]}/update" %>
-	<% end %>
+      <% if response.user == current_user.id and !@ask.solution %>
+        <%= link_to "解決済みにする", "/ask/#{params[:id]}/update" %>
+      <% end %>
 
-	<% @response = @ask.responses.new %>
-	<%= form_for @response, :url => "/ask/#{params[:id]}/create" do |f| %>
-		レスポンス : <br />
-		<%= f.text_area :body, :cols => "120", :rows => "25"%><br /	>
-		<%= f.submit "送信" %>
-	<% end %>
-<% else %>
-	ログインすると書き込めるようになります。
-<% end %>
+      <% @response = @ask.responses.new %>
+      <%= form_for @response, :url => "/ask/#{params[:id]}/create" do |f| %>
+        レスポンス : <br />
+        <%= f.text_area :body, :cols => "120", :rows => "25"%><br /	>
+        <%= f.submit "送信" %>
+      <% end %>
+    <% else %>
+      ログインすると書き込めるようになります。
+    <% end %>
+  </div>
+</div>

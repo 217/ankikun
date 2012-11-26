@@ -15,6 +15,10 @@
   </li>
 
   <li>
-    <a href="/wiki/<%= params[:id] %>/<%= params[:sub_kind] %>/edit">ページの編集</a>
+  <% if params[:sub_id].nil? %>
+    <a href="/wiki/<%= params[:id] %>/edit">ページの編集</a>
+  <% else %>
+    <a href="/wiki/<%= params[:id] %>/<%= params[:sub_id] %>/edit">ページの編集</a>
+  <% end %>
   </li>
 </ul>

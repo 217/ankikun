@@ -1,10 +1,27 @@
 <%# Wikiのページ観覧 %>
 <%# /wiki/:id/:sub_id/show %>
-<%= link_to "トップページに戻る", "http://localhost:3000/" %>
-<%= link_to "Wikiの一覧に戻る", "/wiki/index" %>
-<%= link_to "Wikiに戻る", "/wiki/#{params[:id]}/index" %>
-<center>
-	<h1><%= @wiki.title %></h1>
-	<h3><%= @page.title %></h3>
-</center>
-<%= @page.body %>
+<div class="container">
+    <%= render :partial => "list" %>
+
+    <center> 
+      <h1><%= @wiki.title %></h1>
+    </center>
+    <div class="row">
+      <div class="span3">
+        <ul>ページ一覧</ul>
+        <ul class="nav nav-pills nav-stacked">
+          <% @wikipages.each_with_index do |wikipage, i| %>
+            <li>
+              <% if wikipage.wikipage_id == 1 %>
+                <%= link_to wikipage.title, "/wiki/#{wikipage.wiki_id}/index" %>
+              <% else %>
+                <%= link_to wikipage.title, "/wiki/#{wikipage.wiki_id}/#{wikipage.wikipage_id}/show" %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="span9"><%= @page.body.html_safe %></div>
+    </div>
+  </div>
+</div>
