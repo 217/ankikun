@@ -19,8 +19,15 @@ public
     if params[:id].nil?
       begin 
         Ask.transaction do
+          # validateの代わり。
+          if params[:ask][:title] == ""
+            title = "無題"
+          else
+            title = params[:ask][:title]
+          end
+
           @ask = Ask.create!(
-                          :title => params[:ask][:title],
+                          :title => title,
                           :solution => false
                         )
           @response = @ask.responses.build(params[:ask][:response])

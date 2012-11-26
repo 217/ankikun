@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20121123200856) do
     t.integer  "user"
     t.integer  "min"
     t.integer  "sec"
-    t.string   "title",       :default => "テスト", :null => false
+    t.string   "title",       :default => "テスト"
     t.integer  "questionNum"
     t.boolean  "type"
     t.datetime "created_at",                     :null => false

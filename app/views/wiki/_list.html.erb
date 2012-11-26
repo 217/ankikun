@@ -1,0 +1,20 @@
+<ul class="breadcrumb">
+  <li>
+  <a href="/wiki/<%= params[:id] %>/index">Wiki</a>
+    <span class="divider">/</span>
+  </li>
+
+  <li>
+    <a href="/wiki/<%= params[:id] %>/new">Wikiの新規作成</a>
+    <span class="divider">/</span>
+  </li>
+
+  <li>
+    <a href="/wiki/<%= params[:id] %>/new">ページを作成</a>
+    <span class="divider">/<span>
+  </li>
+
+  <li>
+    <a href="/wiki/<%= params[:id] %>/<%= params[:sub_kind] %>/edit">ページの編集</a>
+  </li>
+</ul>

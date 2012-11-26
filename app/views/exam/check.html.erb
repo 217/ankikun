@@ -93,6 +93,7 @@
 			答えは、<%= choice.choice_text %>です。
     <% end %>
   <% when 4 %>
+    <!--
     <%= i+1 %>問目の問題 - 穴埋め問題
     <p>貴方の回答</p>
     <%# #{~}にマッチするものをテキストボックスに変換 %>
@@ -105,17 +106,20 @@
     <%= html_str.gsub(/(\r\n?)|(\n)/,"<br />").html_safe() %>
 
     <% choices = Choice.find(:all, :conditions => {:exam_id => params[:id], :question_id => question.question_id }) %>
+    <% pp choices %>
 
-    <% choice.each_with_index do |choice,j| %>
-      <% if params[:question][i.to_s][:choices][j.to_s][:choice_text] != choice.choice_text %>
-      	
+    <%# コードが乱雑になってる。後で直す %>
+    <% begin %>
+      <% choices.each_with_index do |choice,j| %>
+        <% if params[:question][i.to_s][:choices][j.to_s][:choice_text] != choice.choice_text %>
+          <% raise %>
+        <% end %>
       <% end %>
+    <% rescue RuntimeError %>
+      <p>不正解</p>
+    <% else %>
+      <p>正解</p>
     <% end %>
+    -->
 	<% end %>
-<% end %>
-
-<% if user_signed_in? %>
-	<%= link_to "この試験の成績を確認する。", "/exam/#{params[:id]}/record" %>
-<% else %>
-	<%= link_to "試験の一覧に戻る", "/exam/index" %>
 <% end %>

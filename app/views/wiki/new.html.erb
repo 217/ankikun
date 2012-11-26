@@ -5,13 +5,16 @@
 
 <div class="container">
 	<%# /wiki/new %>
-	<%# Wikiを新規作成 %>
-	<% if params[:id].nil? %>
+  <%# Wikiを新規作成 %>
+
+  <% if params[:id].nil? %>
+    <%#= render :partial => "list" %>
+
 		<div id="header">
 			<h1>Wikiを新規作成</h1>
 		</div>
 
-		<div class="row">	
+    <div class="row">
 			<%= form_for @wiki, :url => {:action => "create"} do |f| %>
 				Wikiタイトル : <%= f.text_field :title %>
 				<br />

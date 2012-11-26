@@ -35,6 +35,8 @@ public
         # Validateの代わり
         if params[:exam][:title] == ""
           title = "テスト"
+        else
+          title = params[:exam][:title]
         end
 
         @exam = Exam.new(
@@ -71,9 +73,10 @@ public
               ################################
               # @question を、@いらない
               #############################
+              pp choice_params[:right]
               @question.choices.create!(
                                         :choice_text => choice_params[:choice_text],
-                                        :right => choice_params[:right] ? true : false,
+                                        :right => choice_params[:right].nil? ? false : true,
                                         :exam_id => @exam.id,
                                         :choice_id => (j+1)
                                         )
@@ -95,7 +98,7 @@ public
                                     :choice_text => params[:question][i.to_s][:choices]["0"][:choice_text],
                                     :right => "t",
                                     :exam_id => @exam.id,
-                                    :choide_id => 1
+                                    :choice_id => 1
                                     ).save!
           # 穴埋め
           when "4"

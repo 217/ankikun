@@ -1,7 +1,7 @@
 class Choice < ActiveRecord::Base
 	belongs_to :question
 
-  validate :validate_choice_text_presence
+  # validate :validate_choice_text_presence
 
 	attr_accessible :choice_text, :right, :question_id, :choice_id, :exam_id
 private

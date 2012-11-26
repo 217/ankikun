@@ -1,11 +1,19 @@
 <%= javascript_include_tag 'nicEdit' -%>
 <script type="text/javascript">
-       bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+  bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
 </script>
 
-<h1><%= @wikipage.title %></h1>
-<%= form_for @wikipage, :url => {:action => "update"} do |f| %>
-	タイトル : <%= f.text_field :title %><br />
-	本文 : <%= f.text_area :body, :cols => "120", :rows => "25" %>
-	<%= f.submit "送信" %>
-<% end %>
+<div class="container">
+  <%= render :partial => "list" %>
+  <div id="header">
+    <h1><%= @wikipage.title %></h1>
+  </div>
+
+  <div class="row">
+    <%= form_for @wikipage, :url => {:action => "update"} do |f| %>
+      タイトル : <%= f.text_field :title %><br />
+      本文 : <%= f.text_area :body, :cols => "120", :rows => "25", :class => "maxsize" %>
+      <%= f.submit "送信" %>
+    <% end %>
+  </div>
+</div>
