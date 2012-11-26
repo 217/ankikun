@@ -18,7 +18,7 @@ public
   def create
     if params[:id].nil?
       begin 
-        Ask.transaction do 
+        Ask.transaction do
           @ask = Ask.create!(
                           :title => params[:ask][:title],
                           :solution => false
@@ -44,7 +44,7 @@ public
                                 )
         end
         redirect_to :action => "show"
-      rescue => e 
+      rescue => e
       	render :text => "データの書き込みに失敗しました。"
       end
     end

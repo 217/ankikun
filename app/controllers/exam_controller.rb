@@ -32,10 +32,15 @@ public
     i = 0	
     begin
       Exam.transaction do
+        # Validateの代わり
+        if params[:exam][:title] == ""
+          title = "テスト"
+        end
+
         @exam = Exam.new(
                          :min => params[:exam][:min] != "" ? params[:exam][:min].to_i : 100,
                          :sec => params[:exam][:sec] != "" || params[:exam][:sec] == "0" ? params[:exam][:sec].to_i : 100,
-                         :title => params[:exam][:title],
+                         :title => title,
                          :user => current_user.id
                         )
         while !params[:question][i.to_s].nil?

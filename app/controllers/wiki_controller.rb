@@ -32,7 +32,7 @@ public
 		# /wiki/new
 		if params[:id].nil?
 			@wiki = Wiki.new
-			
+
 		# Wikiのページの新規作成
 		# /wiki/:id/new
 		else
@@ -46,7 +46,12 @@ public
 		# Wikiを作成する
 		if params[:id].nil?
 			wiki = Wiki.new
-			wiki.title = params[:wiki][:title]
+      # validateの代わり
+      if params[:wiki][:title] == ""
+        wiki.title = "まとめ"
+      else
+        wiki.title = params[:wiki][:title]
+      end
 			wiki.user = current_user.id
 			begin 
 				Wiki.transaction do
@@ -56,8 +61,16 @@ public
 					page.wiki_id = wiki.id
 					page.wikipage_id = 1
 					page.title = "トップページ"
-					page.body = params[:wiki][:wikipage][:body]
-			
+
+          pp params[:wiki][:wikipage][:body]
+
+          # validateの代わり
+          if params[:wiki][:wikipage][:body] == "" or params[:wiki][:wikipage][:body] =~ /^[<br>]+$/
+            page.body = "Wikiの内容"
+          else
+            page.body = params[:wiki][:wikipage][:body]
+          end
+
 					page.save!
 					redirect_to "/wiki/#{wiki.id}/index"
 				end
