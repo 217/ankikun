@@ -42,7 +42,6 @@
           <p>不正解</p>
         <% else %>
           <p>正解！</p>
-          <% session[:true_question] += 1 %>
         <% end %>
       <% when 2 %>
         <%= i + 1 %>問目の問題 - ○×問題: 
@@ -86,7 +85,6 @@
         </p>
         <% if @answer == choice.choice_text %>
           <p>正解！</p>
-          <% session[:true_question] += 1 %>			
         <% else %>
           <p>不正解</p>
           答えは、<%= choice.choice_text %>です。
