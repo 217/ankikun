@@ -3,7 +3,6 @@
 ### 前作,暗記君は[コチラ](http://ux.getuploader.com/ankikun/download/1/%E6%9A%97%E8%A8%98%E5%90%9B.rar)からダウンロード可能です。
 
 ## 環境
-前作、暗記君は  
 本アプリケーションは、  
 Mac OS X 10.7.4,  
 Ruby 1.9.3-p194,  
