@@ -19,6 +19,6 @@ public
   validate :sub_kind, :presence => true, :if => Proc.new{:kind == 1}
   validates :body, :presence => true
 =end
-
+  validates :body, presence: true
 	attr_accessible :kind, :sub_kind, :body ,:exam_id, :question_id
 end

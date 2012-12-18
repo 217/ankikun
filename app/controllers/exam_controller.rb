@@ -21,6 +21,8 @@ private
 public
   before_filter :login?, :only => ["new","create","record"]
 	before_filter :session_exist?, :only => "record"
+  # vaild
+  before_filter only: "create"
   
   def new
 		@exam = Exam.new
