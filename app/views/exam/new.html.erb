@@ -15,48 +15,49 @@
 				</select>
 			</p>
       -->
+      <div id="exam">
+        <p>試験名 : <input type = "text" name = "exam[title]" onKeyPress="return submitStop(event);"/></p>
+        <p>
+        制限時間(入力しなくても良い) :
+        <!-- ここでは、都合が悪いため、あえてselectを使用する -->
+        <select name = "exam[min]">
+          <option value = "">分</option>
+          <% 60.times do |t| %>
+            <option value="<%= t+1 %>"><%= t+1 %></option>
+          <% end %>
+        </select>
+         :
+        <select name = "exam[sec]">
+          <option value = "">秒</option>
+          <% 60.times do |t| %>
+            <option value="<%= t %>">
+              <% if t < 10 %>
+                <%= "0" + t.to_s %>
+              <% else %>
+                <%= t %>
+              <% end %>
+            </option>
+          <% end %>
+        </select>
+        </p>
 
-      <p>試験名 : <input type = "text" name = "exam[title]" onKeyPress="return submitStop(event);"/></p>
-			<p>
-			制限時間(入力しなくても良い) :
-			<!-- ここでは、都合が悪いため、あえてselectを使用する -->
-			<select name = "exam[min]">
-				<option value = "">分</option>
-				<% 60.times do |t| %>
-					<option value="<%= t+1 %>"><%= t+1 %></option>
-				<% end %>
-			</select>
-			 :
-			<select name = "exam[sec]">
-				<option value = "">秒</option>
-				<% 60.times do |t| %>
-					<option value="<%= t %>">
-						<% if t < 10 %>
-							<%= "0" + t.to_s %>
-						<% else %>
-							<%= t %>
-						<% end %>
-					</option>
-				<% end %>
-			</select>
-			</p>
-
-			<div id = "form0">
-				<% @questions.each_with_index do |question, i| %>
-					<% @question = question %>
-					<%= i + 1 %>問目 : 
-					<select name = "question[<%= i %>][kind]">
-						<option value="0">選択してください</option>
-						<option value="1">N択問題</option>
-						<option value="2">○×問題</option>
-            <option value="3">一問一答</option>
-            <option value="4">穴埋問題</option>
-						<!--
-						<option value="5">記述問題</option>
-						-->
-					</select>
-				<% end %>
-			</div>
+        <div id = "question0">
+          <% @questions.each_with_index do |question, i| %>
+            <% @question = question %>
+            <%= i + 1 %>問目 : 
+            <select name = "question[<%= i %>][kind]">
+              <option value="0">選択してください</option>
+              <option value="1">N択問題</option>
+              <option value="2">○×問題</option>
+              <option value="3">一問一答</option>
+              <option value="4">穴埋問題</option>
+              <!--
+              <option value="5">記述問題</option>
+              -->
+            </select>
+          <% end %>
+        </div>
+      </div>
 		<% end %>
 	</div>
 </div>

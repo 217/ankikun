@@ -81,6 +81,3 @@ end
 #group :development do
  # gem 'awesome_print', '~> 1.0.2'
 #end
-
-# グラフ描画用ライブラリ
-gem 'googlecharts'
